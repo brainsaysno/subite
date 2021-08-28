@@ -6,14 +6,16 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import BottomNavbar from "./components/BottomNavbar";
 import styles from "./styles.js";
 
-const theme = {
+/* const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: "tomato",
-    accent: "yellow",
+    accent: "green",
   },
-};
+}; */
+
+const theme = { ...DefaultTheme };
 
 const authed = true;
 
