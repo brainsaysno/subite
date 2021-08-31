@@ -11,7 +11,8 @@ const TestRoute = () => (
   </View>
 );
 
-const BottomNavbar = () => {
+const BottomNavbar = ({darkThemeToggle}) => {
+  console.log(darkThemeToggle)
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "test", title: "Test", icon: "crosshairs-question" },
@@ -24,7 +25,7 @@ const BottomNavbar = () => {
   const renderScene = BottomNavigation.SceneMap({
     test: TestRoute,
     createTrip: CreateTripScreen,
-    profile: ProfileScreen,
+    profile() {return <ProfileScreen darkThemeToggle={darkThemeToggle}/>},
   });
   return (
     <BottomNavigation
