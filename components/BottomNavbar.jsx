@@ -1,21 +1,18 @@
 import * as React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import styles from "../styles.js";
-import CreateTripPage from "../pages/CreateTripPage";
+import CreateTripScreen from "../screens/CreateTripScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+
 const TestRoute = () => (
   <View style={styles.container}>
-    <Text>Test</Text>
+    <Text>oasshdoashd</Text>
   </View>
 );
 
-const ProfileRoute = () => (
-  <View style={styles.container}>
-    <Text>Profile</Text>
-  </View>
-);
-
-const BottomNavbar = () => {
+const BottomNavbar = ({darkThemeToggle}) => {
+  console.log(darkThemeToggle)
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "test", title: "Test", icon: "crosshairs-question" },
@@ -27,8 +24,8 @@ const BottomNavbar = () => {
 
   const renderScene = BottomNavigation.SceneMap({
     test: TestRoute,
-    createTrip: CreateTripPage,
-    profile: ProfileRoute,
+    createTrip: CreateTripScreen,
+    profile() {return <ProfileScreen darkThemeToggle={darkThemeToggle}/>},
   });
   return (
     <BottomNavigation

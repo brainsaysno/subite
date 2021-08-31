@@ -1,32 +1,51 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, {useRef, useState} from "react";
+import { SafeAreaView, StyleSheet, Text, View, StatusBar } from "react-native";
+import { StatusBar as StatBar } from "expo-status-bar";
 import * as Device from "expo-device";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import {
+  DefaultTheme,
+  DarkTheme,
+  Provider as PaperProvider,
+  useTheme,
+} from "react-native-paper";
 import BottomNavbar from "./components/BottomNavbar";
 import styles from "./styles.js";
 
-const theme = {
+/* const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: "tomato",
-    accent: "yellow",
+    accent: "green",
   },
-};
+}; */
+
+const lightTheme = { dark: false, ...DefaultTheme };
+const darkTheme = { ...DarkTheme };
 
 const authed = true;
 
 export default function App() {
+  const [darkModeOn, setDarkModeOn] = useState(true); // Change!!!
+  const darkThemeToggle = () => {
+    setDarkModeOn(!darkModeOn)
+  }
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={darkModeOn ? darkTheme : lightTheme}>
       {authed ? (
-        <BottomNavbar />
+        <BottomNavbar darkThemeToggle={darkThemeToggle}/>
       ) : (
         <View style={styles.container}>
           <Text>Not authed</Text>
         </View>
       )}
+      <StatBar style={darkModeOn ? "light" : "dark"} />
     </PaperProvider>
   );
 }
+
+const appStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
