@@ -47,10 +47,10 @@ function CreateTripScreen({ navigation, ...props }) {
           style={{
             position: "absolute",
             bottom: 20,
-            left: 130,
-            backgroundColor: "white",
-            width: 100,
-            height: 50,
+
+            //TODO: Change this crap!
+            left: Dimensions.get("screen").width / 2 - 40,
+
             flex: 1,
             justifyContent: "center",
             alignItems: "center",

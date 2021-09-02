@@ -30,12 +30,7 @@ const ChevronSettingItem = ({
             color={DefaultTheme.colors.background}
           />
         )}
-        right={() => (
-          <Chevron />
-          /* <View style={itemStyles.container}>
-            <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-          </View> */
-        )}
+        right={() => <List.Icon icon="chevron-right" />}
         style={{
           borderBottomColor: "grey",
           borderBottomWidth: 1,
@@ -44,10 +39,6 @@ const ChevronSettingItem = ({
       />
     </TouchableOpacity>
   );
-};
-
-const Chevron = () => {
-  return <List.Icon icon="chevron-right" />;
 };
 
 const itemStyles = StyleSheet.create({

@@ -21,9 +21,9 @@ const ChevronSettingItem = ({
       <List.Item
         title={title}
         left={() => (
-          <List.Icon
+          <Lis.Icon
             icon={icon}
-            style={{
+            syle={{
               backgroundColor: iconColor ? iconColor : colors.primary,
               ...itemStyles.icon,
             }}

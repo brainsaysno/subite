@@ -9,7 +9,12 @@ const Stack = createNativeStackNavigator();
 
 function CreateTripNavigation(props) {
   return (
-    <Stack.Navigator initialRouteName="Map">
+    <Stack.Navigator
+      initialRouteName="Map"
+      screenOptions={({ route }) => {
+        if (route.name === "Map") return { headerShown: false };
+      }}
+    >
       <Stack.Screen name="Map">
         {(navProps) => (
           <CreateTripScreen
@@ -26,7 +31,10 @@ function CreateTripNavigation(props) {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="df" component={DefaultScreen}></Stack.Screen>
+      <Stack.Screen
+        name="Default Screen"
+        component={DefaultScreen}
+      ></Stack.Screen>
     </Stack.Navigator>
   );
 }

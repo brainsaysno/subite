@@ -7,6 +7,7 @@ import ProfileNavigator from "../screens/ProfileScreen";
 import CreateTripNavigation from "../screens/CreateTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
+import DefaultScreen from "../screens/DefaultScreen.jsx";
 
 const TestRoute = () => {
   return (
@@ -41,7 +42,7 @@ function BottomNavbar({ darkModeToggle }) {
         },
       })}
     >
-      <Tab.Screen name="Recent Trips" component={TestRoute} />
+      <Tab.Screen name="Recent Trips" component={DefaultScreen} />
       <Tab.Screen name="Create Trip" component={CreateTripNavigation} />
       <Tab.Screen name="Profile">
         {() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
