@@ -4,11 +4,12 @@ import { View, StyleSheet, Image } from "react-native";
 import styles from "../styles.js";
 import CreateTripScreen from "../screens/CreateTripScreen";
 import ProfileNavigator from "../screens/ProfileScreen";
+import CreateTripNavigation from "../screens/CreateTripStack.jsx";
 
 const TestRoute = () => {
   return (
     <View style={styles.container}>
-      <Text>Test Route</Text>
+      <Text>alisdlasidlaihsdl</Text>
     </View>
   );
 };
@@ -25,7 +26,7 @@ const BottomNavbar = ({ darkModeToggle }) => {
 
   const renderScene = BottomNavigation.SceneMap({
     test: TestRoute,
-    createTrip: CreateTripScreen,
+    createTrip: CreateTripNavigation,
     profile() {
       return <ProfileNavigator darkModeToggle={darkModeToggle} />;
     },
