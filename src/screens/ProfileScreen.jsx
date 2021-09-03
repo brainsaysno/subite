@@ -3,7 +3,6 @@ import { View, Text, Settings, StyleSheet, StatusBar } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import DarkModeToggleItem from "../components/DarkModeToggleItem";
 import ChevronSettingItem from "../components/ChevronSettingItem";
-import styles from "../styles";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import DefaultScreen from "./DefaultScreen";
@@ -15,7 +14,7 @@ function ProfileScreen(props) {
 
   console.log(props);
   return (
-    <View style={profileStyles.padTop}>
+    <View>
       <List.Section>
         <List.Subheader /* style={{ backgroundColor: colors.surface }} */>
           Account

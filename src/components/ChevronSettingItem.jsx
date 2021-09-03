@@ -2,17 +2,22 @@ import React from "react";
 import { DefaultTheme, List, Switch, useTheme } from "react-native-paper";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "../styles";
-import DefaultScreen from '../screens/DefaultScreen';
+import DefaultScreen from "../screens/DefaultScreen";
 
-const ChevronSettingItem = ({ title = "Setting", icon = "web", iconColor}) => {
+const ChevronSettingItem = ({
+  title = "Setting",
+  icon = "web",
+  iconColor,
+  screenName = "Default Screen",
+  navigation,
+}) => {
+  console.log(navigation);
   const { colors } = useTheme();
-  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-  const onToggleSwitch = () => {
-    setIsSwitchOn(!isSwitchOn);
-    onToggle();
-  };
   return (
-    <TouchableOpacity onPress={onToggleSwitch} activeOpacity={1}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(screenName)}
+      activeOpacity={1}
+    >
       <List.Item
         title={title}
         left={() => (
@@ -25,15 +30,7 @@ const ChevronSettingItem = ({ title = "Setting", icon = "web", iconColor}) => {
             color={DefaultTheme.colors.background}
           />
         )}
-        right={
-          toggle ?
-          () => (
-          <View style={itemStyles.container}>
-            <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-          </View>
-          ) :
-        null
-        }
+        right={() => <List.Icon icon="chevron-right" />}
         style={{
           borderBottomColor: "grey",
           borderBottomWidth: 1,
@@ -43,10 +40,6 @@ const ChevronSettingItem = ({ title = "Setting", icon = "web", iconColor}) => {
     </TouchableOpacity>
   );
 };
-
-const Chevron = () => {
-  return null
-}
 
 const itemStyles = StyleSheet.create({
   icon: {

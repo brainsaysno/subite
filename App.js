@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import React, { useRef, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View, StatusBar } from "react-native";
 import { StatusBar as StatBar } from "expo-status-bar";
@@ -8,13 +9,14 @@ import {
   Provider as PaperProvider,
   useTheme,
 } from "react-native-paper";
-import BottomNavbar from "./components/BottomNavbar";
-import styles from "./styles.js";
+import BottomNavbar from "./src/components/BottomNavbar";
+import styles from "./src/styles.js";
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
+import NotAuthedScreen from "./src/screens/NotAuthedScreen";
 
 /* const theme = {
   ...DefaultTheme,
@@ -60,18 +62,10 @@ export default function App() {
         {authed ? (
           <BottomNavbar darkModeToggle={darkModeToggle} />
         ) : (
-          <View style={styles.container}>
-            <Text>Not authed</Text>
-          </View>
+          <NotAuthedScreen />
         )}
         <StatBar style={darkModeOn ? "light" : "dark"} />
       </NavigationContainer>
     </PaperProvider>
   );
 }
-
-const appStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

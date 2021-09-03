@@ -8,34 +8,37 @@ const ChevronSettingItem = ({
   title = "Setting",
   icon = "web",
   iconColor,
-  screenName = "Default Screen",
-  navigation,
+  screenName,
 }) => {
-  console.log(navigation);
   const { colors } = useTheme();
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const onToggleSwitch = () => {
+    setIsSwitchOn(!isSwitchOn);
+    onToggle();
+  };
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(screenName)}
-      activeOpacity={1}
-    >
+    <TouchableOpacity onPress={onToggleSwitch} activeOpacity={1}>
       <List.Item
         title={title}
         left={() => (
-          <List.Icon
+          <Lis.Icon
             icon={icon}
-            style={{
+            syle={{
               backgroundColor: iconColor ? iconColor : colors.primary,
               ...itemStyles.icon,
             }}
             color={DefaultTheme.colors.background}
           />
         )}
-        right={() => (
-          <Chevron />
-          /* <View style={itemStyles.container}>
-            <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-          </View> */
-        )}
+        right={
+          toggle
+            ? () => (
+                <View style={itemStyles.container}>
+                  <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+                </View>
+              )
+            : null
+        }
         style={{
           borderBottomColor: "grey",
           borderBottomWidth: 1,
@@ -44,10 +47,6 @@ const ChevronSettingItem = ({
       />
     </TouchableOpacity>
   );
-};
-
-const Chevron = () => {
-  return <List.Icon icon="chevron-right" />;
 };
 
 const itemStyles = StyleSheet.create({
@@ -62,4 +61,4 @@ const itemStyles = StyleSheet.create({
   },
 });
 
-export default ChevronSettingItem;
+export default SettingsItem;
