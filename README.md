@@ -2,11 +2,11 @@
 
 Proyecto desarrollado bajo el marco de la Olimpiada de Programación de Ceibal del año 2021 por el equipo Sobrinos de Voronoi integrado por los alumnos Candelaria Paulo, Nicolás Russo y el tutor Mathías Tejera
 
-# Descripción del problema
+## Descripción del problema
 
 Después de una análisis de las problemáticas más comunes relacionadas al transporte y la comunicación en nuestro entorno detectamos que existe una gran dificultad relacionada al translado hacia las instituciones educativas. Debido a las horas comunes de ingreso entre generaciones se crean horarios pico, en los que los alrededores de las instituciones educativas presentan un problema de embotellamiento grave que genera grandes retrasos para los estudiantes y sus familias. Hay padres y madres que llevan a sus hijos en sus autos a veces hasta con tres espacios libres mientras que otros no pueden llevarlos y tienen que recurrir a contratar transporte. Reducir la cantidad de autos significaría que todos llegaran a destino de forma más eficiente.
 
-# Descripción de la solución
+## Descripción de la solución
 
 Nuestro proyecto consiste en una aplicación movil "Subite" que conecta a las personas que viajan con lugares libres en sus vehículos hacia cada institución educativa con aquellas que no tienen transporte o no pueden llevar a sus hijos y de otra forma tendrían que contratar transporte escolar. La aplicación se encarga de entregarle las opciones de transporte y rutas al usuario que lo recibirá, acorde a dónde se encuentra al momento de su partida y la hora de llegada deseada. Luego de elegir una de las rutas, se le entrega el contacto del conductor que la toma con un mensaje automatizado para que luego puedan definir el lugar específico de comienzo, la hora de recogida, entre otras cosas.
 El sistema tiene un enfoque especial en la seguridad tanto del usuario que ofrece el transporte como del usuario que lo usa, esto es debido a un riguroso registro que se efectua mediante un tramite con las instituciones educativas que llenan un formulario habilitando el uso de las cuentas de sus estudiantes de una forma similar a como funciona el tramite de habilitación de las tarjetas STM y una verificación por SMS.
