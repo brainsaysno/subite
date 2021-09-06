@@ -10,7 +10,9 @@ function TripListComponent({ trip, navigation }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("Default Screen");
+        navigation.navigate("Trip Detail", {
+          trip: trip,
+        });
       }}
     >
       <List.Item

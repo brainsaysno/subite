@@ -10,15 +10,10 @@ import DefaultScreen from "./DefaultScreen";
 const Stack = createNativeStackNavigator();
 
 function ProfileScreen(props) {
-  /* const { colors } = useTheme(); */
-
-  console.log(props);
   return (
     <View>
       <List.Section>
-        <List.Subheader /* style={{ backgroundColor: colors.surface }} */>
-          Account
-        </List.Subheader>
+        <List.Subheader>Account</List.Subheader>
         <DarkModeToggleItem
           darkModeToggle={props.darkModeToggle}
         ></DarkModeToggleItem>

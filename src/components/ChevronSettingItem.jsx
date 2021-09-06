@@ -4,14 +4,13 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import DefaultScreen from "../screens/DefaultScreen";
 
-const ChevronSettingItem = ({
+function ChevronSettingItem({
   title = "Setting",
   icon = "web",
   iconColor,
   screenName = "Default Screen",
   navigation,
-}) => {
-  console.log(navigation);
+}) {
   const { colors } = useTheme();
   return (
     <TouchableOpacity
@@ -39,7 +38,7 @@ const ChevronSettingItem = ({
       />
     </TouchableOpacity>
   );
-};
+}
 
 const itemStyles = StyleSheet.create({
   icon: {
