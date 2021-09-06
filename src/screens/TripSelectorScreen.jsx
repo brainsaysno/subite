@@ -1,51 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import TripListComponent from "../components/TripListComponent";
+import { latitudeToKm } from "../core/utils";
+import { collection, doc, query, where, orderBy } from "firebase/firestore";
+import { db } from "../../firebase";
+
+import { tripData } from "../../dummy";
 
 function TripSelectorScreen(props) {
   const [tripListComponents, setTripListComponents] = useState([]);
-  const data = [
-    { driverName: "Pepe", arrivalTime: "9:00", passengerCount: 1, capacity: 4 },
-    {
-      driverName: "Aleman",
-      arrivalTime: "6:69",
-      passengerCount: 2,
-      capacity: 3,
-    },
-    {
-      driverName: "Guzman",
-      arrivalTime: "4:20",
-      passengerCount: 2,
-      capacity: 5,
-    },
-    { driverName: "Feli", arrivalTime: "4:40", passengerCount: 0, capacity: 3 },
-    {
-      driverName: "Cande",
-      arrivalTime: "6:35",
-      passengerCount: 0,
-      capacity: 2,
-    },
-    {
-      driverName: "Tami",
-      arrivalTime: "18:32",
-      passengerCount: 0,
-      capacity: 1,
-    },
-  ];
+
+  // TODO: Get available radius from settings https://github.com/VendedorDeWards/subite/issues/5
+  const availableRadius = 2;
+
+  //const tripsRef = collection(db, "trips");
   useEffect(() => {
-    const comps = data.map((trip, i) => (
+    /* const coordRadius = kmToCoordinates(radius)
+    const availableBoundaries = {
+      top: departureCoordinates.latitude + coordRadius,
+      bottom: departureCoordinates.latitude - coordRadius,
+      right: departureCoordinates.longitude + coordRadius,
+      left: departureCoordinates.longitude - coordRadius,
+    } */
+    /* const q = query(tripsRef, where("driverName", "==", "Pepe"));
+
+    const querySnapshot = getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      data.push(doc.data());
+    }); */
+
+    const comps = tripData.map((trip, i) => (
       <TripListComponent trip={trip} key={i} navigation={props.navigation} />
     ));
     setTripListComponents(comps);
   }, []);
   return (
-    <View>
+    <ScrollView>
       <List.Section>
         <List.Subheader>Hoy</List.Subheader>
         {tripListComponents}
       </List.Section>
-    </View>
+    </ScrollView>
   );
 }
 

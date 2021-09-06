@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, Dimensions, TouchableOpacity } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
@@ -15,6 +15,7 @@ function CreateTripScreen({ navigation, ...props }) {
     setMarkerCoordinates(coordinate);
     setMarkerOn(true);
   };
+
   return (
     <>
       <MapView
@@ -43,29 +44,38 @@ function CreateTripScreen({ navigation, ...props }) {
         ) : null}
       </MapView>
       {markerOn ? (
-        <View
-          style={{
-            position: "absolute",
-            bottom: 20,
-
-            //TODO: Change this crap!
-            left: Dimensions.get("screen").width / 2 - 40,
-
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            title="Me gusta"
-            onPress={() => {
-              navigation.navigate("Trip Selector");
-              console.log(markerCoordinates);
-            }}
-          />
-        </View>
+        <ConfirmButton
+          navigation={navigation}
+          coordinates={markerCoordinates}
+        />
       ) : null}
     </>
+  );
+}
+
+function ConfirmButton({ navigation, coordinates }) {
+  return (
+    <View
+      style={{
+        position: "absolute",
+        bottom: 20,
+
+        //TODO: Change this crap!
+        left: Dimensions.get("screen").width / 2 - 40,
+
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Button
+        title="Me gusta"
+        onPress={() => {
+          navigation.navigate("Trip Selector");
+          console.log("Coordinates selected: " + coordinates);
+        }}
+      />
+    </View>
   );
 }
 

@@ -3,6 +3,7 @@ import React from "react";
 import { View, List } from "react-native-paper";
 import CreateTripScreen from "./CreateTripScreen";
 import DefaultScreen from "./DefaultScreen";
+import TripDetailScreen from "./tripDetailScreen";
 import TripSelectorScreen from "./TripSelectorScreen";
 
 const Stack = createNativeStackNavigator();
@@ -24,12 +25,10 @@ function CreateTripNavigation(props) {
         )}
       </Stack.Screen>
       <Stack.Screen name="Trip Selector">
-        {(navProps) => (
-          <TripSelectorScreen
-            {...navProps}
-            darkModeToggle={props.darkModeToggle}
-          />
-        )}
+        {(navProps) => <TripSelectorScreen {...navProps} />}
+      </Stack.Screen>
+      <Stack.Screen name="Trip Detail">
+        {(navProps) => <TripDetailScreen {...navProps} />}
       </Stack.Screen>
       <Stack.Screen
         name="Default Screen"
