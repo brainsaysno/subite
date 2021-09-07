@@ -1,30 +1,29 @@
-import React from "react";
-import { Alert, Button, View } from "react-native";
-import styles from "../styles";
+import React, { memo } from "react";
+import Background from "../components/Background";
+import Logo from "../components/Logo";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import Paragraph from "../components/Paragraph";
 
-function DriverSelectorScreen({ navigation }) {
-  return (
-    <View style={{ flexDirection: "row", ...styles.container }}>
-      <Button
-        onPress={() => {
-          Alert.alert("Dev alert", "You are a driver");
-          navigation.navigate("Login", {
-            isDriver: true,
-          });
-        }}
-        title="Driver"
-      ></Button>
-      <Button
-        onPress={() => {
-          Alert.alert("Dev alert", "You are a passenger");
-          navigation.navigate("Login", {
-            isDriver: false,
-          });
-        }}
-        title="Passenger"
-      ></Button>
-    </View>
-  );
-}
+const HomeScreen = ({ navigation }) => (
+  <Background>
+    <Logo />
+    <Header>Lorem Ipsum</Header>
 
-export default DriverSelectorScreen;
+    <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing.</Paragraph>
+    <Button
+      mode="contained"
+      onPress={() => navigation.navigate("Login", { isDriver: true })}
+    >
+      Driver
+    </Button>
+    <Button
+      mode="contained"
+      onPress={() => navigation.navigate("Login", { isDriver: false })}
+    >
+      Passenger
+    </Button>
+  </Background>
+);
+
+export default memo(HomeScreen);
