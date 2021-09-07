@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useTheme } from "react-native-paper";
 import { emailValidator } from "../core/utils";
 import Background from "../components/Background";
 import BackButton from "../components/BackButton";
@@ -8,8 +9,9 @@ import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 
-const ForgotPasswordScreen = ({ navigation }) => {
+const ForgotPasswordScreen = ({ navigation, route }) => {
   const { colors } = useTheme();
+  const { isDriver } = route.params;
 
   const [email, setEmail] = useState({ value: "", error: "" });
 
@@ -23,7 +25,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
     //TODO: add forgot password firebase method
 
-    navigation.navigate("Login");
+    navigation.navigate("Login", { isDriver: isDriver });
   };
 
   const styles = StyleSheet.create({
@@ -42,7 +44,9 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate("Login")} />
+      <BackButton
+        goBack={() => navigation.navigate("Login", { isDriver: isDriver })}
+      />
 
       <Logo />
 
@@ -67,7 +71,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.back}
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => navigation.navigate("Login", { isDriver: isDriver })}
       >
         <Text style={styles.label}>← Back to login</Text>
       </TouchableOpacity>

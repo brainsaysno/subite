@@ -84,7 +84,9 @@ const LoginScreen = ({ navigation, route, DEV_onAuth }) => {
 
       <View style={styles.forgotPassword}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ForgotPasswordScreen")}
+          onPress={() =>
+            navigation.navigate("Forgot Password", { isDriver: isDriver })
+          }
         >
           <Text style={styles.label}>Forgot your password?</Text>
         </TouchableOpacity>
@@ -96,7 +98,11 @@ const LoginScreen = ({ navigation, route, DEV_onAuth }) => {
 
       <View style={styles.row}>
         <Text style={styles.label}>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Register", { isDriver: isDriver })
+          }
+        >
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>

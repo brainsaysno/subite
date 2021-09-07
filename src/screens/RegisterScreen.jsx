@@ -35,7 +35,9 @@ const RegisterScreen = ({ navigation, route }) => {
 
     //TODO: add register firebase method
 
-    navigation.navigate(isDriver ? "Driver Navigator" : "Passenger Navigator");
+    navigation.navigate(isDriver ? "Driver Navigator" : "Passenger Navigator", {
+      isDriver: isDriver,
+    });
   };
 
   const styles = StyleSheet.create({
@@ -57,7 +59,9 @@ const RegisterScreen = ({ navigation, route }) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate("Login")} />
+      <BackButton
+        goBack={() => navigation.navigate("Login", { isDriver: isDriver })}
+      />
 
       <Logo />
 
@@ -101,7 +105,9 @@ const RegisterScreen = ({ navigation, route }) => {
 
       <View style={styles.row}>
         <Text style={styles.label}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login", { isDriver: isDriver })}
+        >
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
