@@ -17,7 +17,7 @@ const DarkModeToggleItem = ({ darkModeToggle }) => {
               backgroundColor: colors.primary,
               ...itemStyles.icon,
             }}
-            color={DefaultTheme.colors.background}
+            color={colors.background}
           />
         )}
         right={() => (

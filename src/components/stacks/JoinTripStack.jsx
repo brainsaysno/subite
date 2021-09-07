@@ -1,14 +1,14 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { View, List } from "react-native-paper";
-import CreateTripScreen from "./CreateTripScreen";
-import DefaultScreen from "./DefaultScreen";
-import TripDetailScreen from "./tripDetailScreen";
-import TripSelectorScreen from "./TripSelectorScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import JoinTripScreen from "../../screens/JoinTripScreen";
+import DefaultScreen from "../../screens/DefaultScreen";
+import TripDetailScreen from "../../screens/TripDetailScreen";
+import TripSelectorScreen from "../../screens/TripSelectorScreen";
 
 const Stack = createNativeStackNavigator();
 
-function CreateTripNavigation(props) {
+function JoinTripNavigation(props) {
   return (
     <Stack.Navigator
       initialRouteName="Map"
@@ -18,10 +18,7 @@ function CreateTripNavigation(props) {
     >
       <Stack.Screen name="Map">
         {(navProps) => (
-          <CreateTripScreen
-            {...navProps}
-            darkModeToggle={props.darkModeToggle}
-          />
+          <JoinTripScreen {...navProps} darkModeToggle={props.darkModeToggle} />
         )}
       </Stack.Screen>
       <Stack.Screen name="Trip Selector">
@@ -38,4 +35,4 @@ function CreateTripNavigation(props) {
   );
 }
 
-export default CreateTripNavigation;
+export default JoinTripNavigation;

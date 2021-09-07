@@ -27,7 +27,7 @@ const ChevronSettingItem = ({
               backgroundColor: iconColor ? iconColor : colors.primary,
               ...itemStyles.icon,
             }}
-            color={DefaultTheme.colors.background}
+            color={colors.background}
           />
         )}
         right={

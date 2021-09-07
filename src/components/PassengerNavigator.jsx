@@ -2,24 +2,16 @@ import * as React from "react";
 import { Text, useTheme } from "react-native-paper";
 import { View, StyleSheet, Image } from "react-native";
 import styles from "../styles.js";
-import CreateTripScreen from "../screens/CreateTripScreen";
+import JoinTripScreen from "../screens/JoinTripScreen";
 import ProfileNavigator from "../screens/ProfileScreen";
-import CreateTripNavigation from "../screens/CreateTripStack.jsx";
+import JoinTripNavigation from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
 
-const TestRoute = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Test Route</Text>
-    </View>
-  );
-};
-
 const Tab = createBottomTabNavigator();
 
-function BottomNavbar({ darkModeToggle }) {
+function PassengerNavigator({ darkModeToggle, isDriver }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -29,7 +21,7 @@ function BottomNavbar({ darkModeToggle }) {
 
           if (route.name === "Recent Trips") {
             iconName = focused ? "star" : "star";
-          } else if (route.name === "Create Trip") {
+          } else if (route.name === "Join Trip") {
             iconName = focused ? "map" : "map";
           } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person";
@@ -42,12 +34,16 @@ function BottomNavbar({ darkModeToggle }) {
         },
       })}
     >
-      <Tab.Screen name="Recent Trips" component={DefaultScreen} />
-      <Tab.Screen name="Create Trip" component={CreateTripNavigation} />
+      <Tab.Screen name="Recent Trips">
+        {(navProps) => (
+          <DefaultScreen {...navProps} isDriver={isDriver}></DefaultScreen>
+        )}
+      </Tab.Screen>
+      <Tab.Screen name="Join Trip" component={JoinTripNavigation} />
       <Tab.Screen name="Profile">
         {() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
 }
-export default BottomNavbar;
+export default PassengerNavigator;

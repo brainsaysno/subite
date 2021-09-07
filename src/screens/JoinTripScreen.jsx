@@ -6,7 +6,7 @@ import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import TripSelectorScreen from "./TripSelectorScreen";
 
-function CreateTripScreen({ navigation, ...props }) {
+function JoinTripScreen({ navigation, ...props }) {
   const { dark, colors } = useTheme();
   const [markerCoordinates, setMarkerCoordinates] = useState({});
   const [markerOn, setMarkerOn] = useState(false);
@@ -79,4 +79,4 @@ function ConfirmButton({ navigation, coordinates }) {
   );
 }
 
-export default CreateTripScreen;
+export default JoinTripScreen;

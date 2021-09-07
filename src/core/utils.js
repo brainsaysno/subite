@@ -1,4 +1,4 @@
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+/* function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
@@ -18,3 +18,27 @@ function deg2rad(deg) {
 }
 
 export { getDistanceFromLatLonInKm };
+ */
+
+// TODO: Change error messages
+
+export const emailValidator = (email) => {
+  const re = /\S+@\S+\.\S+/;
+
+  if (!email || email.length <= 0) return "Email cannot be empty.";
+  if (!re.test(email)) return "Oops! We need a valid email address.";
+
+  return "";
+};
+
+export const passwordValidator = (password) => {
+  if (!password || password.length <= 0) return "Password cannot be empty.";
+
+  return "";
+};
+
+export const nameValidator = (name) => {
+  if (!name || name.length <= 0) return "Name cannot be empty.";
+
+  return "";
+};

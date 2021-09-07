@@ -26,7 +26,7 @@ function ChevronSettingItem({
               backgroundColor: iconColor ? iconColor : colors.primary,
               ...itemStyles.icon,
             }}
-            color={DefaultTheme.colors.background}
+            color={colors.background}
           />
         )}
         right={() => <List.Icon icon="chevron-right" />}

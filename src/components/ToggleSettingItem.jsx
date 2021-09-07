@@ -22,7 +22,7 @@ const ChevronSettingItem = ({ title = "Setting", icon = "web", iconColor }) => {
               backgroundColor: iconColor ? iconColor : colors.primary,
               ...itemStyles.icon,
             }}
-            color={DefaultTheme.colors.background}
+            color={colors.background}
           />
         )}
         right={
