@@ -5,16 +5,39 @@ import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import TripSelectorScreen from "./TripSelectorScreen";
+import { decode } from "@googlemaps/polyline-codec";
+import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 
 function JoinTripScreen({ navigation, ...props }) {
   const { dark, colors } = useTheme();
-  const [markerCoordinates, setMarkerCoordinates] = useState({});
-  const [markerOn, setMarkerOn] = useState(false);
+  const [mapData, setMapData] = useState({ markerOn: false });
+
+  const institution = {
+    coordinates: {
+      latitude: -34.903852,
+      longitude: -56.190639,
+    },
+  };
 
   const handleMapPress = ({ coordinate }) => {
-    setMarkerCoordinates(coordinate);
-    setMarkerOn(true);
+    fetch(
+      `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinate.latitude},${coordinate.longitude}&destination=${institution.coordinates.latitude}, ${institution.coordinates.longitude}&key=${GOOGLE_MAPS_API_KEY}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const dataToSend = {
+          markerCoordinates: coordinate,
+          markerOn: true,
+          ...data,
+        };
+        console.log(dataToSend.routes[0].overview_polyline.points);
+        setMapData(dataToSend);
+      });
   };
+
+  useEffect(() => {
+    console.log(mapData);
+  }, []);
 
   return (
     <>
@@ -30,23 +53,24 @@ function JoinTripScreen({ navigation, ...props }) {
           longitudeDelta: 0.0421,
         }}
       >
-        {markerOn ? (
+        {mapData.markerOn ? (
           <>
-            <Marker coordinate={markerCoordinates}></Marker>
+            <Marker coordinate={mapData.markerCoordinates}></Marker>
             <Polyline
-              coordinates={[
-                markerCoordinates,
-                { latitude: -34.903852, longitude: -56.190639 },
-              ]}
+              coordinates={decode(
+                mapData.routes[0].overview_polyline.points,
+                5
+              ).map((arr) => ({ latitude: arr[0], longitude: arr[1] }))}
               lineDashPattern={[0]}
+              strokeWidth={5}
             ></Polyline>
           </>
         ) : null}
       </MapView>
-      {markerOn ? (
+      {mapData.markerOn ? (
         <ConfirmButton
           navigation={navigation}
-          coordinates={markerCoordinates}
+          coordinates={mapData.markerCoordinates}
         />
       ) : null}
     </>
