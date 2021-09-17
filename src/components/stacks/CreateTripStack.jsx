@@ -7,6 +7,7 @@ import TripDetailScreen from "../../screens/TripDetailScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
 import ConfirmTripScreen from "../../screens/ConfirmTripScreen";
 import CreateTripScreen from "../../screens/CreateTripScreen";
+import CreateTripSuccessScreen from "../../screens/CreateTripSucessScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,8 +30,8 @@ function CreateTripNavigator(props) {
       <Stack.Screen name="Confirm Create Trip">
         {(navProps) => <ConfirmTripScreen {...navProps} />}
       </Stack.Screen>
-      <Stack.Screen name="Trip Detail">
-        {(navProps) => <TripDetailScreen {...navProps} />}
+      <Stack.Screen name="Trip Success">
+        {(navProps) => <CreateTripSuccessScreen {...navProps} />}
       </Stack.Screen>
       <Stack.Screen
         name="Default Screen"

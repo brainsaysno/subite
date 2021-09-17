@@ -16,7 +16,7 @@ function DriverNavigator({ darkModeToggle, isDriver }) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Recent Trips") {
+          if (route.name === "Trips") {
             iconName = focused ? "star" : "star";
           } else if (route.name === "Create Trip") {
             iconName = focused ? "map" : "map";
@@ -31,7 +31,7 @@ function DriverNavigator({ darkModeToggle, isDriver }) {
         },
       })}
     >
-      <Tab.Screen name="Recent Trips">
+      <Tab.Screen name="Trips">
         {(navProps) => <DefaultScreen isDriver={isDriver} {...navProps} />}
       </Tab.Screen>
       <Tab.Screen name="Create Trip" component={CreateTripNavigator} />

@@ -24,6 +24,7 @@ function ConfirmTripScreen({ navigation, route }) {
       .add(newTripData)
       .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
+        navigation.navigate("Trip Success", { docID: docRef.id });
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
