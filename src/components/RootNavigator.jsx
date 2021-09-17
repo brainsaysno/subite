@@ -13,20 +13,22 @@ const auth = Firebase.auth();
 
 function RootNavigator({ darkModeToggle }) {
   const { dark } = useTheme();
-  const { user, setUser } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [reloadState, setReloadState] = useState(null);
-
-  const [isDriver, setIsDriver] = useState(null);
+  const [isAuthed, setIsAuthed] = useState(false);
+  const [isDriver, setIsDriver] = useState(true);
 
   function onAuthStateChanged(authenticatedUser) {
-    authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+    if (authenticatedUser) {
+      setIsAuthed(true);
+      console.log(authenticatedUser.uid);
+    } else {
+      setIsAuthed(false);
+    }
+
     setIsLoading(false);
-    console.log(authenticatedUser ? "yes" : "no");
   }
 
   useEffect(() => {
-    console.log(user);
     const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
     return unsubscribeAuth;
   }, []);
@@ -41,7 +43,7 @@ function RootNavigator({ darkModeToggle }) {
 
   return (
     <>
-      {user ? (
+      {isAuthed ? (
         isDriver ? (
           <DriverNavigator
             darkModeToggle={darkModeToggle}

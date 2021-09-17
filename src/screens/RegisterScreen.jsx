@@ -42,6 +42,9 @@ const RegisterScreen = ({ navigation, route, setIsDriver }) => {
     auth
       .createUserWithEmailAndPassword(email.value, password.value)
       .then(() => {
+        /* authenticatedUser.user.updateProfile({
+          displayName: name.value,
+        }); */
         setIsDriver(isDriver);
         console.log("User account created & signed in!");
       })
