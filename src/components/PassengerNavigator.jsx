@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 import styles from "../styles.js";
 import JoinTripScreen from "../screens/JoinTripScreen";
 import ProfileNavigator from "../screens/ProfileScreen";
-import JoinTripNavigation from "./stacks/JoinTripStack.jsx";
+import JoinTripNavigator from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
@@ -39,7 +39,7 @@ function PassengerNavigator({ darkModeToggle, isDriver }) {
           <DefaultScreen {...navProps} isDriver={isDriver}></DefaultScreen>
         )}
       </Tab.Screen>
-      <Tab.Screen name="Join Trip" component={JoinTripNavigation} />
+      <Tab.Screen name="Join Trip" component={JoinTripNavigator} />
       <Tab.Screen name="Profile">
         {() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
       </Tab.Screen>

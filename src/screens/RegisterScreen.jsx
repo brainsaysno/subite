@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
@@ -12,16 +12,21 @@ import {
   passwordValidator,
   nameValidator,
 } from "../core/utils";
+import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import Firebase from "../../config/firebase";
 
-const RegisterScreen = ({ navigation, route }) => {
+const auth = Firebase.auth();
+
+const RegisterScreen = ({ navigation, route, setIsDriver }) => {
   const { colors } = useTheme();
   const { isDriver } = route.params;
+  const { user, setUser } = useContext(AuthenticatedUserContext);
 
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const _onSignUpPressed = () => {
+  const onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -34,10 +39,23 @@ const RegisterScreen = ({ navigation, route }) => {
     }
 
     //TODO: add register firebase method
+    auth
+      .createUserWithEmailAndPassword(email.value, password.value)
+      .then(() => {
+        setIsDriver(isDriver);
+        console.log("User account created & signed in!");
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          console.log("That email address is already in use!");
+        }
 
-    navigation.navigate(isDriver ? "Driver Navigator" : "Passenger Navigator", {
-      isDriver: isDriver,
-    });
+        if (error.code === "auth/invalid-email") {
+          console.log("That email address is invalid!");
+        }
+
+        console.error(error);
+      });
   };
 
   const styles = StyleSheet.create({
@@ -99,7 +117,7 @@ const RegisterScreen = ({ navigation, route }) => {
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+      <Button mode="contained" onPress={onSignUpPressed} style={styles.button}>
         Sign Up
       </Button>
 

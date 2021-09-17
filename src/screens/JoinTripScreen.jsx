@@ -12,27 +12,8 @@ function JoinTripScreen({ navigation, ...props }) {
   const { dark, colors } = useTheme();
   const [mapData, setMapData] = useState({ markerOn: false });
 
-  const institution = {
-    coordinates: {
-      latitude: -34.903852,
-      longitude: -56.190639,
-    },
-  };
-
   const handleMapPress = ({ coordinate }) => {
-    fetch(
-      `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinate.latitude},${coordinate.longitude}&destination=${institution.coordinates.latitude}, ${institution.coordinates.longitude}&key=${GOOGLE_MAPS_API_KEY}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const dataToSend = {
-          markerCoordinates: coordinate,
-          markerOn: true,
-          ...data,
-        };
-        console.log(dataToSend.routes[0].overview_polyline.points);
-        setMapData(dataToSend);
-      });
+    setMapData({ markerOn: true, markerCoordinates: coordinate });
   };
 
   useEffect(() => {
@@ -54,17 +35,7 @@ function JoinTripScreen({ navigation, ...props }) {
         }}
       >
         {mapData.markerOn ? (
-          <>
-            <Marker coordinate={mapData.markerCoordinates}></Marker>
-            <Polyline
-              coordinates={decode(
-                mapData.routes[0].overview_polyline.points,
-                5
-              ).map((arr) => ({ latitude: arr[0], longitude: arr[1] }))}
-              lineDashPattern={[0]}
-              strokeWidth={5}
-            ></Polyline>
-          </>
+          <Marker coordinate={mapData.markerCoordinates}></Marker>
         ) : null}
       </MapView>
       {mapData.markerOn ? (
@@ -95,7 +66,9 @@ function ConfirmButton({ navigation, coordinates }) {
       <Button
         title="Me gusta"
         onPress={() => {
-          navigation.navigate("Trip Selector");
+          navigation.navigate("Trip Selector", {
+            markerCoordinates: coordinates,
+          });
           console.log("Coordinates selected: " + coordinates);
         }}
       />

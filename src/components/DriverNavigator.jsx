@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import ProfileNavigator from "../screens/ProfileScreen";
-import JoinTripNavigation from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
+import CreateTripScreen from "../screens/CreateTripScreen";
+import CreateTripNavigator from "./stacks/CreateTripStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ function DriverNavigator({ darkModeToggle, isDriver }) {
       <Tab.Screen name="Recent Trips">
         {(navProps) => <DefaultScreen isDriver={isDriver} {...navProps} />}
       </Tab.Screen>
-      <Tab.Screen name="Create Trip" component={JoinTripNavigation} />
+      <Tab.Screen name="Create Trip" component={CreateTripNavigator} />
       <Tab.Screen name="Profile">
         {() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
       </Tab.Screen>

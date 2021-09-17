@@ -4,11 +4,11 @@ import { List } from "react-native-paper";
 import TripListComponent from "../components/TripListComponent";
 import { latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../config/firebase";
 
 import { tripData } from "../../dummy";
 
-function TripSelectorScreen(props) {
+function TripSelectorScreen({ navigation }) {
   const [tripListComponents, setTripListComponents] = useState([]);
 
   // TODO: Get available radius from settings https://github.com/VendedorDeWards/subite/issues/5
@@ -16,15 +16,7 @@ function TripSelectorScreen(props) {
 
   //const tripsRef = collection(db, "trips");
   useEffect(() => {
-    /* const coordRadius = kmToCoordinates(radius)
-    const availableBoundaries = {
-      top: departureCoordinates.latitude + coordRadius,
-      bottom: departureCoordinates.latitude - coordRadius,
-      right: departureCoordinates.longitude + coordRadius,
-      left: departureCoordinates.longitude - coordRadius,
-    } */
-    /* const q = query(tripsRef, where("driverName", "==", "Pepe"));
-
+    /*
     const querySnapshot = getDocs(q);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
@@ -33,7 +25,7 @@ function TripSelectorScreen(props) {
     }); */
 
     const comps = tripData.map((trip, i) => (
-      <TripListComponent trip={trip} key={i} navigation={props.navigation} />
+      <TripListComponent trip={trip} key={i} navigation={navigation} />
     ));
     setTripListComponents(comps);
   }, []);

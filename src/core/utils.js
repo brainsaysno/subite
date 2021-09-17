@@ -42,3 +42,65 @@ export const nameValidator = (name) => {
 
   return "";
 };
+
+function coordsToLighthouse(coords) {
+  lighthouseCoords = {
+    lat: -34.935311,
+    long: -56.160579,
+  };
+
+  // Using aproximations from https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance
+
+  return [
+    (coords[1] - lighthouseCoords.long) *
+      111.32 *
+      Math.cos((coords[0] * Math.PI) / 180),
+    (coords[0] - lighthouseCoords.lat) * 110.574,
+  ];
+}
+
+export function isInRadius(path, coords, radius) {
+  const lhPath = path.map(coordsToLighthouse);
+  const lhCoords = coordsToLighthouse(coords);
+
+  const lhDistances = [];
+
+  // Check for distance to points
+  for (el of lhPath) {
+    const distance = Math.sqrt(
+      (el[0] - lhCoords[0]) ** 2 + (el[1] - lhCoords[1]) ** 2
+    );
+    if (distance <= radius) return true;
+
+    lhDistances.push(distance);
+  }
+
+  // Check for distance to line... FIXME: Checking for pairs, so last element is left unchecked in odd-numbered point cases
+  console.log(lhDistances.length);
+  for (let i = 1; i < lhDistances.length / 2; i++) {
+    const i1 = i * 2 - 2;
+    const i2 = i * 2 - 1;
+    console.log(i1, i2);
+
+    const leg1 = Math.min(lhDistances[i1], lhDistances[i2]);
+    const leg2 = Math.sqrt(
+      (lhPath[i1] - lhPath[i2]) ** 2 + (lhPath[i1] - lhPath[i2]) ** 2
+    );
+    const hyp = Math.max(lhDistances[i1], lhDistances[i1]);
+
+    if (leg1 ** 2 + leg2 ** 2 <= hyp ** 2) continue;
+
+    const a = lhPath[i2][1] - lhPath[i1][1];
+    const b = lhPath[i2][0] - lhPath[i1][0];
+    const c =
+      (lhPath[i2][0] - lhPath[i1][0]) * lhPath[i2][1] +
+      (lhPath[i1][1] - lhPath[i2][1]) * lhPath[i2][0];
+
+    const distance =
+      Math.abs(a * lhCoords[0] + b * lhCoords[1] + c) /
+      Math.sqrt(a ** 2 + b ** 2);
+
+    if (distance <= radius) return true;
+  }
+  return false;
+}

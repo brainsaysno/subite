@@ -5,10 +5,12 @@ import JoinTripScreen from "../../screens/JoinTripScreen";
 import DefaultScreen from "../../screens/DefaultScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
+import ConfirmTripScreen from "../../screens/ConfirmTripScreen";
+import CreateTripScreen from "../../screens/CreateTripScreen";
 
 const Stack = createNativeStackNavigator();
 
-function JoinTripNavigator(props) {
+function CreateTripNavigator(props) {
   return (
     <Stack.Navigator
       initialRouteName="Map"
@@ -18,11 +20,14 @@ function JoinTripNavigator(props) {
     >
       <Stack.Screen name="Map">
         {(navProps) => (
-          <JoinTripScreen {...navProps} darkModeToggle={props.darkModeToggle} />
+          <CreateTripScreen
+            {...navProps}
+            darkModeToggle={props.darkModeToggle}
+          />
         )}
       </Stack.Screen>
-      <Stack.Screen name="Trip Selector">
-        {(navProps) => <TripSelectorScreen {...navProps} />}
+      <Stack.Screen name="Confirm Create Trip">
+        {(navProps) => <ConfirmTripScreen {...navProps} />}
       </Stack.Screen>
       <Stack.Screen name="Trip Detail">
         {(navProps) => <TripDetailScreen {...navProps} />}
@@ -35,4 +40,4 @@ function JoinTripNavigator(props) {
   );
 }
 
-export default JoinTripNavigator;
+export default CreateTripNavigator;

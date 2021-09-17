@@ -6,6 +6,7 @@ import ChevronSettingItem from "../components/ChevronSettingItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import DefaultScreen from "./DefaultScreen";
+import SignOutSettingItem from "../components/SignOutSettingItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,8 @@ function ProfileScreen(props) {
           darkModeToggle={props.darkModeToggle}
         ></DarkModeToggleItem>
         <ChevronSettingItem {...props} />
+        <ChevronSettingItem {...props} />
+        <SignOutSettingItem />
       </List.Section>
     </View>
   );

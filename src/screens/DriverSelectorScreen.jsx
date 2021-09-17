@@ -26,4 +26,4 @@ const HomeScreen = ({ navigation }) => (
   </Background>
 );
 
-export default memo(HomeScreen);
+export default HomeScreen;

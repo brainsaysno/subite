@@ -18,3 +18,4 @@ web-build/
 .notes.txt
 .hashes.txt
 keys.js
+.env

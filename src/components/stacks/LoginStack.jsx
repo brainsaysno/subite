@@ -20,10 +20,14 @@ function LoginStack(props) {
       <Stack.Screen name="Driver Selector" component={DriverSelectorScreen} />
       <Stack.Screen name="Login">
         {(navProps) => (
-          <LoginScreen {...navProps} DEV_onAuth={props.DEV_onAuth} />
+          <LoginScreen {...navProps} setIsDriver={props.setIsDriver} />
         )}
       </Stack.Screen>
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Register">
+        {(navProps) => (
+          <RegisterScreen {...navProps} setIsDriver={props.setIsDriver} />
+        )}
+      </Stack.Screen>
       <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
     </Stack.Navigator>
   );
