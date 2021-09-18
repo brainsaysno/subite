@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import styles from "../styles";
 import firebase from "firebase";
 import { db } from "../../config/firebase";
 
 function ConfirmTripScreen({ navigation, route }) {
   const { tripData } = route.params;
-
   const [capacity, setCapacity] = useState();
-
   const [newTripData, setNewTripData] = useState({
     polyline: tripData.routes[0].overview_polyline.points,
     departureTime: Date.now(),
