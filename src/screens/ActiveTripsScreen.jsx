@@ -6,35 +6,32 @@ import { latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
+import { tripData } from "../../dummy";
 import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
-import Loading from "../components/Loading";
 
-function TripSelectorScreen({ navigation }) {
+function ActiveTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
 	const { user } = useContext(AuthenticatedUserContext);
 
 	//const tripsRef = collection(db, "trips");
 	useEffect(() => {
 		if (user) {
-			db.collection("trips")
-				.where("institutionName", "==", user.institution.name)
+			const unsub = db
+				.collection("trips")
+				.where("driver.uid", "==", user.uid)
 				.orderBy("departureTime")
-				.get()
-				.then((querySnapshot) => {
+				.onSnapshot((querySnapshot) => {
+					console.log("snap");
 					const data = querySnapshot.docs.map((doc) => doc.data());
-					const comps = data.map((trip, i) => (
+					const components = data.map((trip, i) => (
 						<TripListComponent trip={trip} key={i} navigation={navigation} />
 					));
-					setIsLoading(false);
-					setTripListComponents(comps);
-					console.log(data);
+
+					setTripListComponents(components);
 				});
+			return unsub;
 		}
 	}, []);
-
-	if (isLoading) return <Loading />;
-
 	return (
 		<ScrollView>
 			<List.Section>
@@ -45,4 +42,4 @@ function TripSelectorScreen({ navigation }) {
 	);
 }
 
-export default TripSelectorScreen;
+export default ActiveTripsScreen;

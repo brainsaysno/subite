@@ -6,61 +6,69 @@ import PassengerNavigator from "./PassengerNavigator";
 import DriverNavigator from "./DriverNavigator";
 import LoginStack from "./stacks/LoginStack";
 import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
-import Firebase from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import { NavigationContainer } from "@react-navigation/native";
 
-const auth = Firebase.auth();
-
 function RootNavigator({ darkModeToggle }) {
-  const { dark } = useTheme();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthed, setIsAuthed] = useState(false);
-  const [isDriver, setIsDriver] = useState(true);
+	const { dark } = useTheme();
+	const [isLoading, setIsLoading] = useState(true);
+	const [isAuthed, setIsAuthed] = useState(false);
+	const { isDriver, setUser } = useContext(AuthenticatedUserContext);
 
-  function onAuthStateChanged(authenticatedUser) {
-    if (authenticatedUser) {
-      setIsAuthed(true);
-      console.log(authenticatedUser.uid);
-    } else {
-      setIsAuthed(false);
-    }
+	function onAuthStateChanged(authenticatedUser) {
+		if (authenticatedUser) {
+			db.collection("users")
+				.doc(authenticatedUser.uid)
+				.get()
+				.then((doc) => {
+					if (doc.exists) {
+						setIsAuthed(true);
+						setUser({
+							uid: doc.id,
+							...doc.data(),
+						});
+						console.log("User data: ", doc.data());
+					} else {
+						// Sign out for security reasons... this should never happen for legitimate users
+						auth.signOut();
+					}
+				});
+			console.log(authenticatedUser.uid);
+		} else {
+			setUser(undefined);
+			setIsAuthed(false);
+		}
 
-    setIsLoading(false);
-  }
+		setIsLoading(false);
+	}
 
-  useEffect(() => {
-    const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
-    return unsubscribeAuth;
-  }, []);
+	useEffect(() => {
+		const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
+		return unsubscribeAuth;
+	}, []);
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+	if (isLoading) {
+		return (
+			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+				<ActivityIndicator size="large" />
+			</View>
+		);
+	}
 
-  return (
-    <>
-      {isAuthed ? (
-        isDriver ? (
-          <DriverNavigator
-            darkModeToggle={darkModeToggle}
-            isDriver={isDriver}
-          />
-        ) : (
-          <PassengerNavigator
-            darkModeToggle={darkModeToggle}
-            isDriver={isDriver}
-          />
-        )
-      ) : (
-        <LoginStack setIsDriver={setIsDriver} />
-      )}
-      <StatBar style={dark ? "light" : "dark"} />
-    </>
-  );
+	return (
+		<>
+			{isAuthed ? (
+				isDriver ? (
+					<DriverNavigator darkModeToggle={darkModeToggle} />
+				) : (
+					<PassengerNavigator darkModeToggle={darkModeToggle} />
+				)
+			) : (
+				<LoginStack />
+			)}
+			<StatBar style={dark ? "light" : "dark"} />
+		</>
+	);
 }
 
 export default RootNavigator;

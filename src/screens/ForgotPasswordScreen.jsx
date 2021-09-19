@@ -9,74 +9,71 @@ import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 
-const ForgotPasswordScreen = ({ navigation, route }) => {
-  const { colors } = useTheme();
-  const { isDriver } = route.params;
+const ForgotPasswordScreen = ({ navigation }) => {
+	const { colors } = useTheme();
 
-  const [email, setEmail] = useState({ value: "", error: "" });
+	const [email, setEmail] = useState({ value: "", error: "" });
 
-  const _onSendPressed = () => {
-    const emailError = emailValidator(email.value);
+	const _onSendPressed = () => {
+		const emailError = emailValidator(email.value);
 
-    if (emailError) {
-      setEmail({ ...email, error: emailError });
-      return;
-    }
+		if (emailError) {
+			setEmail({ ...email, error: emailError });
+			return;
+		}
 
-    //TODO: add forgot password firebase method
+		//TODO: add forgot password firebase method
 
-    navigation.navigate("Login", { isDriver: isDriver });
-  };
+		navigation.navigate("Login");
+	};
 
-  const styles = StyleSheet.create({
-    back: {
-      width: "100%",
-      marginTop: 12,
-    },
-    button: {
-      marginTop: 12,
-    },
-    label: {
-      color: colors.secondary,
-      width: "100%",
-    },
-  });
+	const styles = StyleSheet.create({
+		back: {
+			width: "100%",
+			marginTop: 12,
+		},
+		button: {
+			marginTop: 12,
+		},
+		label: {
+			color: colors.secondary,
+			width: "100%",
+		},
+	});
 
-  return (
-    <Background>
-      <BackButton
-        goBack={() => navigation.navigate("Login", { isDriver: isDriver })}
-      />
+	return (
+		<Background>
+			<BackButton goBack={() => navigation.navigate("Login")} />
 
-      <Logo />
+			<Logo />
 
-      <Header>Restore Password</Header>
+			<Header>Restore Password</Header>
 
-      <TextInput
-        label="E-mail address"
-        returnKeyType="done"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
+			<TextInput
+				label="E-mail address"
+				returnKeyType="done"
+				value={email.value}
+				onChangeText={(text) => setEmail({ value: text, error: "" })}
+				error={!!email.error}
+				errorText={email.error}
+				autoCapitalize="none"
+				autoCompleteType="email"
+				textContentType="emailAddress"
+				keyboardType="email-address"
+			/>
 
-      <Button mode="contained" onPress={_onSendPressed} style={styles.button}>
-        Send Reset Instructions
-      </Button>
+			<Button mode="contained" onPress={_onSendPressed} style={styles.button}>
+				Send Reset Instructions
+			</Button>
 
-      <TouchableOpacity
-        style={styles.back}
-        onPress={() => navigation.navigate("Login", { isDriver: isDriver })}
-      >
-        <Text style={styles.label}>← Back to login</Text>
-      </TouchableOpacity>
-    </Background>
-  );
+			<TouchableOpacity
+				style={styles.back}
+				onPress={() => navigation.navigate("Login")}
+			>
+				<Text style={styles.label}>← Back to login</Text>
+			</TouchableOpacity>
+		</Background>
+	);
 };
 
 export default ForgotPasswordScreen;

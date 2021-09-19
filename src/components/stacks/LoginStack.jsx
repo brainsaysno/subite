@@ -10,27 +10,23 @@ import PassengerNavigator from "../PassengerNavigator";
 const Stack = createNativeStackNavigator();
 
 function LoginStack(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Driver Selector"
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Driver Selector" component={DriverSelectorScreen} />
-      <Stack.Screen name="Login">
-        {(navProps) => (
-          <LoginScreen {...navProps} setIsDriver={props.setIsDriver} />
-        )}
-      </Stack.Screen>
-      <Stack.Screen name="Register">
-        {(navProps) => (
-          <RegisterScreen {...navProps} setIsDriver={props.setIsDriver} />
-        )}
-      </Stack.Screen>
-      <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			initialRouteName="Driver Selector"
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen name="Driver Selector" component={DriverSelectorScreen} />
+			<Stack.Screen name="Login">
+				{(navProps) => <LoginScreen {...navProps} />}
+			</Stack.Screen>
+			<Stack.Screen name="Register">
+				{(navProps) => <RegisterScreen {...navProps} />}
+			</Stack.Screen>
+			<Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
+		</Stack.Navigator>
+	);
 }
 
 export default LoginStack;

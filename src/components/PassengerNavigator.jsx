@@ -11,39 +11,37 @@ import DefaultScreen from "../screens/DefaultScreen.jsx";
 
 const Tab = createBottomTabNavigator();
 
-function PassengerNavigator({ darkModeToggle, isDriver }) {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+function PassengerNavigator({ darkModeToggle }) {
+	return (
+		<Tab.Navigator
+			screenOptions={({ route }) => ({
+				headerShown: false,
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
 
-          if (route.name === "Recent Trips") {
-            iconName = focused ? "star" : "star";
-          } else if (route.name === "Join Trip") {
-            iconName = focused ? "map" : "map";
-          } else if (route.name === "Profile") {
-            iconName = focused ? "person" : "person";
-          }
+					if (route.name === "Recent Trips") {
+						iconName = focused ? "star" : "star";
+					} else if (route.name === "Join Trip") {
+						iconName = focused ? "map" : "map";
+					} else if (route.name === "Profile") {
+						iconName = focused ? "person" : "person";
+					}
 
-          return (
-            // ICONS FROM EVA DESIGN: https://akveo.github.io/eva-icons/#/
-            <Icon name={iconName} width={size} height={size} fill={color} />
-          );
-        },
-      })}
-    >
-      <Tab.Screen name="Recent Trips">
-        {(navProps) => (
-          <DefaultScreen {...navProps} isDriver={isDriver}></DefaultScreen>
-        )}
-      </Tab.Screen>
-      <Tab.Screen name="Join Trip" component={JoinTripNavigator} />
-      <Tab.Screen name="Profile">
-        {() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
-      </Tab.Screen>
-    </Tab.Navigator>
-  );
+					return (
+						// ICONS FROM EVA DESIGN: https://akveo.github.io/eva-icons/#/
+						<Icon name={iconName} width={size} height={size} fill={color} />
+					);
+				},
+			})}
+		>
+			<Tab.Screen name="Recent Trips">
+				{(navProps) => <DefaultScreen {...navProps}></DefaultScreen>}
+			</Tab.Screen>
+			<Tab.Screen name="Join Trip" component={JoinTripNavigator} />
+			<Tab.Screen name="Profile">
+				{() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
+			</Tab.Screen>
+		</Tab.Navigator>
+	);
 }
 export default PassengerNavigator;

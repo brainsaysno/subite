@@ -1,40 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Text, View } from "react-native";
 import styles from "../styles";
-import firebase from "firebase";
 import { db } from "../../config/firebase";
+import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
 
 function ConfirmTripScreen({ navigation, route }) {
-  const { tripData } = route.params;
-  const [capacity, setCapacity] = useState();
-  const [newTripData, setNewTripData] = useState({
-    polyline: tripData.routes[0].overview_polyline.points,
-    departureTime: Date.now(),
-    capacity: 3,
-    driver: db.doc("users/" + firebase.auth().currentUser.uid),
-    institutionID: "ort",
-    passengerCount: 0,
-  });
+	const { tripData } = route.params;
+	const { user } = useContext(AuthenticatedUserContext);
 
-  const handlePress = () => {
-    db.collection("trips")
-      .add(newTripData)
-      .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-        navigation.navigate("Trip Success", { docID: docRef.id });
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-  };
+	// TODO: Add capacity picker
+	const [capacity, setCapacity] = useState(3);
 
-  return (
-    <View style={styles.container}>
-      <Text>{tripData.routes[0].overview_polyline.points}</Text>
+	const handlePress = () => {
+		const newTripData = {
+			polyline: tripData.routes[0].overview_polyline.points,
+			departureTime: Date.now(),
+			capacity: capacity,
+			driver: {
+				uid: user.uid,
+				fullName: user.fullName,
+				phone: user.phone,
+				plate: "***" + user.plate.slice(3),
+				childName: user.childName,
+			},
+			institutionName: user.institution.name,
+			passengerCount: 0,
+		};
+		db.collection("trips")
+			.add(newTripData)
+			.then((docRef) => {
+				console.log("Document written with ID: ", docRef.id);
+				navigation.navigate("Trip Success", { docID: docRef.id });
+			})
+			.catch((error) => {
+				console.error("Error adding document: ", error);
+			});
+	};
 
-      <Button title={"DEV Confirm"} onPress={handlePress}></Button>
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<Text>{tripData.routes[0].overview_polyline.points}</Text>
+
+			<Button title={"DEV Confirm"} onPress={handlePress}></Button>
+		</View>
+	);
 }
 
 export default ConfirmTripScreen;
