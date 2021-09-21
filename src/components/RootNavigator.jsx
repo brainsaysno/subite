@@ -1,19 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { StatusBar as StatBar } from "expo-status-bar";
-import { ActivityIndicator, useTheme } from "react-native-paper";
 import PassengerNavigator from "./PassengerNavigator";
 import DriverNavigator from "./DriverNavigator";
 import LoginStack from "./stacks/LoginStack";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 import { auth, db } from "../../config/firebase";
-import { NavigationContainer } from "@react-navigation/native";
 
-function RootNavigator({ darkModeToggle }) {
+import {
+	DefaultTheme as PaperDefaultTheme,
+	DarkTheme as PaperDarkTheme,
+	Provider as PaperProvider,
+	useTheme,
+	ActivityIndicator,
+} from "react-native-paper";
+import {
+	NavigationContainer,
+	DefaultTheme as NavigationDefaultTheme,
+	DarkTheme as NavigationDarkTheme,
+} from "@react-navigation/native";
+
+const CombinedDefaultTheme = {
+	...PaperDefaultTheme,
+	...NavigationDefaultTheme,
+	colors: {
+		text: "tomato",
+		...PaperDefaultTheme.colors,
+		...NavigationDefaultTheme.colors,
+	},
+};
+const CombinedDarkTheme = {
+	...PaperDarkTheme,
+	...NavigationDarkTheme,
+	colors: {
+		...PaperDarkTheme.colors,
+		...NavigationDarkTheme.colors,
+	},
+};
+
+function RootNavigator() {
 	const { dark } = useTheme();
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthed, setIsAuthed] = useState(false);
-	const { isDriver, setUser } = useContext(AuthenticatedUserContext);
+	const { isDriver, setUser, usingDarkMode } = useContext(AppContext);
 
 	function onAuthStateChanged(authenticatedUser) {
 		if (authenticatedUser) {
@@ -56,18 +85,24 @@ function RootNavigator({ darkModeToggle }) {
 	}
 
 	return (
-		<>
-			{isAuthed ? (
-				isDriver ? (
-					<DriverNavigator darkModeToggle={darkModeToggle} />
+		<PaperProvider
+			theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+		>
+			<NavigationContainer
+				theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+			>
+				{isAuthed ? (
+					isDriver ? (
+						<DriverNavigator />
+					) : (
+						<PassengerNavigator />
+					)
 				) : (
-					<PassengerNavigator darkModeToggle={darkModeToggle} />
-				)
-			) : (
-				<LoginStack />
-			)}
-			<StatBar style={dark ? "light" : "dark"} />
-		</>
+					<LoginStack />
+				)}
+				<StatBar style={dark ? "light" : "dark"} />
+			</NavigationContainer>
+		</PaperProvider>
 	);
 }
 

@@ -11,34 +11,29 @@ import CreateTripSuccessScreen from "../../screens/CreateTripSucessScreen";
 
 const Stack = createNativeStackNavigator();
 
-function CreateTripNavigator(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Map"
-      screenOptions={({ route }) => {
-        if (route.name === "Map") return { headerShown: false };
-      }}
-    >
-      <Stack.Screen name="Map">
-        {(navProps) => (
-          <CreateTripScreen
-            {...navProps}
-            darkModeToggle={props.darkModeToggle}
-          />
-        )}
-      </Stack.Screen>
-      <Stack.Screen name="Confirm Create Trip">
-        {(navProps) => <ConfirmTripScreen {...navProps} />}
-      </Stack.Screen>
-      <Stack.Screen name="Trip Success">
-        {(navProps) => <CreateTripSuccessScreen {...navProps} />}
-      </Stack.Screen>
-      <Stack.Screen
-        name="Default Screen"
-        component={DefaultScreen}
-      ></Stack.Screen>
-    </Stack.Navigator>
-  );
+function CreateTripNavigator() {
+	return (
+		<Stack.Navigator
+			initialRouteName="Map"
+			screenOptions={({ route }) => {
+				if (route.name === "Map") return { headerShown: false };
+			}}
+		>
+			<Stack.Screen name="Map">
+				{(navProps) => <CreateTripScreen {...navProps} />}
+			</Stack.Screen>
+			<Stack.Screen name="Confirm Create Trip">
+				{(navProps) => <ConfirmTripScreen {...navProps} />}
+			</Stack.Screen>
+			<Stack.Screen name="Trip Success">
+				{(navProps) => <CreateTripSuccessScreen {...navProps} />}
+			</Stack.Screen>
+			<Stack.Screen
+				name="Default Screen"
+				component={DefaultScreen}
+			></Stack.Screen>
+		</Stack.Navigator>
+	);
 }
 
 export default CreateTripNavigator;

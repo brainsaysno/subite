@@ -10,7 +10,7 @@ import ActiveTripsNavigator from "./stacks/ActiveTripsNavigator";
 
 const Tab = createBottomTabNavigator();
 
-function DriverNavigator({ darkModeToggle }) {
+function DriverNavigator() {
 	return (
 		<Tab.Navigator
 			initialRouteName="Create Trip"
@@ -36,9 +36,7 @@ function DriverNavigator({ darkModeToggle }) {
 		>
 			<Tab.Screen name="Trips" component={ActiveTripsNavigator} />
 			<Tab.Screen name="Create Trip" component={CreateTripNavigator} />
-			<Tab.Screen name="Profile">
-				{() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
-			</Tab.Screen>
+			<Tab.Screen name="Profile">{() => <ProfileNavigator />}</Tab.Screen>
 		</Tab.Navigator>
 	);
 }

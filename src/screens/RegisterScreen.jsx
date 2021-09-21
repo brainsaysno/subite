@@ -12,7 +12,7 @@ import {
 	passwordValidator,
 	nameValidator,
 } from "../core/utils";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 import { auth } from "../../config/firebase";
 
 const RegisterScreen = ({ navigation }) => {

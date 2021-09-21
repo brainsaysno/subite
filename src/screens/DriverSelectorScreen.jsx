@@ -4,10 +4,10 @@ import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import Paragraph from "../components/Paragraph";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 
 function HomeScreen({ navigation }) {
-	const { setIsDriver } = useContext(AuthenticatedUserContext);
+	const { setIsDriver } = useContext(AppContext);
 
 	return (
 		<Background>

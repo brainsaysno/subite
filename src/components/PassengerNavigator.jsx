@@ -11,7 +11,7 @@ import DefaultScreen from "../screens/DefaultScreen.jsx";
 
 const Tab = createBottomTabNavigator();
 
-function PassengerNavigator({ darkModeToggle }) {
+function PassengerNavigator() {
 	return (
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
@@ -38,9 +38,7 @@ function PassengerNavigator({ darkModeToggle }) {
 				{(navProps) => <DefaultScreen {...navProps}></DefaultScreen>}
 			</Tab.Screen>
 			<Tab.Screen name="Join Trip" component={JoinTripNavigator} />
-			<Tab.Screen name="Profile">
-				{() => <ProfileNavigator darkModeToggle={darkModeToggle} />}
-			</Tab.Screen>
+			<Tab.Screen name="Profile">{() => <ProfileNavigator />}</Tab.Screen>
 		</Tab.Navigator>
 	);
 }

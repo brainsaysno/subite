@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { Button, Text, View } from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 
 function ConfirmTripScreen({ navigation, route }) {
 	const { tripData } = route.params;
-	const { user } = useContext(AuthenticatedUserContext);
+	const { user } = useContext(AppContext);
 
 	// TODO: Add capacity picker
 	const [capacity, setCapacity] = useState(3);

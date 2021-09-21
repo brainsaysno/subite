@@ -7,11 +7,11 @@ import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 import { tripData } from "../../dummy";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 
 function ActiveTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
-	const { user } = useContext(AuthenticatedUserContext);
+	const { user } = useContext(AppContext);
 
 	//const tripsRef = collection(db, "trips");
 	useEffect(() => {

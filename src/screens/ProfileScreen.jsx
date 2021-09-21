@@ -11,40 +11,28 @@ import SignOutSettingItem from "../components/SignOutSettingItem";
 const Stack = createNativeStackNavigator();
 
 function ProfileScreen(props) {
-  return (
-    <View>
-      <List.Section>
-        <List.Subheader>Account</List.Subheader>
-        <DarkModeToggleItem
-          darkModeToggle={props.darkModeToggle}
-        ></DarkModeToggleItem>
-        <ChevronSettingItem {...props} />
-        <ChevronSettingItem {...props} />
-        <SignOutSettingItem />
-      </List.Section>
-    </View>
-  );
+	return (
+		<View>
+			<List.Section>
+				<List.Subheader>Account</List.Subheader>
+				<DarkModeToggleItem />
+				<ChevronSettingItem {...props} />
+				<ChevronSettingItem {...props} />
+				<SignOutSettingItem />
+			</List.Section>
+		</View>
+	);
 }
 
 function ProfileNavigation(props) {
-  return (
-    <Stack.Navigator initialRouteName="Profile Settings">
-      <Stack.Screen name="Profile Settings">
-        {(navProps) => (
-          <ProfileScreen {...navProps} darkModeToggle={props.darkModeToggle} />
-        )}
-      </Stack.Screen>
-      <Stack.Screen name="Default Screen">
-        {() => <DefaultScreen {...props} />}
-      </Stack.Screen>
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator initialRouteName="Profile Settings">
+			<Stack.Screen name="Profile Settings" component={ProfileScreen} />
+			<Stack.Screen name="Default Screen">
+				{() => <DefaultScreen {...props} />}
+			</Stack.Screen>
+		</Stack.Navigator>
+	);
 }
 
 export default ProfileNavigation;
-
-const profileStyles = StyleSheet.create({
-  padTop: {
-    paddingTop: StatusBar.currentHeight,
-  },
-});

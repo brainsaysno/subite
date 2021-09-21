@@ -6,13 +6,13 @@ import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
 import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();
 	const [mapData, setMapData] = useState({ markerOn: false });
 
-	const { user } = useContext(AuthenticatedUserContext);
+	const { user } = useContext(AppContext);
 
 	const handleMapPress = ({ coordinate }) => {
 		fetch(

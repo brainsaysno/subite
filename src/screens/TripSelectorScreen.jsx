@@ -6,14 +6,14 @@ import { isInRadius, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-import { AuthenticatedUserContext } from "../../navigation/AuthenticatedUserProvider";
+import { AppContext } from "../../navigation/AppProvider";
 import Loading from "../components/Loading";
 import styles from "../styles";
 
 function TripSelectorScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const { user } = useContext(AuthenticatedUserContext);
+	const { user } = useContext(AppContext);
 
 	const { markerCoordinates } = route.params;
 
