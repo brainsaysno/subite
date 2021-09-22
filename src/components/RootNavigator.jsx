@@ -39,7 +39,6 @@ const CombinedDarkTheme = {
 };
 
 function RootNavigator() {
-	const { dark } = useTheme();
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthed, setIsAuthed] = useState(false);
 	const { isDriver, setUser, usingDarkMode } = useContext(AppContext);
@@ -53,8 +52,8 @@ function RootNavigator() {
 					if (doc.exists) {
 						setIsAuthed(true);
 						setUser({
-							uid: doc.id,
 							...doc.data(),
+							uid: doc.id,
 						});
 						console.log("User data: ", doc.data());
 					} else {
@@ -100,7 +99,7 @@ function RootNavigator() {
 				) : (
 					<LoginStack />
 				)}
-				<StatBar style={dark ? "light" : "dark"} />
+				<StatBar style={usingDarkMode ? "light" : "dark"} />
 			</NavigationContainer>
 		</PaperProvider>
 	);

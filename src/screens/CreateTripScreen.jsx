@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, Button, Dimensions, TouchableOpacity } from "react-native";
+import { View, Button } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
@@ -7,6 +7,7 @@ import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
 import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 import { AppContext } from "../../navigation/AppProvider";
+import MapConfirmButton from "../components/MapConfirmButton";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();
@@ -30,10 +31,6 @@ function CreateTripScreen({ navigation, ...props }) {
 			});
 	};
 
-	useEffect(() => {
-		console.log(mapData);
-	}, []);
-
 	return (
 		<>
 			<MapView
@@ -56,44 +53,20 @@ function CreateTripScreen({ navigation, ...props }) {
 								mapData.routes[0].overview_polyline.points,
 								5
 							).map((arr) => ({ latitude: arr[0], longitude: arr[1] }))}
-							lineDashPattern={[0]}
+							lineDashPattern={[1, 8]}
 							strokeWidth={5}
 						></Polyline>
 					</>
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<ConfirmButton navigation={navigation} mapData={mapData} />
+				<MapConfirmButton
+					navigation={navigation}
+					mapData={mapData}
+					screenName={"Confirm Create Trip"}
+				/>
 			) : null}
 		</>
-	);
-}
-
-function ConfirmButton({ navigation, mapData }) {
-	return (
-		<View
-			style={{
-				position: "absolute",
-				bottom: 20,
-				left: 0,
-				right: 0,
-				marginRight: "auto",
-				marginLeft: "auto",
-				flex: 1,
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<Button
-				title="Continue"
-				onPress={() => {
-					navigation.navigate("Confirm Create Trip", {
-						tripData: mapData,
-					});
-					console.log("Coordinates selected: " + mapData.markerCoordinates);
-				}}
-			/>
-		</View>
 	);
 }
 

@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button, Dimensions, TouchableOpacity } from "react-native";
-import MapView, {
-	Marker,
-	Polyline,
-	PROVIDER_GOOGLE,
-	Circle,
-} from "react-native-maps";
+import React, { useContext, useEffect, useState } from "react";
+import MapView, { Marker, PROVIDER_GOOGLE, Circle } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
-import TripSelectorScreen from "./TripSelectorScreen";
-import { decode } from "@googlemaps/polyline-codec";
-import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
+import MapConfirmButton from "../components/MapConfirmButton";
+import { AppContext } from "../../navigation/AppProvider";
 
-function JoinTripScreen({ navigation, ...props }) {
+function JoinTripScreen({ navigation }) {
 	const { dark, colors } = useTheme();
 	const [mapData, setMapData] = useState({ markerOn: false });
+	const { user } = useContext(AppContext);
 
 	const handleMapPress = ({ coordinate }) => {
 		setMapData({ markerOn: true, markerCoordinates: coordinate });
@@ -42,45 +36,24 @@ function JoinTripScreen({ navigation, ...props }) {
 				{mapData.markerOn ? (
 					<>
 						<Marker coordinate={mapData.markerCoordinates} />
-						<Circle center={mapData.markerCoordinates} radius={1000} />
+						<Circle
+							center={mapData.markerCoordinates}
+							radius={user.radius * 1000}
+							strokeColor={colors.text}
+							fillColor={"#ff000040"}
+							/* #rgba */
+						/>
 					</>
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<ConfirmButton
+				<MapConfirmButton
 					navigation={navigation}
-					coordinates={mapData.markerCoordinates}
+					mapData={mapData}
+					screenName={"Trip Selector"}
 				/>
 			) : null}
 		</>
-	);
-}
-
-function ConfirmButton({ navigation, coordinates }) {
-	return (
-		<View
-			style={{
-				position: "absolute",
-				bottom: 20,
-				left: 0,
-				right: 0,
-				marginRight: "auto",
-				marginLeft: "auto",
-				flex: 1,
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<Button
-				title="Me gusta"
-				onPress={() => {
-					navigation.navigate("Trip Selector", {
-						markerCoordinates: coordinates,
-					});
-					console.log("Coordinates selected: " + coordinates);
-				}}
-			/>
-		</View>
 	);
 }
 

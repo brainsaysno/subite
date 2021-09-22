@@ -16,19 +16,10 @@ function JoinTripNavigator(props) {
 				if (route.name === "Map") return { headerShown: false };
 			}}
 		>
-			<Stack.Screen name="Map">
-				{(navProps) => <JoinTripScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen name="Trip Selector">
-				{(navProps) => <TripSelectorScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen name="Trip Detail">
-				{(navProps) => <TripDetailScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen
-				name="Default Screen"
-				component={DefaultScreen}
-			></Stack.Screen>
+			<Stack.Screen name="Map" component={JoinTripScreen} />
+			<Stack.Screen name="Trip Selector" component={TripSelectorScreen} />
+			<Stack.Screen name="Trip Detail" component={TripDetailScreen} />
+			<Stack.Screen name="Default Screen" component={DefaultScreen} />
 		</Stack.Navigator>
 	);
 }

@@ -4,21 +4,23 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "../styles";
 import { AppContext } from "../../navigation/AppProvider";
 
-const DarkModeToggleItem = () => {
-	const { colors, dark } = useTheme();
-	const { usingDarkMode, setUsingDarkMode } = useContext(AppContext);
-
-	const toggleDarkMode = () => setUsingDarkMode(!usingDarkMode);
-
+function ToggleSettingItem({
+	title = "Toggle Setting",
+	value,
+	onToggle,
+	icon = "emoticon",
+	iconColor,
+}) {
+	const { colors } = useTheme();
 	return (
-		<TouchableOpacity onPress={toggleDarkMode} activeOpacity={1}>
+		<TouchableOpacity onPress={onToggle} activeOpacity={1}>
 			<List.Item
-				title="Dark Mode"
+				title={title}
 				left={() => (
 					<List.Icon
-						icon={dark ? "brightness-2" : "brightness-7"}
+						icon={icon}
 						style={{
-							backgroundColor: colors.primary,
+							backgroundColor: iconColor ? iconColor : colors.primary,
 							...itemStyles.icon,
 						}}
 						color={colors.background}
@@ -26,7 +28,7 @@ const DarkModeToggleItem = () => {
 				)}
 				right={() => (
 					<View style={itemStyles.container}>
-						<Switch value={dark} onValueChange={toggleDarkMode} />
+						<Switch value={value} onValueChange={onToggle} />
 					</View>
 				)}
 				style={{
@@ -37,7 +39,7 @@ const DarkModeToggleItem = () => {
 			/>
 		</TouchableOpacity>
 	);
-};
+}
 
 const itemStyles = StyleSheet.create({
 	icon: {
@@ -51,4 +53,4 @@ const itemStyles = StyleSheet.create({
 	},
 });
 
-export default DarkModeToggleItem;
+export default ToggleSettingItem;

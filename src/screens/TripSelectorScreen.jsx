@@ -15,7 +15,7 @@ function TripSelectorScreen({ navigation, route }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const { user } = useContext(AppContext);
 
-	const { markerCoordinates } = route.params;
+	const { mapData } = route.params;
 
 	useEffect(() => {
 		if (user) {
@@ -25,12 +25,13 @@ function TripSelectorScreen({ navigation, route }) {
 				.get()
 				.then((querySnapshot) => {
 					const data = querySnapshot.docs.map((doc) => doc.data());
-					console.log(markerCoordinates);
 					const filteredData = data.filter((d) => {
-						console.log(isInRadius(d.polyline, markerCoordinates, 0.1));
-						return isInRadius(d.polyline, markerCoordinates, 1);
+						return (
+							isInRadius(d.polyline, mapData.markerCoordinates, user.radius) &&
+							d.driver.uid !== user.uid
+							/* TODO: Filter for departureTime > Date.now() */
+						);
 					});
-					//					console.log(data);
 					const comps = filteredData.map((trip, i) => (
 						<TripListComponent trip={trip} key={i} navigation={navigation} />
 					));
@@ -45,7 +46,7 @@ function TripSelectorScreen({ navigation, route }) {
 	if (tripListComponents.length == 0)
 		return (
 			<View style={styles.container}>
-				<Text>No trips found!</Text>
+				<Text>Sorry, no trips were found in your radius!</Text>
 			</View>
 		);
 

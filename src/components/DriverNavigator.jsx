@@ -36,7 +36,7 @@ function DriverNavigator() {
 		>
 			<Tab.Screen name="Trips" component={ActiveTripsNavigator} />
 			<Tab.Screen name="Create Trip" component={CreateTripNavigator} />
-			<Tab.Screen name="Profile">{() => <ProfileNavigator />}</Tab.Screen>
+			<Tab.Screen name="Profile" component={ProfileNavigator} />
 		</Tab.Navigator>
 	);
 }

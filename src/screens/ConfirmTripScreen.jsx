@@ -5,15 +5,15 @@ import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 
 function ConfirmTripScreen({ navigation, route }) {
-	const { tripData } = route.params;
+	const { mapData } = route.params;
 	const { user } = useContext(AppContext);
 
 	// TODO: Add capacity picker
 	const [capacity, setCapacity] = useState(3);
 
 	const handlePress = () => {
-		const newTripData = {
-			polyline: tripData.routes[0].overview_polyline.points,
+		const tripData = {
+			polyline: mapData.routes[0].overview_polyline.points,
 			departureTime: Date.now(),
 			capacity: capacity,
 			driver: {
@@ -27,7 +27,7 @@ function ConfirmTripScreen({ navigation, route }) {
 			passengerCount: 0,
 		};
 		db.collection("trips")
-			.add(newTripData)
+			.add(tripData)
 			.then((docRef) => {
 				console.log("Document written with ID: ", docRef.id);
 				navigation.navigate("Trip Success", { docID: docRef.id });
@@ -39,7 +39,7 @@ function ConfirmTripScreen({ navigation, route }) {
 
 	return (
 		<View style={styles.container}>
-			<Text>{tripData.routes[0].overview_polyline.points}</Text>
+			<Text>{mapData.routes[0].overview_polyline.points}</Text>
 
 			<Button title={"DEV Confirm"} onPress={handlePress}></Button>
 		</View>

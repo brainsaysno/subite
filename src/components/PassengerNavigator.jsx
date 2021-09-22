@@ -34,11 +34,9 @@ function PassengerNavigator() {
 				},
 			})}
 		>
-			<Tab.Screen name="Recent Trips">
-				{(navProps) => <DefaultScreen {...navProps}></DefaultScreen>}
-			</Tab.Screen>
+			<Tab.Screen name="Recent Trips" component={DefaultScreen} />
 			<Tab.Screen name="Join Trip" component={JoinTripNavigator} />
-			<Tab.Screen name="Profile">{() => <ProfileNavigator />}</Tab.Screen>
+			<Tab.Screen name="Profile" component={ProfileNavigator} />
 		</Tab.Navigator>
 	);
 }

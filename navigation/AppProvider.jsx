@@ -15,7 +15,7 @@ export function AppProvider({ children }) {
 
 	// TODO: Decide on dark vs light default
 	const [usingDarkMode, setUsingDarkMode] = useState(false);
-	useEffect(() => {}, []);
+
 	return (
 		<AppContext.Provider
 			value={{

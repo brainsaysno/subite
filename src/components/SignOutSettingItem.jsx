@@ -17,7 +17,7 @@ function SignOutSettingItem() {
 				title="Sign Out"
 				left={() => (
 					<List.Icon
-						icon="web"
+						icon="logout"
 						style={{
 							backgroundColor: colors.primary,
 							...itemStyles.icon,
