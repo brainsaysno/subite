@@ -7,7 +7,7 @@ import { Icon } from "react-native-eva-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../../config/firebase";
 
-function SetRadiusScreen() {
+function SetRadiusScreen({ navigation }) {
 	const { colors } = useTheme();
 	const { user, setUser } = useContext(AppContext);
 	const [radius, setRadius] = useState(user.radius ? user.radius : 1);
@@ -43,7 +43,8 @@ function SetRadiusScreen() {
 						...user,
 						radius: radius,
 					});
-					console.log(user.radius);
+					navigation.goBack();
+					navigation.navigate("Join Trip");
 				}}
 			>
 				Ok!
