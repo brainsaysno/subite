@@ -3,13 +3,14 @@ import { Button, Text, View } from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
+import HorizontalNumberPicker from "../components/NumberPicker";
 
 function ConfirmTripScreen({ navigation, route }) {
 	const { mapData } = route.params;
 	const { user } = useContext(AppContext);
 
 	// TODO: Add capacity picker
-	const [capacity, setCapacity] = useState(3);
+	const [capacity, setCapacity] = useState(1);
 
 	const handlePress = () => {
 		const tripData = {
@@ -39,8 +40,14 @@ function ConfirmTripScreen({ navigation, route }) {
 
 	return (
 		<View style={styles.container}>
+			<HorizontalNumberPicker
+				value={capacity}
+				onChange={setCapacity}
+				min={1}
+				max={4}
+				title={"Capacity"}
+			/>
 			<Text>{mapData.routes[0].overview_polyline.points}</Text>
-
 			<Button title={"DEV Confirm"} onPress={handlePress}></Button>
 		</View>
 	);

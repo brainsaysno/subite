@@ -33,7 +33,7 @@ function JoinTripScreen({ navigation }) {
 					longitudeDelta: 0.0421,
 				}}
 			>
-				{mapData.markerOn ? (
+				{mapData.markerOn && user ? (
 					<>
 						<Marker coordinate={mapData.markerCoordinates} />
 						<Circle

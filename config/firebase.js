@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 import Constants from "expo-constants";
 
 const firebaseConfig = {
@@ -18,7 +19,7 @@ const Firebase = !firebase.apps.length
 
 const db = firebase.firestore();
 
-const auth = Firebase.auth();
+const auth = firebase.auth();
 
 export default Firebase;
 

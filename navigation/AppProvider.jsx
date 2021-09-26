@@ -11,7 +11,7 @@ export const AppContext = createContext({
 
 export function AppProvider({ children }) {
 	const [user, setUser] = useState(null);
-	const [isDriver, setIsDriver] = useState(null);
+	const [isDriver, setIsDriver] = useState(true);
 
 	// TODO: Decide on dark vs light default
 	const [usingDarkMode, setUsingDarkMode] = useState(false);
