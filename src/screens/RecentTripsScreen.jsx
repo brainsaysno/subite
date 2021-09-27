@@ -24,17 +24,20 @@ function RecentTripsScreen({ navigation }) {
 				.onSnapshot((querySnapshot) => {
 					console.log("snap");
 					const data = querySnapshot.docs.map((doc) => doc.data());
-					const components = data.map((trip, i) => (
-						<TripListComponent
-							trip={trip}
-							key={i}
-							navigation={navigation}
-							passengerCoordinates={[
-								trip.passengerData.filter((pData) => pData.uid === user.uid)[0]
-									.location,
-							]}
-						/>
-					));
+					const components = data.map((trip, i) => {
+						return (
+							<TripListComponent
+								trip={trip}
+								key={i}
+								navigation={navigation}
+								passengerCoordinates={[
+									trip.passengerData.filter(
+										(pData) => pData.uid === user.uid
+									)[0].location,
+								].flat(10)}
+							/>
+						);
+					});
 
 					setTripListComponents(components);
 				});

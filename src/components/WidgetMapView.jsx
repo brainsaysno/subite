@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
 import { AppContext } from "../../navigation/AppProvider";
-import { InteractionManager } from "react-native";
 
 function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 	const decodedTrip = decode(polyline, 5).map((arr) => ({
@@ -14,16 +13,17 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 		longitude: arr[1],
 	}));
 
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(Platform.OS === "ios" ? false : true);
 
 	useEffect(() => {
-		navigation.addListener("transitionEnd", (e) => {
-			setShow(true);
-		});
-		navigation.addListener("transitionStart", (e) => {
-			setShow(false);
-		});
-		console.log(passengerCoordinates);
+		if (Platform.OS === "ios") {
+			navigation.addListener("transitionEnd", (e) => {
+				setShow(true);
+			});
+			navigation.addListener("transitionStart", (e) => {
+				setShow(false);
+			});
+		}
 	}, []);
 
 	const { dark, colors } = useTheme();

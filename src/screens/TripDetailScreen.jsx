@@ -1,14 +1,17 @@
 import React, { useContext, useEffect } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Linking } from "react-native";
 import styles from "../styles";
-import { useTheme } from "react-native-paper";
+import { Button, useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
+import { Icon } from "react-native-eva-icons";
 
 function TripDetailScreen({ navigation, route }) {
 	const { trip, passengerCoordinates } = route.params;
 	const { colors } = useTheme();
+
+	const message = "Whatsapp test message";
 
 	return (
 		<View style={styles.container}>
@@ -38,6 +41,36 @@ function TripDetailScreen({ navigation, route }) {
 				navigation={navigation}
 				passengerCoordinates={passengerCoordinates}
 			/>
+			<TouchableOpacity
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+				onPress={() =>
+					Linking.openURL(
+						`https://wa.me/598${trip.driver.phone}?text=${encodeURIComponent(
+							message
+						)}`
+					)
+				}
+			>
+				<Icon
+					name="message-circle-outline"
+					width={20}
+					height={20}
+					fill={colors.error}
+					style={{ marginRight: 2 }}
+				/>
+				<Text
+					style={{
+						color: colors.error,
+					}}
+				>
+					Whatsapp driver!
+				</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }
