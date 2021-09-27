@@ -21,18 +21,22 @@ function ActiveTripsScreen({ navigation }) {
 				.where("driver.uid", "==", user.uid)
 				.orderBy("departureTime")
 				.onSnapshot((querySnapshot) => {
-					console.log("snap");
 					const data = querySnapshot.docs.map((doc) => doc.data());
-					const components = data.map((trip, i) => (
-						<TripListComponent
-							trip={trip}
-							key={i}
-							navigation={navigation}
-							passengerCoordinates={trip.passengerData.map(
-								(pData) => pData.location
-							)}
-						/>
-					));
+
+					const components = data.map((trip, i) => {
+						return (
+							<TripListComponent
+								trip={trip}
+								key={i}
+								navigation={navigation}
+								passengerCoordinates={
+									trip.passengerData.length === 0
+										? null
+										: trip.passengerData.map((pData) => pData.location[0])
+								}
+							/>
+						);
+					});
 
 					setTripListComponents(components);
 				});

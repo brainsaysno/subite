@@ -23,6 +23,7 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 		navigation.addListener("transitionStart", (e) => {
 			setShow(false);
 		});
+		console.log(passengerCoordinates);
 	}, []);
 
 	const { dark, colors } = useTheme();
@@ -56,9 +57,11 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 			{/* Arrival coordinates marker */}
 			<Marker coordinate={decodedTrip[decodedTrip.length - 1]}></Marker>
 			{/* Passenger coordinates marker */}
-			{passengerCoordinates.map((pCoord, i) => (
-				<Marker key={i} coordinate={pCoord} pinColor="blue" />
-			))}
+			{passengerCoordinates
+				? passengerCoordinates.map((pCoord, i) => (
+						<Marker key={i} coordinate={pCoord} pinColor="blue" />
+				  ))
+				: null}
 			<Polyline
 				coordinates={decodedTrip}
 				lineDashPattern={[1, 8]}
