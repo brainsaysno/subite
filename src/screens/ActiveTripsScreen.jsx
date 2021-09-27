@@ -24,9 +24,6 @@ function ActiveTripsScreen({ navigation }) {
 					const data = querySnapshot.docs.map((doc) => doc.data());
 
 					const components = data.map((trip, i) => {
-						console.log(
-							trip.passengerData.map((pData) => [pData.location].flat(10)[0])
-						);
 						return (
 							<TripListComponent
 								trip={trip}

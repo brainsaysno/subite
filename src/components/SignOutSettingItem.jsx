@@ -9,7 +9,6 @@ function SignOutSettingItem() {
 		<TouchableOpacity
 			onPress={() => {
 				auth.signOut();
-				console.log("Signing out");
 			}}
 			activeOpacity={1}
 		>

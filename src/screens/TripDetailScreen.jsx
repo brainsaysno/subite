@@ -15,7 +15,14 @@ function TripDetailScreen({ navigation, route }) {
 
 	return (
 		<View style={styles.container}>
-			<Text style={{ fontWeight: "500", fontSize: 30, color: colors.text }}>
+			<Text
+				style={{
+					fontWeight: "500",
+					fontSize: 30,
+					color: colors.text,
+					textAlign: "center",
+				}}
+			>
 				Driver name: {trip.driver.fullName}
 			</Text>
 			<Text
@@ -24,6 +31,7 @@ function TripDetailScreen({ navigation, route }) {
 					fontWeight: "300",
 					fontSize: 20,
 					color: colors.text,
+					textAlign: "center",
 				}}
 			>
 				Departure Time: {new Date(trip.departureTime).getDate().toString()}
@@ -45,8 +53,6 @@ function TripDetailScreen({ navigation, route }) {
 				style={{
 					display: "flex",
 					flexDirection: "row",
-					justifyContent: "center",
-					alignItems: "center",
 				}}
 				onPress={() =>
 					Linking.openURL(

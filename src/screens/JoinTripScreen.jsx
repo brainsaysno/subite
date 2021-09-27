@@ -15,10 +15,6 @@ function JoinTripScreen({ navigation }) {
 		setMapData({ markerOn: true, markerCoordinates: coordinate });
 	};
 
-	useEffect(() => {
-		console.log(mapData);
-	}, []);
-
 	return (
 		<>
 			<MapView

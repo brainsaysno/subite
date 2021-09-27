@@ -17,12 +17,10 @@ function RecentTripsScreen({ navigation }) {
 
 	useEffect(() => {
 		if (user) {
-			console.log(user.uid);
 			const unsub = db
 				.collection("trips")
 				.where("passengerUids", "array-contains", user.uid)
 				.onSnapshot((querySnapshot) => {
-					console.log("snap");
 					const data = querySnapshot.docs.map((doc) => doc.data());
 					const components = data.map((trip, i) => {
 						return (

@@ -22,7 +22,6 @@ export default function MapConfirmButton({ navigation, mapData, screenName }) {
 					navigation.navigate(screenName, {
 						mapData: mapData,
 					});
-					console.log("Coordinates selected: " + mapData.markerCoordinates);
 				}}
 			/>
 		</View>

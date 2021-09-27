@@ -26,7 +26,6 @@ function CreateTripScreen({ navigation, ...props }) {
 					markerOn: true,
 					...data,
 				};
-				console.log(dataToSend.routes[0].overview_polyline.points);
 				setMapData(dataToSend);
 			});
 	};

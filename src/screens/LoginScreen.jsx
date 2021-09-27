@@ -27,16 +27,14 @@ const LoginScreen = ({ navigation }) => {
 
 		auth
 			.signInWithEmailAndPassword(email.value, password.value)
-			.then((authenticatedUser) => {
-				console.log("User signed in!");
-			})
+			.then((authenticatedUser) => {})
 			.catch((error) => {
 				if (error.code === "auth/email-already-in-use") {
-					console.log("That email address is already in use!");
+					//TODO: Add login backend errors
 				}
 
 				if (error.code === "auth/invalid-email") {
-					console.log("That email address is invalid!");
+					//TODO: Add login backend errors
 				}
 
 				console.error(error);

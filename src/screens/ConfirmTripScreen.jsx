@@ -32,7 +32,6 @@ function ConfirmTripScreen({ navigation, route }) {
 		db.collection("trips")
 			.add(tripData)
 			.then((docRef) => {
-				console.log("Document written with ID: ", docRef.id);
 				navigation.navigate("Trip Success", { docID: docRef.id });
 			})
 			.catch((error) => {

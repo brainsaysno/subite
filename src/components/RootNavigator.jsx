@@ -55,13 +55,11 @@ function RootNavigator() {
 							...doc.data(),
 							uid: doc.id,
 						});
-						console.log("User data: ", doc.data());
 					} else {
 						// Sign out for security reasons... this should never happen for legitimate users
 						auth.signOut();
 					}
 				});
-			console.log(authenticatedUser.uid);
 		} else {
 			setUser(undefined);
 			setIsAuthed(false);

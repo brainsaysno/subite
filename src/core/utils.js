@@ -85,7 +85,6 @@ export function isInRadius(polyline, coords, radius) {
 	}
 
 	// Check for distance to line... FIXME: Checking for pairs, so last element is left unchecked in odd-numbered point cases
-	console.log(lhDistances.length);
 	for (let i = 1; i < lhDistances.length / 2; i++) {
 		const i1 = i * 2 - 2;
 		const i2 = i * 2 - 1;
@@ -109,8 +108,6 @@ export function isInRadius(polyline, coords, radius) {
 		const distance =
 			Math.abs(a * lhCoords[0] + b * lhCoords[1] + c) /
 			Math.sqrt(a ** 2 + b ** 2);
-
-		console.log(distance);
 
 		if (distance <= radius) return true;
 	}
