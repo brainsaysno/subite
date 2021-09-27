@@ -22,11 +22,11 @@ function PassengerNavigator() {
 					let iconName;
 
 					if (route.name === "Recent Trips") {
-						iconName = focused ? "star" : "star";
+						iconName = focused ? "clock-outline" : "clock-outline";
 					} else if (route.name === "Join Trip") {
 						iconName = focused ? "map" : "map";
 					} else if (route.name === "Profile") {
-						iconName = focused ? "person" : "person";
+						iconName = focused ? "settings-2-outline" : "settings-2-outline";
 					}
 
 					return (
@@ -36,8 +36,11 @@ function PassengerNavigator() {
 				},
 			})}
 		>
+			{/* Viajes recientes */}
 			<Tab.Screen name="Recent Trips" component={RecentTripsScreen} />
+			{/* Nuevo viaje */}
 			<Tab.Screen name="Join Trip" component={JoinTripNavigator} />
+			{/* Ajustes */}
 			<Tab.Screen name="Profile" component={ProfileNavigator} />
 		</Tab.Navigator>
 	);

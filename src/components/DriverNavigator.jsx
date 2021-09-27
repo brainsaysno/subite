@@ -20,11 +20,13 @@ function DriverNavigator() {
 					let iconName;
 
 					if (route.name === "Trips") {
-						iconName = focused ? "star" : "star";
+						iconName = focused
+							? "navigation-2-outline"
+							: "navigation-2-outline";
 					} else if (route.name === "Create Trip") {
 						iconName = focused ? "map" : "map";
 					} else if (route.name === "Profile") {
-						iconName = focused ? "person" : "person";
+						iconName = focused ? "settings-2-outline" : "settings-2-outline";
 					}
 
 					return (
@@ -34,8 +36,11 @@ function DriverNavigator() {
 				},
 			})}
 		>
+			{/* Viajes activos */}
 			<Tab.Screen name="Trips" component={ActiveTripsNavigator} />
+			{/* Nuevo viaje */}
 			<Tab.Screen name="Create Trip" component={CreateTripNavigator} />
+			{/* Ajustes */}
 			<Tab.Screen name="Profile" component={ProfileNavigator} />
 		</Tab.Navigator>
 	);

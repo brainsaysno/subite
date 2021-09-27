@@ -31,7 +31,10 @@ function JoinTripScreen({ navigation }) {
 			>
 				{mapData.markerOn && user ? (
 					<>
-						<Marker coordinate={mapData.markerCoordinates} />
+						<Marker
+							pinColor={"#ff6347"}
+							coordinate={mapData.markerCoordinates}
+						/>
 						<Circle
 							center={mapData.markerCoordinates}
 							radius={user.radius * 1000}

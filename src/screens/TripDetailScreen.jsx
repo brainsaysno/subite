@@ -10,20 +10,34 @@ import { Icon } from "react-native-eva-icons";
 function TripDetailScreen({ navigation, route }) {
 	const { trip, passengerCoordinates } = route.params;
 	const { colors } = useTheme();
+	const { user } = useContext(AppContext);
 
-	const message = "Whatsapp test message";
+	const message = `Hola, soy ${user.fullName}`;
 
 	return (
 		<View style={styles.container}>
 			<Text
 				style={{
-					fontWeight: "500",
+					fontWeight: "400",
 					fontSize: 30,
+					color: colors.text,
+					textAlign: "center",
+					marginBottom: 20,
+				}}
+			>
+				<Text style={{ fontWeight: "500" }}>Conductor:</Text>{" "}
+				{trip.driver.fullName}
+			</Text>
+			<Text
+				style={{
+					fontStyle: "italic",
+					fontWeight: "400",
+					fontSize: 20,
 					color: colors.text,
 					textAlign: "center",
 				}}
 			>
-				Driver name: {trip.driver.fullName}
+				27 de setiembre
 			</Text>
 			<Text
 				style={{
@@ -34,16 +48,15 @@ function TripDetailScreen({ navigation, route }) {
 					textAlign: "center",
 				}}
 			>
-				Departure Time: {new Date(trip.departureTime).getDate().toString()}
-				{", "}
+				<Text style={{ fontWeight: "400" }}>Salida:</Text>{" "}
 				{new Date(trip.departureTime).getHours().toString()}:
 				{new Date(trip.departureTime).getMinutes().toString()}
 			</Text>
-			<Text
+			{/* <Text
 				style={{ fontStyle: "italic", fontWeight: "200", color: colors.text }}
 			>
 				Capacity: {trip.passengerCount}/{trip.capacity}
-			</Text>
+			</Text> */}
 			<WidgetMapView
 				polyline={trip.polyline}
 				navigation={navigation}
@@ -53,6 +66,10 @@ function TripDetailScreen({ navigation, route }) {
 				style={{
 					display: "flex",
 					flexDirection: "row",
+					backgroundColor: colors.error,
+					padding: 15,
+					marginTop: "auto",
+					marginBottom: "auto",
 				}}
 				onPress={() =>
 					Linking.openURL(
@@ -66,15 +83,17 @@ function TripDetailScreen({ navigation, route }) {
 					name="message-circle-outline"
 					width={20}
 					height={20}
-					fill={colors.error}
-					style={{ marginRight: 2 }}
+					fill={colors.background}
+					style={{ marginRight: 7 }}
 				/>
 				<Text
 					style={{
-						color: colors.error,
+						color: colors.background,
+						fontSize: 17,
+						fontWeight: "500",
 					}}
 				>
-					Whatsapp driver!
+					Coordina el punto de encuentro!
 				</Text>
 			</TouchableOpacity>
 		</View>

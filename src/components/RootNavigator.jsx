@@ -6,6 +6,7 @@ import DriverNavigator from "./DriverNavigator";
 import LoginStack from "./stacks/LoginStack";
 import { AppContext } from "../../navigation/AppProvider";
 import { auth, db } from "../../config/firebase";
+import { useFonts } from "expo-font";
 
 import {
 	DefaultTheme as PaperDefaultTheme,
@@ -23,10 +24,31 @@ import {
 const CombinedDefaultTheme = {
 	...PaperDefaultTheme,
 	...NavigationDefaultTheme,
+	fonts: {
+		...PaperDefaultTheme.fonts,
+		...NavigationDefaultTheme.fonts,
+		regular: {
+			fontFamily: "Gill Sans",
+			fontWeight: "300",
+		},
+		medium: {
+			fontFamily: "Gill Sans",
+			fontWeight: "400",
+		},
+		light: {
+			fontFamily: "Gill Sans",
+			fontWeight: "400",
+		},
+	},
+
 	colors: {
-		text: "tomato",
 		...PaperDefaultTheme.colors,
 		...NavigationDefaultTheme.colors,
+		primary: "#e6594c",
+		accent: "#689bf3",
+		onSurface: "#FFC247",
+		error: "#81C596",
+		/* error: "red", */
 	},
 };
 const CombinedDarkTheme = {
@@ -37,8 +59,11 @@ const CombinedDarkTheme = {
 		...NavigationDarkTheme.colors,
 	},
 };
-
 function RootNavigator() {
+	/* const [loaded] = useFonts({
+		Blogger: require("../../assets/fonts/BloggerSans-Light.ttf"),
+	}); */
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthed, setIsAuthed] = useState(false);
 	const { isDriver, setUser, usingDarkMode } = useContext(AppContext);
@@ -72,7 +97,9 @@ function RootNavigator() {
 		const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
 		return unsubscribeAuth;
 	}, []);
-
+	/* 	if (!loaded) {
+		return null;
+	} */
 	if (isLoading) {
 		return (
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

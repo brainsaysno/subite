@@ -8,7 +8,11 @@ function HorizontalNumberPicker({ value, onChange, min, max, title }) {
 
 	return (
 		<>
-			{title ? <Text>{title}:</Text> : null}
+			{title ? (
+				<Text style={{ textAlign: "center", fontWeight: "400", fontSize: 18 }}>
+					{title}:
+				</Text>
+			) : null}
 			<View
 				style={{
 					display: "flex",
@@ -27,7 +31,7 @@ function HorizontalNumberPicker({ value, onChange, min, max, title }) {
 						fill={colors.primary}
 					/>
 				</TouchableOpacity>
-				<Text style={{ color: colors.text }}>{value}</Text>
+				<Text style={{ color: colors.text, fontSize: 20 }}>{value}</Text>
 				<TouchableOpacity
 					onPress={() => (value == max ? null : onChange(value + 1))}
 				>

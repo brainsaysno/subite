@@ -53,18 +53,21 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 			}}
 		>
 			{/* Departure coordinates marker */}
-			<Marker coordinate={decodedTrip[0]} pinColor="red"></Marker>
+			<Marker coordinate={decodedTrip[0]} pinColor={colors.primary}></Marker>
 			{/* Arrival coordinates marker */}
-			<Marker coordinate={decodedTrip[decodedTrip.length - 1]}></Marker>
+			<Marker
+				coordinate={decodedTrip[decodedTrip.length - 1]}
+				pinColor={colors.primary}
+			></Marker>
 			{/* Passenger coordinates marker */}
 			{passengerCoordinates
 				? passengerCoordinates.map((pCoord, i) => (
-						<Marker key={i} coordinate={pCoord} pinColor="blue" />
+						<Marker key={i} coordinate={pCoord} pinColor={colors.accent} />
 				  ))
 				: null}
 			<Polyline
 				coordinates={decodedTrip}
-				lineDashPattern={[1, 8]}
+				lineDashPattern={[0]}
 				strokeWidth={5}
 				strokeColor={dark ? "#fff" : "#000"}
 			></Polyline>

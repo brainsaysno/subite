@@ -2,9 +2,9 @@ import React, { memo, useContext } from "react";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
-import Button from "../components/Button";
 import Paragraph from "../components/Paragraph";
 import { AppContext } from "../../navigation/AppProvider";
+import { Button } from "react-native";
 
 function HomeScreen({ navigation }) {
 	const { setIsDriver } = useContext(AppContext);
@@ -12,27 +12,24 @@ function HomeScreen({ navigation }) {
 	return (
 		<Background>
 			<Logo />
-			<Header>Lorem Ipsum</Header>
+			<Header>Subite</Header>
 
-			<Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing.</Paragraph>
 			<Button
 				mode="contained"
 				onPress={() => {
 					setIsDriver(true);
 					navigation.navigate("Login");
 				}}
-			>
-				Driver
-			</Button>
+				title="Conductor"
+			></Button>
 			<Button
 				mode="contained"
 				onPress={() => {
 					setIsDriver(false);
 					navigation.navigate("Login");
 				}}
-			>
-				Passenger
-			</Button>
+				title="Pasajero"
+			></Button>
 		</Background>
 	);
 }

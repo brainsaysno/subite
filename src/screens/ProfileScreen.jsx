@@ -10,12 +10,15 @@ import SignOutSettingItem from "../components/SignOutSettingItem";
 import SetRadiusScreen from "./SetRadiusScreen";
 import { AppContext } from "../../navigation/AppProvider";
 import ToggleSettingItem from "../components/DarkModeToggleItem";
+import AccountData from "../screens/AccountData";
+import AboutUs from "../screens/AboutUs";
 
 const Stack = createNativeStackNavigator();
 
 function ProfileScreen({ navigation }) {
 	const { usingDarkMode, setUsingDarkMode, isDriver, setIsDriver } =
 		useContext(AppContext);
+	const { colors, fonts } = useTheme();
 
 	const toggleDarkMode = () => setUsingDarkMode(!usingDarkMode);
 	const toggleIsDriver = () => setIsDriver(!isDriver);
@@ -31,50 +34,43 @@ function ProfileScreen({ navigation }) {
 
 	const DriverToggleItem = () => (
 		<ToggleSettingItem
-			title="Driver"
+			title="Conductor"
 			value={isDriver}
 			onToggle={toggleIsDriver}
 			icon="steering"
 		/>
 	);
-
-	if (isDriver)
-		return (
-			<View>
-				<List.Section>
-					<List.Subheader style={profileStyles.subheader}>
-						Account
-					</List.Subheader>
-					<DarkModeToggleItem />
-					<DriverToggleItem />
-					<ChevronSettingItem navigation={navigation} />
-				</List.Section>
-				<List.Section>
-					<List.Subheader style={profileStyles.subheader}>
-						Another Section
-					</List.Subheader>
-					<SignOutSettingItem />
-				</List.Section>
-			</View>
-		);
 	return (
 		<View>
 			<List.Section>
-				<List.Subheader style={profileStyles.subheader}>Account</List.Subheader>
-				<DarkModeToggleItem />
+				<List.Subheader>Cuenta</List.Subheader>
+				{/* 	<DarkModeToggleItem /> */}
+				<ChevronSettingItem
+					navigation={navigation}
+					title="Mi cuenta"
+					icon="account"
+					iconColor={colors.onSurface}
+					screenName="Mi cuenta"
+				/>
+			</List.Section>
+			<List.Section>
+				<List.Subheader>Otros ajustes</List.Subheader>
+				{isDriver ? null : (
+					<ChevronSettingItem
+						navigation={navigation}
+						title="Ajustar radio"
+						icon="android-studio"
+						screenName="Set Radius"
+					/>
+				)}
 				<DriverToggleItem />
 				<ChevronSettingItem
 					navigation={navigation}
-					title="Set radius"
-					icon="android-studio"
-					screenName="Set Radius"
+					title="Sobre nosotros"
+					icon="information-outline"
+					iconColor={colors.error}
+					screenName="Sobre nosotros"
 				/>
-				<ChevronSettingItem navigation={navigation} />
-			</List.Section>
-			<List.Section>
-				<List.Subheader style={profileStyles.subheader}>
-					Another Section
-				</List.Subheader>
 				<SignOutSettingItem />
 			</List.Section>
 		</View>
@@ -84,19 +80,15 @@ function ProfileScreen({ navigation }) {
 function ProfileNavigation(props) {
 	return (
 		<Stack.Navigator initialRouteName="Profile Settings">
+			{/* Preferencias */}
 			<Stack.Screen name="Profile Settings" component={ProfileScreen} />
+			{/* Ajustar radio */}
 			<Stack.Screen name="Set Radius" component={SetRadiusScreen} />
+			<Stack.Screen name="Mi cuenta" component={AccountData} />
+			<Stack.Screen name="Sobre nosotros" component={AboutUs} />
 			<Stack.Screen name="Default Screen" component={DefaultScreen} />
 		</Stack.Navigator>
 	);
 }
 
 export default ProfileNavigation;
-
-const profileStyles = StyleSheet.create({
-	subheader: {
-		borderBottomColor: "grey",
-		borderBottomWidth: 1,
-		borderStyle: "solid",
-	},
-});

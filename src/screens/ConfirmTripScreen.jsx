@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, Dimensions } from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import HorizontalNumberPicker from "../components/NumberPicker";
+import { useTheme } from "react-native-paper";
 
 function ConfirmTripScreen({ navigation, route }) {
 	const { mapData } = route.params;
 	const { user } = useContext(AppContext);
+	const { colors } = useTheme();
 
 	// TODO: Add capacity picker
 	const [capacity, setCapacity] = useState(1);
@@ -41,15 +43,25 @@ function ConfirmTripScreen({ navigation, route }) {
 
 	return (
 		<View style={styles.container}>
+			<Text style={{ textAlign: "center", fontWeight: "400", fontSize: 18 }}>
+				Fecha y hora:
+			</Text>
+			<View
+				style={{
+					backgroundColor: colors.accent,
+					width: Dimensions.get("screen").width,
+					height: 200,
+					marginVertical: 20,
+				}}
+			></View>
 			<HorizontalNumberPicker
 				value={capacity}
 				onChange={setCapacity}
 				min={1}
 				max={4}
-				title={"Capacity"}
+				title={"Capacidad"}
 			/>
-			<Text>{mapData.routes[0].overview_polyline.points}</Text>
-			<Button title={"DEV Confirm"} onPress={handlePress}></Button>
+			<Button title={"Crear viaje"} onPress={handlePress}></Button>
 		</View>
 	);
 }

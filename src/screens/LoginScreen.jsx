@@ -66,8 +66,6 @@ const LoginScreen = ({ navigation }) => {
 			<BackButton goBack={() => navigation.navigate("Driver Selector")} />
 			<Logo />
 
-			<Header>Welcome back.</Header>
-
 			<TextInput
 				label="Email"
 				returnKeyType="next"
@@ -82,7 +80,7 @@ const LoginScreen = ({ navigation }) => {
 			/>
 
 			<TextInput
-				label="Password"
+				label="Contraseña"
 				returnKeyType="done"
 				value={password.value}
 				onChangeText={(text) => setPassword({ value: text, error: "" })}
@@ -95,20 +93,13 @@ const LoginScreen = ({ navigation }) => {
 				<TouchableOpacity
 					onPress={() => navigation.navigate("Forgot Password")}
 				>
-					<Text style={styles.label}>Forgot your password?</Text>
+					<Text style={styles.label}>Olvidaste tu contraseña</Text>
 				</TouchableOpacity>
 			</View>
 
 			<Button mode="contained" onPress={onLoginPressed}>
-				Login
+				Ingresar
 			</Button>
-
-			<View style={styles.row}>
-				<Text style={styles.label}>Don’t have an account? </Text>
-				<TouchableOpacity onPress={() => navigation.navigate("Register")}>
-					<Text style={styles.link}>Sign up</Text>
-				</TouchableOpacity>
-			</View>
 		</Background>
 	);
 };

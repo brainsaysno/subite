@@ -52,7 +52,7 @@ function CreateTripScreen({ navigation, ...props }) {
 								mapData.routes[0].overview_polyline.points,
 								5
 							).map((arr) => ({ latitude: arr[0], longitude: arr[1] }))}
-							lineDashPattern={[1, 8]}
+							lineDashPattern={[0]}
 							strokeWidth={5}
 						></Polyline>
 					</>
