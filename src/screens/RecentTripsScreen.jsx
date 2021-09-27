@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { List, useTheme } from "react-native-paper";
 import TripListComponent from "../components/TripListComponent";
 import { latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
@@ -8,18 +8,19 @@ import { db } from "../../config/firebase";
 
 import { tripData } from "../../dummy";
 import { AppContext } from "../../navigation/AppProvider";
+import styles from "../styles";
 
-function ActiveTripsScreen({ navigation }) {
+function RecentTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
 	const { user } = useContext(AppContext);
+	const { colors } = useTheme();
 
-	//const tripsRef = collection(db, "trips");
 	useEffect(() => {
 		if (user) {
+			console.log(user.uid);
 			const unsub = db
 				.collection("trips")
-				.where("driver.uid", "==", user.uid)
-				.orderBy("departureTime")
+				.where("passengerUids", "array-contains", user.uid)
 				.onSnapshot((querySnapshot) => {
 					console.log("snap");
 					const data = querySnapshot.docs.map((doc) => doc.data());
@@ -28,9 +29,10 @@ function ActiveTripsScreen({ navigation }) {
 							trip={trip}
 							key={i}
 							navigation={navigation}
-							passengerCoordinates={trip.passengerData.map(
-								(pData) => pData.location
-							)}
+							passengerCoordinates={[
+								trip.passengerData.filter((pData) => pData.uid === user.uid)[0]
+									.location,
+							]}
 						/>
 					));
 
@@ -39,14 +41,24 @@ function ActiveTripsScreen({ navigation }) {
 			return unsub;
 		}
 	}, []);
+
+	if (tripListComponents.length === 0)
+		return (
+			<View style={styles.container}>
+				<Text color={colors.text}>You have not made any trips yet!</Text>
+				{/* TODO: Button "Join a trip now", navigate to join trip */}
+			</View>
+		);
+
 	return (
 		<ScrollView>
 			<List.Section>
-				<List.Subheader>Hoy</List.Subheader>
+				<List.Subheader>Active</List.Subheader>
 				{tripListComponents}
+				<List.Subheader>Recent</List.Subheader>
 			</List.Section>
 		</ScrollView>
 	);
 }
 
-export default ActiveTripsScreen;
+export default RecentTripsScreen;

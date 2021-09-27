@@ -8,12 +8,14 @@ import JoinTripNavigator from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
+import RecentTripsScreen from "../screens/RecentTripsScreen.jsx";
 
 const Tab = createBottomTabNavigator();
 
 function PassengerNavigator() {
 	return (
 		<Tab.Navigator
+			initialRouteName="Join Trip"
 			screenOptions={({ route }) => ({
 				headerShown: false,
 				tabBarIcon: ({ focused, color, size }) => {
@@ -34,7 +36,7 @@ function PassengerNavigator() {
 				},
 			})}
 		>
-			<Tab.Screen name="Recent Trips" component={DefaultScreen} />
+			<Tab.Screen name="Recent Trips" component={RecentTripsScreen} />
 			<Tab.Screen name="Join Trip" component={JoinTripNavigator} />
 			<Tab.Screen name="Profile" component={ProfileNavigator} />
 		</Tab.Navigator>

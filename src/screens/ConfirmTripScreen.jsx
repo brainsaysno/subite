@@ -24,6 +24,8 @@ function ConfirmTripScreen({ navigation, route }) {
 				plate: "***" + user.plate.slice(3),
 				childName: user.childName,
 			},
+			passengerData: [],
+			passengerUids: [],
 			institutionName: user.institution.name,
 			passengerCount: 0,
 		};

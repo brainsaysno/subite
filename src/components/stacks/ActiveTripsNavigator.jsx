@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import JoinTripScreen from "../../screens/JoinTripScreen";
 import DefaultScreen from "../../screens/DefaultScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
-import TripSelectorScreen from "../../screens/TripSelectorScreen";
 import ActiveTripsScreen from "../../screens/ActiveTripsScreen";
 
 const Stack = createNativeStackNavigator();

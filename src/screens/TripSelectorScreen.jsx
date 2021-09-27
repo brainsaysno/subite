@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { List, useTheme } from "react-native-paper";
 import TripListComponent from "../components/TripListComponent";
 import { isInRadius, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
@@ -14,6 +14,7 @@ function TripSelectorScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user } = useContext(AppContext);
+	const { colors } = useTheme();
 
 	const { mapData } = route.params;
 
@@ -21,19 +22,32 @@ function TripSelectorScreen({ navigation, route }) {
 		if (user) {
 			db.collection("trips")
 				.where("institutionName", "==", user.institution.name)
+				.where("passengerUids", "not-in", [[user.uid]])
+				.orderBy("passengerUids")
 				.orderBy("departureTime")
 				.get()
+
 				.then((querySnapshot) => {
-					const data = querySnapshot.docs.map((doc) => doc.data());
+					const data = querySnapshot.docs.map((doc) => {
+						return { ...doc.data(), tripId: doc.id };
+					});
 					const filteredData = data.filter((d) => {
 						return (
 							isInRadius(d.polyline, mapData.markerCoordinates, user.radius) &&
-							d.driver.uid !== user.uid
+							d.driver.uid !== user.uid &&
+							d.passengerCount < d.capacity
+
 							/* TODO: Filter for departureTime > Date.now() */
 						);
 					});
 					const comps = filteredData.map((trip, i) => (
-						<TripListComponent trip={trip} key={i} navigation={navigation} />
+						<TripListComponent
+							trip={trip}
+							key={i}
+							navigation={navigation}
+							passengerCoordinates={[mapData.markerCoordinates]}
+							confirmNavigate
+						/>
 					));
 					setIsLoading(false);
 					setTripListComponents(comps);
@@ -46,7 +60,11 @@ function TripSelectorScreen({ navigation, route }) {
 	if (tripListComponents.length == 0)
 		return (
 			<View style={styles.container}>
-				<Text>Sorry, no trips were found in your radius!</Text>
+				<Text style={{ textAlign: "center", color: colors.text }}>
+					Sorry, no trips were found in your area, try by increasing your
+					radius!
+				</Text>
+				{/* Button to nav out back to map, to profile and to radius screen */}
 			</View>
 		);
 

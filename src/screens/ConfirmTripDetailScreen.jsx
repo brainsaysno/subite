@@ -6,9 +6,35 @@ import WidgetMapView from "../components/WidgetMapView";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 
-function TripDetailScreen({ navigation, route }) {
+function ConfirmTripDetailScreen({ navigation, route }) {
 	const { trip, passengerCoordinates } = route.params;
 	const { colors } = useTheme();
+	const { user } = useContext(AppContext);
+
+	const confirmTrip = () => {
+		db.collection("trips")
+			.doc(trip.tripId)
+			.update({
+				passengerCount: trip.passengerCount + 1,
+				passengerData: [
+					...trip.passengerData,
+					{
+						fullName: user.fullName,
+						phone: user.phone,
+						location: passengerCoordinates,
+						uid: user.uid,
+					},
+				],
+				passengerUids: [...trip.passengerUids, user.uid],
+			})
+			.then(() =>
+				navigation.navigate("Join Trip Success", {
+					trip: trip,
+				})
+			);
+		//passengerData = []
+		//passengerUids = []
+	};
 
 	return (
 		<View style={styles.container}>
@@ -38,8 +64,29 @@ function TripDetailScreen({ navigation, route }) {
 				navigation={navigation}
 				passengerCoordinates={passengerCoordinates}
 			/>
+			<TouchableOpacity
+				style={{
+					width: 100,
+					height: 50,
+					backgroundColor: colors.primary,
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+				onPress={confirmTrip}
+			>
+				<Text
+					style={{
+						color: colors.surface,
+						fontWeight: "400",
+						textTransform: "uppercase",
+					}}
+				>
+					Confirm
+				</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }
 
-export default TripDetailScreen;
+export default ConfirmTripDetailScreen;

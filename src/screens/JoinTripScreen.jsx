@@ -41,6 +41,7 @@ function JoinTripScreen({ navigation }) {
 							radius={user.radius * 1000}
 							strokeColor={colors.text}
 							fillColor={"#ff000040"}
+							onPress={(e) => handleMapPress(e.nativeEvent)}
 							/* #rgba */
 						/>
 					</>
