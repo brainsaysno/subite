@@ -11,7 +11,6 @@ function ConfirmTripScreen({ navigation, route }) {
 	const { user } = useContext(AppContext);
 	const { colors } = useTheme();
 
-	// TODO: Add capacity picker
 	const [capacity, setCapacity] = useState(1);
 
 	const handlePress = () => {

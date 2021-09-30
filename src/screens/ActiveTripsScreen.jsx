@@ -8,6 +8,7 @@ import { db } from "../../config/firebase";
 
 import { tripData } from "../../dummy";
 import { AppContext } from "../../navigation/AppProvider";
+import styles from "../styles";
 
 function ActiveTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
@@ -45,6 +46,15 @@ function ActiveTripsScreen({ navigation }) {
 			return unsub;
 		}
 	}, []);
+
+	if (tripListComponents.length === 0) {
+		return (
+			<View style={styles.container}>
+				<Text>No trips</Text>
+			</View>
+		);
+	}
+
 	return (
 		<ScrollView>
 			<List.Section>

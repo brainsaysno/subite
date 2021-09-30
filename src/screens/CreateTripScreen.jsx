@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Button } from "react-native";
+import { View, Button, Text } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
@@ -8,6 +8,8 @@ import { decode } from "@googlemaps/polyline-codec";
 import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 import { AppContext } from "../../navigation/AppProvider";
 import MapConfirmButton from "../components/MapConfirmButton";
+import { SvgFromUri } from "react-native-svg";
+import Home from "../../assets/home-outline.svg";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();

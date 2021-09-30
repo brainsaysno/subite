@@ -27,7 +27,7 @@ const CombinedDefaultTheme = {
 	fonts: {
 		...PaperDefaultTheme.fonts,
 		...NavigationDefaultTheme.fonts,
-		regular: {
+		/* regular: {
 			fontFamily: "Gill Sans",
 			fontWeight: "300",
 		},
@@ -38,8 +38,10 @@ const CombinedDefaultTheme = {
 		light: {
 			fontFamily: "Gill Sans",
 			fontWeight: "400",
-		},
+		}, */
 	},
+
+	/* https://coolors.co/e6594c-689bf3-ffc247-81c596-95a8b1 */
 
 	colors: {
 		...PaperDefaultTheme.colors,

@@ -10,10 +10,12 @@ import { db } from "../../config/firebase";
 function SetRadiusScreen({ navigation }) {
 	const { colors } = useTheme();
 	const { user, setUser } = useContext(AppContext);
-	const [radius, setRadius] = useState(user.radius ? user.radius : 1);
+	const [radius, setRadius] = useState(0.1);
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity onPress={() => setRadius(radius + 1)}>
+			<TouchableOpacity
+				onPress={() => setRadius(Math.round(radius * 10 + 1) / 10)}
+			>
 				<Icon
 					name={"arrow-ios-upward-outline"}
 					width={100}
@@ -21,9 +23,11 @@ function SetRadiusScreen({ navigation }) {
 					fill={colors.primary}
 				/>
 			</TouchableOpacity>
-			<Text style={{ color: colors.text }}>{radius} kms</Text>
+			<Text style={{ color: colors.text }}>{radius * 1000} mts</Text>
 			<TouchableOpacity
-				onPress={() => (radius == 1 ? null : setRadius(radius - 1))}
+				onPress={() =>
+					radius == 0.1 ? null : setRadius(Math.round(radius * 10 - 1) / 10)
+				}
 			>
 				<Icon
 					name={"arrow-ios-downward-outline"}
