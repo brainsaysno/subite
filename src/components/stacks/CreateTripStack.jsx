@@ -18,15 +18,9 @@ function CreateTripNavigator() {
 				if (route.name === "Map") return { headerShown: false };
 			}}
 		>
-			<Stack.Screen name="Map">
-				{(navProps) => <CreateTripScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen name="Confirm Create Trip">
-				{(navProps) => <ConfirmTripScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen name="Trip Success">
-				{(navProps) => <CreateTripSuccessScreen {...navProps} />}
-			</Stack.Screen>
+			<Stack.Screen name="Map" component={CreateTripScreen} />
+			<Stack.Screen name="Confirm Create Trip" component={ConfirmTripScreen} />
+			<Stack.Screen name="Trip Success" component={CreateTripSuccessScreen} />
 			<Stack.Screen
 				name="Default Screen"
 				component={DefaultScreen}

@@ -10,7 +10,7 @@ import { db } from "../../config/firebase";
 function SetRadiusScreen({ navigation }) {
 	const { colors } = useTheme();
 	const { user, setUser } = useContext(AppContext);
-	const [radius, setRadius] = useState(0.1);
+	const [radius, setRadius] = useState(user.radius ? user.radius : 0.1);
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity

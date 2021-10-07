@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Button, Text } from "react-native";
+import React, { useContext, useState } from "react";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
@@ -8,8 +7,7 @@ import { decode } from "@googlemaps/polyline-codec";
 import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 import { AppContext } from "../../navigation/AppProvider";
 import MapConfirmButton from "../components/MapConfirmButton";
-import { SvgFromUri } from "react-native-svg";
-import Home from "../../assets/home-outline.svg";
+import Button from "../components/Button";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();
@@ -61,11 +59,26 @@ function CreateTripScreen({ navigation, ...props }) {
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<MapConfirmButton
-					navigation={navigation}
-					mapData={mapData}
-					screenName={"Confirm Create Trip"}
-				/>
+				<Button
+					onPress={() =>
+						navigation.navigate("Confirm Create Trip", {
+							mapData: mapData,
+						})
+					}
+					mode="contained"
+					// Horizontal centering may not work on all device sizes
+					style={{
+						position: "absolute",
+						bottom: 10,
+						left: "25%",
+						flex: 1,
+						justifyContent: "center",
+						alignItems: "center",
+						width: 200,
+					}}
+				>
+					Confirmar
+				</Button>
 			) : null}
 		</>
 	);

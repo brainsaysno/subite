@@ -16,12 +16,8 @@ function ActiveTripsNavigator(props) {
 				if (route.name === "Map") return { headerShown: false };
 			}} */
 		>
-			<Stack.Screen name="Active Trips">
-				{(navProps) => <ActiveTripsScreen {...navProps} />}
-			</Stack.Screen>
-			<Stack.Screen name="Trip Detail">
-				{(navProps) => <TripDetailScreen {...navProps} />}
-			</Stack.Screen>
+			<Stack.Screen name="Active Trips" component={ActiveTripsScreen} />
+			<Stack.Screen name="Trip Detail" component={TripDetailScreen} />
 			<Stack.Screen
 				name="Default Screen"
 				component={DefaultScreen}

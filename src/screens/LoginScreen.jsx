@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
-import Background from "../components/Background";
+import KeyboardAvoidingCustom from "../components/KeyboardAvoidingCustom";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -62,7 +62,7 @@ const LoginScreen = ({ navigation }) => {
 	});
 
 	return (
-		<Background>
+		<KeyboardAvoidingCustom>
 			<BackButton goBack={() => navigation.navigate("Driver Selector")} />
 			<Logo />
 
@@ -100,7 +100,7 @@ const LoginScreen = ({ navigation }) => {
 			<Button mode="contained" onPress={onLoginPressed}>
 				Ingresar
 			</Button>
-		</Background>
+		</KeyboardAvoidingCustom>
 	);
 };
 

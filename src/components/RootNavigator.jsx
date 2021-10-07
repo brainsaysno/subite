@@ -12,14 +12,13 @@ import {
 	DefaultTheme as PaperDefaultTheme,
 	DarkTheme as PaperDarkTheme,
 	Provider as PaperProvider,
-	useTheme,
-	ActivityIndicator,
 } from "react-native-paper";
 import {
 	NavigationContainer,
 	DefaultTheme as NavigationDefaultTheme,
 	DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
+import Loading from "./Loading";
 
 const CombinedDefaultTheme = {
 	...PaperDefaultTheme,
@@ -82,6 +81,7 @@ function RootNavigator() {
 							...doc.data(),
 							uid: doc.id,
 						});
+						setIsLoading(false);
 					} else {
 						// Sign out for security reasons... this should never happen for legitimate users
 						auth.signOut();
@@ -90,9 +90,8 @@ function RootNavigator() {
 		} else {
 			setUser(undefined);
 			setIsAuthed(false);
+			setIsLoading(false);
 		}
-
-		setIsLoading(false);
 	}
 
 	useEffect(() => {
@@ -103,11 +102,7 @@ function RootNavigator() {
 		return null;
 	} */
 	if (isLoading) {
-		return (
-			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<ActivityIndicator size="large" />
-			</View>
-		);
+		return <Loading />;
 	}
 
 	return (

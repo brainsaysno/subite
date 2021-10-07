@@ -5,9 +5,10 @@ import { useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
-
+import moment from "moment-with-locales-es6";
+import Button from "../components/Button";
 function ConfirmTripDetailScreen({ navigation, route }) {
-	const { trip, passengerCoordinates } = route.params;
+	const { trip, userCoordinates } = route.params;
 	const { colors } = useTheme();
 	const { user } = useContext(AppContext);
 
@@ -21,25 +22,48 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 					{
 						fullName: user.fullName,
 						phone: user.phone,
-						location: passengerCoordinates,
+						location: userCoordinates,
 						uid: user.uid,
 					},
 				],
 				passengerUids: [...trip.passengerUids, user.uid],
 			})
-			.then(() =>
-				navigation.navigate("Join Trip Success", {
+			.then(() => {
+				navigation.navigate("Recent Trips");
+				navigation.navigate("Trip Detail", {
 					trip: trip,
-				})
+					userCoordinates: userCoordinates,
+				});
+			})
+			.catch((e) =>
+				console.error(`There was an error while joining trip: ${e}`)
 			);
-		//passengerData = []
-		//passengerUids = []
 	};
 
 	return (
 		<View style={styles.container}>
-			<Text style={{ fontWeight: "500", fontSize: 30, color: colors.text }}>
-				Driver name: {trip.driver.fullName}
+			<Text
+				style={{
+					fontWeight: "400",
+					fontSize: 30,
+					color: colors.text,
+					textAlign: "center",
+					marginBottom: 20,
+				}}
+			>
+				<Text style={{ fontWeight: "500" }}>Conductor: </Text>
+				{trip.driver.fullName}
+			</Text>
+			<Text
+				style={{
+					fontStyle: "italic",
+					fontWeight: "400",
+					fontSize: 20,
+					color: colors.text,
+					textAlign: "center",
+				}}
+			>
+				{moment(trip.departureTime).locale("es").format("LL")}
 			</Text>
 			<Text
 				style={{
@@ -47,44 +71,25 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 					fontWeight: "300",
 					fontSize: 20,
 					color: colors.text,
+					textAlign: "center",
 				}}
 			>
-				Departure Time: {new Date(trip.departureTime).getDate().toString()}
-				{", "}
-				{new Date(trip.departureTime).getHours().toString()}:
-				{new Date(trip.departureTime).getMinutes().toString()}
+				<Text style={{ fontWeight: "400" }}>Salida: </Text>
+				{moment(trip.departureTime).locale("es").format("HH:mm")}
 			</Text>
 			<Text
 				style={{ fontStyle: "italic", fontWeight: "200", color: colors.text }}
 			>
-				Capacity: {trip.passengerCount}/{trip.capacity}
+				Capacidad: {trip.passengerCount}/{trip.capacity}
 			</Text>
 			<WidgetMapView
 				polyline={trip.polyline}
 				navigation={navigation}
-				passengerCoordinates={passengerCoordinates}
+				passengerCoordinates={userCoordinates}
 			/>
-			<TouchableOpacity
-				style={{
-					width: 100,
-					height: 50,
-					backgroundColor: colors.primary,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-				onPress={confirmTrip}
-			>
-				<Text
-					style={{
-						color: colors.surface,
-						fontWeight: "400",
-						textTransform: "uppercase",
-					}}
-				>
-					Confirm
-				</Text>
-			</TouchableOpacity>
+			<Button onPress={confirmTrip} mode="contained">
+				Confirm
+			</Button>
 		</View>
 	);
 }

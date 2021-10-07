@@ -1,13 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import styles from "../styles";
 
-const Loading = () => {
+function Loading() {
 	return (
 		<View style={styles.container}>
-			<Text>Loading...</Text>
+			<ActivityIndicator size="large" />
 		</View>
 	);
-};
+}
 
 export default Loading;

@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Button, Text, View, Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import HorizontalNumberPicker from "../components/NumberPicker";
 import { useTheme } from "react-native-paper";
+import Button from "../components/Button";
 
 function ConfirmTripScreen({ navigation, route }) {
 	const { mapData } = route.params;
@@ -33,7 +34,10 @@ function ConfirmTripScreen({ navigation, route }) {
 		db.collection("trips")
 			.add(tripData)
 			.then((docRef) => {
-				navigation.navigate("Trip Success", { docID: docRef.id });
+				navigation.navigate("Map");
+				navigation.navigate("Trips");
+				navigation.navigate("Trip Detail", { trip: tripData });
+				//				navigation.navigate("Trip Success", { docID: docRef.id });
 			})
 			.catch((error) => {
 				console.error("Error adding document: ", error);
@@ -60,7 +64,9 @@ function ConfirmTripScreen({ navigation, route }) {
 				max={4}
 				title={"Capacidad"}
 			/>
-			<Button title={"Crear viaje"} onPress={handlePress}></Button>
+			<Button onPress={handlePress} mode="contained" style={{ width: 150 }}>
+				Crear viaje
+			</Button>
 		</View>
 	);
 }

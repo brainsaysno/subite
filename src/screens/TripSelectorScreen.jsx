@@ -45,7 +45,7 @@ function TripSelectorScreen({ navigation, route }) {
 							trip={trip}
 							key={i}
 							navigation={navigation}
-							passengerCoordinates={[mapData.markerCoordinates]}
+							userCoordinates={[mapData.markerCoordinates]}
 							confirmNavigate
 						/>
 					));

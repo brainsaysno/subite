@@ -6,11 +6,10 @@ import { latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-import { tripData } from "../../dummy";
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 
-function ActiveTripsScreen({ navigation }) {
+function ActiveTripsScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
 	const { user } = useContext(AppContext);
 
@@ -26,18 +25,7 @@ function ActiveTripsScreen({ navigation }) {
 
 					const components = data.map((trip, i) => {
 						return (
-							<TripListComponent
-								trip={trip}
-								key={i}
-								navigation={navigation}
-								passengerCoordinates={
-									trip.passengerData.length === 0
-										? null
-										: trip.passengerData.map(
-												(pData) => [pData.location].flat(10)[0]
-										  )
-								}
-							/>
+							<TripListComponent trip={trip} key={i} navigation={navigation} />
 						);
 					});
 

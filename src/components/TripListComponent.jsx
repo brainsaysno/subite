@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect } from "react";
 import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-eva-icons";
@@ -6,8 +7,8 @@ import styles from "../styles";
 
 function TripListComponent({
 	trip,
+	userCoordinates,
 	navigation,
-	passengerCoordinates,
 	confirmNavigate,
 }) {
 	const { colors } = useTheme();
@@ -15,21 +16,18 @@ function TripListComponent({
 	return (
 		<TouchableOpacity
 			onPress={() => {
-				confirmNavigate === true
-					? navigation.navigate("Confirm Trip Detail", {
-							trip: trip,
-							passengerCoordinates: passengerCoordinates,
-					  })
-					: navigation.navigate("Trip Detail", {
-							trip: trip,
-							passengerCoordinates: passengerCoordinates,
-					  });
+				navigation.navigate(
+					confirmNavigate === true ? "Confirm Trip Detail" : "Trip Detail",
+					{
+						trip: trip,
+						userCoordinates: userCoordinates,
+					}
+				);
 			}}
 		>
 			<List.Item
 				// TODO: Decide on fullName vs firstName
 				title={trip.driver.fullName /* .split(" ")[0] */}
-				// TODO: Add moment.js dates. See issue #8 https://github.com/VendedorDeWards/subite/issues/8
 				description={
 					trip.passengerCount.toString() + "/" + trip.capacity.toString()
 				}
@@ -43,8 +41,7 @@ function TripListComponent({
 						}}
 					>
 						<Text style={{ color: colors.text, fontSize: 25 }}>
-							{new Date(trip.departureTime).getHours().toString()}:
-							{new Date(trip.departureTime).getMinutes().toString()}
+							{moment(trip.departureTime).format("HH:mm")}
 						</Text>
 					</View>
 				)}

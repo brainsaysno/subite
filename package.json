@@ -15,8 +15,10 @@
     "expo": "~42.0.1",
     "expo-constants": "~11.0.1",
     "expo-device": "~3.3.0",
+    "expo-font": "~9.2.1",
     "expo-status-bar": "~1.0.4",
     "firebase": "^8.2.3",
+    "moment-with-locales-es6": "^1.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -28,8 +30,7 @@
     "react-native-screens": "~3.4.0",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "12.1.1",
-    "react-native-web": "^0.17.1",
-    "expo-font": "~9.2.1"
+    "react-native-web": "^0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

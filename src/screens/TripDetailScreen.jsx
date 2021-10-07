@@ -6,9 +6,10 @@ import WidgetMapView from "../components/WidgetMapView";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import { Icon } from "react-native-eva-icons";
+import moment from "moment-with-locales-es6";
 
 function TripDetailScreen({ navigation, route }) {
-	const { trip, passengerCoordinates } = route.params;
+	const { trip, userCoordinates } = route.params;
 	const { colors } = useTheme();
 	const { user } = useContext(AppContext);
 
@@ -37,7 +38,7 @@ function TripDetailScreen({ navigation, route }) {
 					textAlign: "center",
 				}}
 			>
-				27 de setiembre
+				{moment(trip.departureTime).locale("es").format("LL")}
 			</Text>
 			<Text
 				style={{
@@ -48,9 +49,8 @@ function TripDetailScreen({ navigation, route }) {
 					textAlign: "center",
 				}}
 			>
-				<Text style={{ fontWeight: "400" }}>Salida:</Text>{" "}
-				{new Date(trip.departureTime).getHours().toString()}:
-				{new Date(trip.departureTime).getMinutes().toString()}
+				<Text style={{ fontWeight: "400" }}>Salida: </Text>
+				{moment(trip.departureTime).locale("es").format("HH:mm")}
 			</Text>
 			{/* <Text
 				style={{ fontStyle: "italic", fontWeight: "200", color: colors.text }}
@@ -60,7 +60,13 @@ function TripDetailScreen({ navigation, route }) {
 			<WidgetMapView
 				polyline={trip.polyline}
 				navigation={navigation}
-				passengerCoordinates={passengerCoordinates}
+				passengerCoordinates={
+					userCoordinates
+						? userCoordinates
+						: trip.passengerData.length === 0
+						? null
+						: trip.passengerData.map((pData) => [pData.location].flat(10)[0])
+				}
 			/>
 			<TouchableOpacity
 				style={{
@@ -93,7 +99,7 @@ function TripDetailScreen({ navigation, route }) {
 						fontWeight: "500",
 					}}
 				>
-					Coordina el punto de encuentro!
+					¡Coordina el punto de encuentro!
 				</Text>
 			</TouchableOpacity>
 		</View>

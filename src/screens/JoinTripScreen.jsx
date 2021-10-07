@@ -5,6 +5,7 @@ import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import MapConfirmButton from "../components/MapConfirmButton";
 import { AppContext } from "../../navigation/AppProvider";
+import Button from "../components/Button";
 
 function JoinTripScreen({ navigation }) {
 	const { dark, colors } = useTheme();
@@ -13,6 +14,12 @@ function JoinTripScreen({ navigation }) {
 
 	const handleMapPress = ({ coordinate }) => {
 		setMapData({ markerOn: true, markerCoordinates: coordinate });
+	};
+
+	const handleConfirm = () => {
+		navigation.navigate("Trip Selector", {
+			mapData: mapData,
+		});
 	};
 
 	return (
@@ -47,11 +54,21 @@ function JoinTripScreen({ navigation }) {
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<MapConfirmButton
-					navigation={navigation}
-					mapData={mapData}
-					screenName={"Trip Selector"}
-				/>
+				<Button
+					onPress={handleConfirm}
+					mode="contained"
+					style={{
+						position: "absolute",
+						bottom: 10,
+						left: "25%",
+						flex: 1,
+						justifyContent: "center",
+						alignItems: "center",
+						width: 200,
+					}}
+				>
+					Confirmar
+				</Button>
 			) : null}
 		</>
 	);

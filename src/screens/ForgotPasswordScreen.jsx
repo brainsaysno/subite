@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
 import { emailValidator } from "../core/utils";
-import Background from "../components/Background";
+import KeyboardAvoidingCustom from "../components/KeyboardAvoidingCustom";
 import BackButton from "../components/BackButton";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
@@ -42,7 +42,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 	});
 
 	return (
-		<Background>
+		<KeyboardAvoidingCustom>
 			<BackButton goBack={() => navigation.navigate("Login")} />
 
 			<Logo />
@@ -72,7 +72,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 			>
 				<Text style={styles.label}>← Back to login</Text>
 			</TouchableOpacity>
-		</Background>
+		</KeyboardAvoidingCustom>
 	);
 };
 
