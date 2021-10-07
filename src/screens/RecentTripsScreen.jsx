@@ -2,13 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TripListComponent from "../components/TripListComponent";
-import { latitudeToKm } from "../core/utils";
-import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-import { tripData } from "../../dummy";
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
+import Button from "../components/Button";
 
 function RecentTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState([]);
@@ -47,7 +45,9 @@ function RecentTripsScreen({ navigation }) {
 		return (
 			<View style={styles.container}>
 				<Text color={colors.text}>You have not made any trips yet!</Text>
-				{/* TODO: Button "Join a trip now", navigate to join trip */}
+				<Button onPress={() => navigation.navigate("Join Trip")}>
+					Join a trip now
+				</Button>
 			</View>
 		);
 
