@@ -6,15 +6,11 @@ function ChevronSettingItem({
 	title = "Setting",
 	icon = "web",
 	iconColor,
-	screenName = "Default Screen",
-	navigation,
+	onPress,
 }) {
 	const { colors } = useTheme();
 	return (
-		<TouchableOpacity
-			onPress={() => navigation.navigate(screenName)}
-			activeOpacity={1}
-		>
+		<TouchableOpacity onPress={onPress} activeOpacity={1}>
 			<List.Item
 				title={title}
 				left={() => (

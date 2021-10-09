@@ -102,7 +102,13 @@ function RootNavigator() {
 		return null;
 	} */
 	if (isLoading) {
-		return <Loading />;
+		return (
+			<PaperProvider
+				theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+			>
+				<Loading />
+			</PaperProvider>
+		);
 	}
 
 	return (

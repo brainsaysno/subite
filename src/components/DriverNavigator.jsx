@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ProfileNavigator from "../screens/ProfileScreen";
+import PreferencesNavigator from "../screens/PreferencesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
@@ -13,19 +13,19 @@ const Tab = createBottomTabNavigator();
 function DriverNavigator() {
 	return (
 		<Tab.Navigator
-			initialRouteName="Create Trip"
+			initialRouteName="Nuevo Viaje"
 			screenOptions={({ route }) => ({
 				headerShown: false,
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 
-					if (route.name === "Trips") {
+					if (route.name === "Viajes activos") {
 						iconName = focused
 							? "navigation-2-outline"
 							: "navigation-2-outline";
-					} else if (route.name === "Create Trip") {
+					} else if (route.name === "Crear Viaje") {
 						iconName = focused ? "map" : "map";
-					} else if (route.name === "Profile") {
+					} else if (route.name === "Ajustes") {
 						iconName = focused ? "settings-2-outline" : "settings-2-outline";
 					}
 
@@ -37,11 +37,11 @@ function DriverNavigator() {
 			})}
 		>
 			{/* Viajes activos */}
-			<Tab.Screen name="Trips" component={ActiveTripsNavigator} />
+			<Tab.Screen name="Viajes activos" component={ActiveTripsNavigator} />
 			{/* Nuevo viaje */}
-			<Tab.Screen name="Create Trip" component={CreateTripNavigator} />
+			<Tab.Screen name="Crear Viaje" component={CreateTripNavigator} />
 			{/* Ajustes */}
-			<Tab.Screen name="Profile" component={ProfileNavigator} />
+			<Tab.Screen name="Ajustes" component={PreferencesNavigator} />
 		</Tab.Navigator>
 	);
 }

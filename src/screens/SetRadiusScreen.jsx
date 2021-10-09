@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { View, Text } from "react-native";
-import { Button, useTheme } from "react-native-paper";
+import { View } from "react-native";
+import { Text, Button, useTheme } from "react-native-paper";
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 import { Icon } from "react-native-eva-icons";
@@ -23,7 +23,7 @@ function SetRadiusScreen({ navigation }) {
 					fill={colors.primary}
 				/>
 			</TouchableOpacity>
-			<Text style={{ color: colors.text }}>{radius * 1000} mts</Text>
+			<Text>{radius * 1000} mts</Text>
 			<TouchableOpacity
 				onPress={() =>
 					radius == 0.1 ? null : setRadius(Math.round(radius * 10 - 1) / 10)
@@ -48,7 +48,7 @@ function SetRadiusScreen({ navigation }) {
 						radius: radius,
 					});
 					navigation.goBack();
-					navigation.navigate("Join Trip");
+					navigation.navigate("Nuevo Viaje");
 				}}
 			>
 				Ok!

@@ -29,7 +29,7 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 				passengerUids: [...trip.passengerUids, user.uid],
 			})
 			.then(() => {
-				navigation.navigate("Recent Trips");
+				navigation.navigate("Viajes Recientes");
 				navigation.navigate("Trip Detail", {
 					trip: trip,
 					userCoordinates: userCoordinates,

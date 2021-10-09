@@ -45,7 +45,7 @@ function RecentTripsScreen({ navigation }) {
 		return (
 			<View style={styles.container}>
 				<Text color={colors.text}>You have not made any trips yet!</Text>
-				<Button onPress={() => navigation.navigate("Join Trip")}>
+				<Button onPress={() => navigation.navigate("Nuevo Viaje")}>
 					Join a trip now
 				</Button>
 			</View>

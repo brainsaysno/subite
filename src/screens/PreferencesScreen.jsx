@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
 import { View, Text, Settings, StyleSheet, StatusBar } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import DarkModeToggleItem from "../components/DarkModeToggleItem";
 import ChevronSettingItem from "../components/ChevronSettingItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
 import DefaultScreen from "./DefaultScreen";
-import SignOutSettingItem from "../components/SignOutSettingItem";
 import SetRadiusScreen from "./SetRadiusScreen";
 import { AppContext } from "../../navigation/AppProvider";
-import ToggleSettingItem from "../components/DarkModeToggleItem";
-import AccountData from "../screens/AccountData";
-import AboutUs from "../screens/AboutUs";
+import ToggleSettingItem from "../components/ToggleSettingItem";
+import AccountData from "./AccountData";
+import AboutUs from "./AboutUs";
+import { auth } from "../../config/firebase";
 
 const Stack = createNativeStackNavigator();
 
-function ProfileScreen({ navigation }) {
+function PreferencesScreen({ navigation }) {
 	const { usingDarkMode, setUsingDarkMode, isDriver, setIsDriver } =
 		useContext(AppContext);
 	const { colors, fonts } = useTheme();
@@ -46,44 +44,45 @@ function ProfileScreen({ navigation }) {
 				<List.Subheader>Cuenta</List.Subheader>
 				{/* 	<DarkModeToggleItem /> */}
 				<ChevronSettingItem
-					navigation={navigation}
 					title="Mi cuenta"
 					icon="account"
 					iconColor={colors.onSurface}
-					screenName="Mi cuenta"
+					onPress={() => navigation.navigate("Mi cuenta")}
 				/>
 			</List.Section>
 			<List.Section>
 				<List.Subheader>Otros ajustes</List.Subheader>
 				{isDriver ? null : (
 					<ChevronSettingItem
-						navigation={navigation}
 						title="Ajustar radio"
 						icon="android-studio"
-						screenName="Set Radius"
+						onPress={() => navigation.navigate("Ajustar radio")}
 					/>
 				)}
 				<DriverToggleItem />
 				<ChevronSettingItem
-					navigation={navigation}
 					title="Sobre nosotros"
 					icon="information-outline"
 					iconColor={colors.error}
-					screenName="Sobre nosotros"
+					onPress={() => navigation.navigate("Sobre nosotros")}
 				/>
-				<SignOutSettingItem />
+				<ChevronSettingItem
+					title="Cerrar Sesión"
+					icon="logout"
+					onPress={() => auth.signOut()}
+				/>
 			</List.Section>
 		</View>
 	);
 }
 
-function ProfileNavigation(props) {
+function PreferencesNavigator() {
 	return (
-		<Stack.Navigator initialRouteName="Profile Settings">
+		<Stack.Navigator initialRouteName="Preferencias">
 			{/* Preferencias */}
-			<Stack.Screen name="Profile Settings" component={ProfileScreen} />
+			<Stack.Screen name="Preferencias" component={PreferencesScreen} />
 			{/* Ajustar radio */}
-			<Stack.Screen name="Set Radius" component={SetRadiusScreen} />
+			<Stack.Screen name="Ajustar radio" component={SetRadiusScreen} />
 			<Stack.Screen name="Mi cuenta" component={AccountData} />
 			<Stack.Screen name="Sobre nosotros" component={AboutUs} />
 			<Stack.Screen name="Default Screen" component={DefaultScreen} />
@@ -91,4 +90,4 @@ function ProfileNavigation(props) {
 	);
 }
 
-export default ProfileNavigation;
+export default PreferencesNavigator;
