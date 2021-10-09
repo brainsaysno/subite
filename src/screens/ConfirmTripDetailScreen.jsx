@@ -30,7 +30,7 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 			})
 			.then(() => {
 				navigation.navigate("Viajes Recientes");
-				navigation.navigate("Trip Detail", {
+				navigation.navigate("Detalle de viaje", {
 					trip: trip,
 					userCoordinates: userCoordinates,
 				});

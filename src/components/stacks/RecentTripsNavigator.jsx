@@ -4,19 +4,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import JoinTripScreen from "../../screens/JoinTripScreen";
 import DefaultScreen from "../../screens/DefaultScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
-import ActiveTripsScreen from "../../screens/ActiveTripsScreen";
+import RecentTripsScreen from "../../screens/RecentTripsScreen";
 
 const Stack = createNativeStackNavigator();
 
-function ActiveTripsNavigator(props) {
+function RecentTripsNavigator(props) {
 	return (
 		<Stack.Navigator
-			initialRouteName="Viajes Activos"
+			initialRouteName="Viajes recientes"
 			/* 			screenOptions={({ route }) => {
-				if (route.name === "Map") return { headerShown: false };
+        if (route.name === "Map") return { headerShown: false };
 			}} */
 		>
-			<Stack.Screen name="Viajes Activos" component={ActiveTripsScreen} />
+			<Stack.Screen name="Viajes recientes" component={RecentTripsScreen} />
 			<Stack.Screen name="Detalle de viaje" component={TripDetailScreen} />
 			<Stack.Screen
 				name="Default Screen"
@@ -26,4 +26,4 @@ function ActiveTripsNavigator(props) {
 	);
 }
 
-export default ActiveTripsNavigator;
+export default RecentTripsNavigator;

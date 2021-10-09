@@ -8,7 +8,7 @@ import JoinTripNavigator from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
 import DefaultScreen from "../screens/DefaultScreen.jsx";
-import RecentTripsScreen from "../screens/RecentTripsScreen.jsx";
+import RecentTripsNavigator from "./stacks/RecentTripsNavigator.jsx";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +37,7 @@ function PassengerNavigator() {
 			})}
 		>
 			{/* Viajes recientes */}
-			<Tab.Screen name="Viajes Recientes" component={RecentTripsScreen} />
+			<Tab.Screen name="Viajes Recientes" component={RecentTripsNavigator} />
 			{/* Nuevo viaje */}
 			<Tab.Screen name="Nuevo Viaje" component={JoinTripNavigator} />
 			{/* Ajustes */}

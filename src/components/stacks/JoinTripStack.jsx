@@ -21,10 +21,10 @@ function JoinTripNavigator(props) {
 			<Stack.Screen name="Map" component={JoinTripScreen} />
 			<Stack.Screen name="Trip Selector" component={TripSelectorScreen} />
 			<Stack.Screen
-				name="Confirm Trip Detail"
+				name="Resumen del viaje"
 				component={ConfirmTripDetailScreen}
 			/>
-			<Stack.Screen name="Trip Detail" component={TripDetailScreen} />
+			<Stack.Screen name="Detalle de viaje" component={TripDetailScreen} />
 			<Stack.Screen
 				name="Join Trip Success"
 				component={JoinTripSuccessScreen}

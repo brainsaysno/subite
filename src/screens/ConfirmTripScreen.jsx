@@ -36,7 +36,7 @@ function ConfirmTripScreen({ navigation, route }) {
 			.then((docRef) => {
 				navigation.navigate("Map");
 				navigation.navigate("Trips");
-				navigation.navigate("Trip Detail", { trip: tripData });
+				navigation.navigate("Detalle de viaje", { trip: tripData });
 				//				navigation.navigate("Trip Success", { docID: docRef.id });
 			})
 			.catch((error) => {

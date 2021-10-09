@@ -17,7 +17,7 @@ function TripListComponent({
 		<TouchableOpacity
 			onPress={() => {
 				navigation.navigate(
-					confirmNavigate === true ? "Confirm Trip Detail" : "Trip Detail",
+					confirmNavigate === true ? "Resumen del viaje" : "Detalle de viaje",
 					{
 						trip: trip,
 						userCoordinates: userCoordinates,
