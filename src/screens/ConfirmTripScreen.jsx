@@ -22,7 +22,7 @@ function ConfirmTripScreen({ navigation, route }) {
 	const handlePress = () => {
 		const tripData = {
 			polyline: polyline,
-			departureTime: date.toUTCString(),
+			departureTime: Date.parse(date),
 			capacity: capacity,
 			driver: {
 				uid: user.uid,

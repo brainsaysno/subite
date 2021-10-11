@@ -84,3 +84,12 @@ export function isInRadius(polyline, coords, radius) {
 	}
 	return false;
 }
+
+export const isToday = (date) => {
+	const now = new Date(Date.now());
+	return (
+		date.getDate() === now.getDate() &&
+		date.getMonth() === now.getMonth() &&
+		date.getFullYear() === now.getFullYear()
+	);
+};
