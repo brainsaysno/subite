@@ -85,12 +85,15 @@ function TripSelectorScreen({ navigation, route }) {
 
 	if (isLoading) return <Loading />;
 
-	if (tripListComponents.length == 0)
+	if (
+		tripListComponents.today.length === 0 &&
+		tripListComponents.others.length === 0
+	)
 		return (
 			<View style={styles.container}>
 				<Text style={{ textAlign: "center", color: colors.text }}>
-					Sorry, no trips were found in your area, try by increasing your
-					radius!
+					No se encontraron viajes activos en tu zona, intenta incrementando el
+					radio de búsqueda!
 				</Text>
 				{/* Button to nav out back to map, to profile and to radius screen */}
 			</View>

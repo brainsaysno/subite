@@ -69,7 +69,8 @@ function ActiveTripsScreen({ navigation, route }) {
 	) {
 		return (
 			<View style={styles.container}>
-				<Text>No trips</Text>
+				<Text>No tienes ningun viaje activo</Text>
+				{/* Add button to nav to create trip */}
 			</View>
 		);
 	}
