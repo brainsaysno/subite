@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List } from "react-native-paper";
-import TripListComponent from "../components/TripListComponent";
+import TodayTripListComponent from "../components/TodayTripListComponent";
 import { isToday, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
+import OtherTripListComponent from "../components/OtherTripListComponent";
 
 function ActiveTripsScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState({
@@ -32,23 +33,26 @@ function ActiveTripsScreen({ navigation, route }) {
 
 					todayComponents.sort((a, b) => a.departureTime - b.departureTime);
 
-					todayComponents = todayComponents.map((trip, i) => {
-						return (
-							<TripListComponent trip={trip} key={i} navigation={navigation} />
-						);
-					});
+					todayComponents = todayComponents.map((trip, i) => (
+						<TodayTripListComponent
+							trip={trip}
+							key={i}
+							navigation={navigation}
+						/>
+					));
 
-					const otherComponents = data
-						.filter((trip) => !isToday(new Date(trip.departureTime)))
-						.map((trip, i) => {
-							return (
-								<TripListComponent
-									trip={trip}
-									key={i}
-									navigation={navigation}
-								/>
-							);
-						});
+					let otherComponents = data.filter(
+						(trip) => !isToday(new Date(trip.departureTime))
+					);
+
+					otherComponents.sort((a, b) => a.departureTime - b.departureTime);
+					otherComponents = otherComponents.map((trip, i) => (
+						<OtherTripListComponent
+							trip={trip}
+							key={i}
+							navigation={navigation}
+						/>
+					));
 
 					setTripListComponents({
 						today: todayComponents,

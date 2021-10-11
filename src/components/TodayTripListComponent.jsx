@@ -5,7 +5,7 @@ import { Icon } from "react-native-eva-icons";
 import { List, useTheme } from "react-native-paper";
 import styles from "../styles";
 
-function TripListComponent({
+function TodayTripListComponent({
 	trip,
 	userCoordinates,
 	navigation,
@@ -51,4 +51,4 @@ function TripListComponent({
 	);
 }
 
-export default TripListComponent;
+export default TodayTripListComponent;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import TripListComponent from "../components/TripListComponent";
+import TodayTripListComponent from "../components/TodayTripListComponent";
 import { isInRadius, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
@@ -41,7 +41,7 @@ function TripSelectorScreen({ navigation, route }) {
 						);
 					});
 					const comps = filteredData.map((trip, i) => (
-						<TripListComponent
+						<TodayTripListComponent
 							trip={trip}
 							key={i}
 							navigation={navigation}

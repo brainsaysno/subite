@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import TripListComponent from "../components/TripListComponent";
+import TodayTripListComponent from "../components/TodayTripListComponent";
 import { db } from "../../config/firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
