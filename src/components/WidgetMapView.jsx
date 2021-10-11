@@ -43,13 +43,24 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates }) {
 			}} */
 			initialRegion={{
 				latitude:
-					decodedTrip[(decodedTrip.length - (decodedTrip.length % 2)) / 2]
-						.latitude,
+					(decodedTrip[0].latitude +
+						decodedTrip[decodedTrip.length - 1].latitude) /
+						2 +
+					0.005,
 				longitude:
-					decodedTrip[[(decodedTrip.length - (decodedTrip.length % 2)) / 2]]
-						.longitude,
-				latitudeDelta: 0.03,
-				longitudeDelta: 0.03,
+					(decodedTrip[0].longitude +
+						decodedTrip[decodedTrip.length - 1].longitude) /
+					2,
+				latitudeDelta:
+					Math.abs(
+						decodedTrip[0].latitude -
+							decodedTrip[decodedTrip.length - 1].latitude
+					) + 0.02,
+				longitudeDelta:
+					Math.abs(
+						decodedTrip[0].longitude -
+							decodedTrip[decodedTrip.length - 1].longitude
+					) + 0.02,
 			}}
 		>
 			{/* Departure coordinates marker */}

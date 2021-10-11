@@ -61,7 +61,7 @@ function CreateTripScreen({ navigation, ...props }) {
 			{mapData.markerOn ? (
 				<Button
 					onPress={() =>
-						navigation.navigate("Confirm Create Trip", {
+						navigation.navigate("Confirmar viaje", {
 							mapData: mapData,
 						})
 					}
@@ -77,7 +77,7 @@ function CreateTripScreen({ navigation, ...props }) {
 						width: 200,
 					}}
 				>
-					Confirmar
+					Continuar
 				</Button>
 			) : null}
 		</>

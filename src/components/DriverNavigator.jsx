@@ -23,7 +23,7 @@ function DriverNavigator() {
 						iconName = focused
 							? "navigation-2-outline"
 							: "navigation-2-outline";
-					} else if (route.name === "Crear Viaje") {
+					} else if (route.name === "Crear viaje") {
 						iconName = focused ? "map" : "map";
 					} else if (route.name === "Ajustes") {
 						iconName = focused ? "settings-2-outline" : "settings-2-outline";
@@ -39,7 +39,7 @@ function DriverNavigator() {
 			{/* Viajes activos */}
 			<Tab.Screen name="Viajes activos" component={ActiveTripsNavigator} />
 			{/* Nuevo viaje */}
-			<Tab.Screen name="Crear Viaje" component={CreateTripNavigator} />
+			<Tab.Screen name="Crear viaje" component={CreateTripNavigator} />
 			{/* Ajustes */}
 			<Tab.Screen name="Ajustes" component={PreferencesNavigator} />
 		</Tab.Navigator>

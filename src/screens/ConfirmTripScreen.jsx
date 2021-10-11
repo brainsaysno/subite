@@ -3,21 +3,26 @@ import { Text, View, Dimensions } from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
-import HorizontalNumberPicker from "../components/NumberPicker";
+import HorizontalNumberPicker from "../components/HorizontalNumberPicker";
 import { useTheme } from "react-native-paper";
 import Button from "../components/Button";
+import { DTComponent } from "../components/DTComponent";
+import WidgetMapView from "../components/WidgetMapView";
 
 function ConfirmTripScreen({ navigation, route }) {
 	const { mapData } = route.params;
 	const { user } = useContext(AppContext);
 	const { colors } = useTheme();
+	const [date, setDate] = useState(new Date(Date.now()));
 
 	const [capacity, setCapacity] = useState(1);
 
+	const polyline = mapData.routes[0].overview_polyline.points;
+
 	const handlePress = () => {
 		const tripData = {
-			polyline: mapData.routes[0].overview_polyline.points,
-			departureTime: Date.now(),
+			polyline: polyline,
+			departureTime: date.toUTCString(),
 			capacity: capacity,
 			driver: {
 				uid: user.uid,
@@ -34,29 +39,34 @@ function ConfirmTripScreen({ navigation, route }) {
 		db.collection("trips")
 			.add(tripData)
 			.then((docRef) => {
-				navigation.navigate("Map");
-				navigation.navigate("Trips");
+				navigation.navigate("Crear viaje");
+				navigation.navigate("Viajes activos");
 				navigation.navigate("Detalle de viaje", { trip: tripData });
-				//				navigation.navigate("Trip Success", { docID: docRef.id });
 			})
 			.catch((error) => {
 				console.error("Error adding document: ", error);
 			});
 	};
+	const onDateChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date;
+		setDate(currentDate);
+	};
 
 	return (
 		<View style={styles.container}>
-			<Text style={{ textAlign: "center", fontWeight: "400", fontSize: 18 }}>
-				Fecha y hora:
-			</Text>
+			<WidgetMapView
+				polyline={polyline}
+				navigation={navigation}
+				passengerCoordinates={[]}
+			/>
 			<View
 				style={{
-					backgroundColor: colors.accent,
-					width: Dimensions.get("screen").width,
-					height: 200,
 					marginVertical: 20,
+					width: "100%",
 				}}
-			></View>
+			>
+				<DTComponent onChange={onDateChange} date={date} />
+			</View>
 			<HorizontalNumberPicker
 				value={capacity}
 				onChange={setCapacity}

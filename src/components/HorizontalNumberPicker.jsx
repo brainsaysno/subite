@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-eva-icons";
 import { useTheme } from "react-native-paper";
 
-function HorizontalNumberPicker({ value, onChange, min, max, title }) {
+function HorizontalNumberPicker({ value, onChange, min, max, choices, title }) {
 	const { colors } = useTheme();
 
 	return (
 		<>
 			{title ? (
-				<Text style={{ textAlign: "center", fontWeight: "400", fontSize: 18 }}>
+				<Text style={{ textAlign: "center", fontWeight: "400", fontSize: 16 }}>
 					{title}:
 				</Text>
 			) : null}
@@ -26,8 +26,8 @@ function HorizontalNumberPicker({ value, onChange, min, max, title }) {
 				>
 					<Icon
 						name={"chevron-left-outline"}
-						width={100}
-						height={100}
+						width={75}
+						height={75}
 						fill={colors.primary}
 					/>
 				</TouchableOpacity>
@@ -37,8 +37,8 @@ function HorizontalNumberPicker({ value, onChange, min, max, title }) {
 				>
 					<Icon
 						name={"chevron-right-outline"}
-						width={100}
-						height={100}
+						width={75}
+						height={75}
 						fill={colors.primary}
 					/>
 				</TouchableOpacity>

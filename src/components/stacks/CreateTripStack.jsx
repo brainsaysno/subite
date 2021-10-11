@@ -6,7 +6,6 @@ import DefaultScreen from "../../screens/DefaultScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
 import ConfirmTripScreen from "../../screens/ConfirmTripScreen";
 import CreateTripScreen from "../../screens/CreateTripScreen";
-import CreateTripSuccessScreen from "../../screens/CreateTripSucessScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +18,7 @@ function CreateTripNavigator() {
 			}}
 		>
 			<Stack.Screen name="Map" component={CreateTripScreen} />
-			<Stack.Screen name="Confirm Create Trip" component={ConfirmTripScreen} />
-			<Stack.Screen name="Trip Success" component={CreateTripSuccessScreen} />
+			<Stack.Screen name="Confirmar viaje" component={ConfirmTripScreen} />
 			<Stack.Screen
 				name="Default Screen"
 				component={DefaultScreen}
