@@ -12,12 +12,12 @@ const Stack = createNativeStackNavigator();
 function CreateTripNavigator() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Map"
+			initialRouteName="Mapa"
 			screenOptions={({ route }) => {
-				if (route.name === "Map") return { headerShown: false };
+				if (route.name === "Mapa") return { headerShown: false };
 			}}
 		>
-			<Stack.Screen name="Map" component={CreateTripScreen} />
+			<Stack.Screen name="Mapa" component={CreateTripScreen} />
 			<Stack.Screen name="Confirmar viaje" component={ConfirmTripScreen} />
 			<Stack.Screen
 				name="Default Screen"

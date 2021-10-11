@@ -2,16 +2,20 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
-import { isInRadius, latitudeToKm } from "../core/utils";
+import { isInRadius, isToday, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import Loading from "../components/Loading";
 import styles from "../styles";
+import OtherTripListComponent from "../components/OtherTripListComponent";
 
 function TripSelectorScreen({ navigation, route }) {
-	const [tripListComponents, setTripListComponents] = useState([]);
+	const [tripListComponents, setTripListComponents] = useState({
+		today: [],
+		others: [],
+	});
 	const [isLoading, setIsLoading] = useState(true);
 	const { user } = useContext(AppContext);
 	const { colors } = useTheme();
@@ -40,7 +44,13 @@ function TripSelectorScreen({ navigation, route }) {
 							/* TODO: Filter for departureTime > Date.now() */
 						);
 					});
-					const comps = filteredData.map((trip, i) => (
+					let todayComponents = filteredData.filter((trip) =>
+						isToday(new Date(trip.departureTime))
+					);
+
+					todayComponents.sort((a, b) => a.departureTime - b.departureTime);
+
+					todayComponents = todayComponents.map((trip, i) => (
 						<TodayTripListComponent
 							trip={trip}
 							key={i}
@@ -49,8 +59,26 @@ function TripSelectorScreen({ navigation, route }) {
 							confirmNavigate
 						/>
 					));
+					let otherComponents = filteredData.filter(
+						(trip) => !isToday(new Date(trip.departureTime))
+					);
+
+					otherComponents.sort((a, b) => a.departureTime - b.departureTime);
+					otherComponents = otherComponents.map((trip, i) => (
+						<OtherTripListComponent
+							trip={trip}
+							key={i}
+							navigation={navigation}
+							userCoordinates={[mapData.markerCoordinates]}
+							confirmNavigate
+						/>
+					));
+
 					setIsLoading(false);
-					setTripListComponents(comps);
+					setTripListComponents({
+						today: todayComponents,
+						others: otherComponents,
+					});
 				});
 		}
 	}, []);
@@ -70,10 +98,18 @@ function TripSelectorScreen({ navigation, route }) {
 
 	return (
 		<ScrollView>
-			<List.Section>
-				<List.Subheader>Hoy</List.Subheader>
-				{tripListComponents}
-			</List.Section>
+			{tripListComponents.today.length === 0 ? null : (
+				<List.Section>
+					<List.Subheader>Hoy</List.Subheader>
+					{tripListComponents.today}
+				</List.Section>
+			)}
+			{tripListComponents.others.length === 0 ? null : (
+				<List.Section>
+					<List.Subheader>Otros</List.Subheader>
+					{tripListComponents.others}
+				</List.Section>
+			)}
 		</ScrollView>
 	);
 }

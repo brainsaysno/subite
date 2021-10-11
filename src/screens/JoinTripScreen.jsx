@@ -17,7 +17,7 @@ function JoinTripScreen({ navigation }) {
 	};
 
 	const handleConfirm = () => {
-		navigation.navigate("Trip Selector", {
+		navigation.navigate("Seleccionar viaje", {
 			mapData: mapData,
 		});
 	};
@@ -67,7 +67,7 @@ function JoinTripScreen({ navigation }) {
 						width: 200,
 					}}
 				>
-					Confirmar
+					Buscar viajes
 				</Button>
 			) : null}
 		</>

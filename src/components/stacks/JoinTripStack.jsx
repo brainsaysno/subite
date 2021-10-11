@@ -6,29 +6,24 @@ import DefaultScreen from "../../screens/DefaultScreen";
 import ConfirmTripDetailScreen from "../../screens/ConfirmTripDetailScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
-import JoinTripSuccessScreen from "../../screens/JoinTripSuccessScreen";
 
 const Stack = createNativeStackNavigator();
 
 function JoinTripNavigator(props) {
 	return (
 		<Stack.Navigator
-			initialRouteName="Map"
+			initialRouteName="Mapa"
 			screenOptions={({ route }) => {
-				if (route.name === "Map") return { headerShown: false };
+				if (route.name === "Mapa") return { headerShown: false };
 			}}
 		>
-			<Stack.Screen name="Map" component={JoinTripScreen} />
-			<Stack.Screen name="Trip Selector" component={TripSelectorScreen} />
+			<Stack.Screen name="Mapa" component={JoinTripScreen} />
+			<Stack.Screen name="Seleccionar viaje" component={TripSelectorScreen} />
 			<Stack.Screen
 				name="Resumen del viaje"
 				component={ConfirmTripDetailScreen}
 			/>
 			<Stack.Screen name="Detalle de viaje" component={TripDetailScreen} />
-			<Stack.Screen
-				name="Join Trip Success"
-				component={JoinTripSuccessScreen}
-			/>
 			<Stack.Screen name="Default Screen" component={DefaultScreen} />
 		</Stack.Navigator>
 	);

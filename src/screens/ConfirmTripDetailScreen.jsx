@@ -29,6 +29,7 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 				passengerUids: [...trip.passengerUids, user.uid],
 			})
 			.then(() => {
+				navigation.navigate("Mapa");
 				navigation.navigate("Viajes Recientes");
 				navigation.navigate("Detalle de viaje", {
 					trip: trip,
@@ -88,7 +89,7 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 				passengerCoordinates={userCoordinates}
 			/>
 			<Button onPress={confirmTrip} mode="contained">
-				Confirm
+				Unirse al viaje
 			</Button>
 		</View>
 	);

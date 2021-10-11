@@ -7,9 +7,13 @@ import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 import Button from "../components/Button";
+import OtherTripListComponent from "../components/OtherTripListComponent";
 
 function RecentTripsScreen({ navigation }) {
-	const [tripListComponents, setTripListComponents] = useState([]);
+	const [tripListComponents, setTripListComponents] = useState({
+		active: [],
+		recent: [],
+	});
 	const { user } = useContext(AppContext);
 	const { colors } = useTheme();
 
@@ -20,9 +24,17 @@ function RecentTripsScreen({ navigation }) {
 				.where("passengerUids", "array-contains", user.uid)
 				.onSnapshot((querySnapshot) => {
 					const data = querySnapshot.docs.map((doc) => doc.data());
-					const components = data.map((trip, i) => {
+					console.log(data);
+
+					let activeComponents = data.filter(
+						(trip) => trip.departureTime > Date.parse(new Date(Date.now()))
+					);
+
+					activeComponents.sort((a, b) => a.departureTime - b.departureTime);
+
+					activeComponents = activeComponents.map((trip, i) => {
 						return (
-							<TripListComponent
+							<OtherTripListComponent
 								trip={trip}
 								key={i}
 								navigation={navigation}
@@ -35,29 +47,63 @@ function RecentTripsScreen({ navigation }) {
 						);
 					});
 
-					setTripListComponents(components);
+					let recentComponents = data.filter(
+						(trip) => trip.departureTime < Date.parse(new Date(Date.now()))
+					);
+
+					recentComponents.sort((a, b) => a.departureTime - b.departureTime);
+
+					recentComponents = recentComponents.map((trip, i) => {
+						return (
+							<OtherTripListComponent
+								trip={trip}
+								key={i}
+								navigation={navigation}
+								passengerCoordinates={[
+									trip.passengerData.filter(
+										(pData) => pData.uid === user.uid
+									)[0].location,
+								].flat(10)}
+							/>
+						);
+					});
+
+					setTripListComponents({
+						active: activeComponents,
+						recent: recentComponents,
+					});
 				});
 			return unsub;
 		}
 	}, []);
 
-	if (tripListComponents.length === 0)
+	if (
+		tripListComponents.active.length === 0 &&
+		tripListComponents.recent.length === 0
+	)
 		return (
 			<View style={styles.container}>
-				<Text color={colors.text}>You have not made any trips yet!</Text>
+				<Text color={colors.text}>No hiciste ningun viaje todavía.</Text>
 				<Button onPress={() => navigation.navigate("Nuevo Viaje")}>
-					Join a trip now
+					Unirse a un nuevo viaje ahora
 				</Button>
 			</View>
 		);
 
 	return (
 		<ScrollView>
-			<List.Section>
-				<List.Subheader>Active</List.Subheader>
-				{tripListComponents}
-				<List.Subheader>Recent</List.Subheader>
-			</List.Section>
+			{tripListComponents.active.length === 0 ? null : (
+				<List.Section>
+					<List.Subheader>Activos</List.Subheader>
+					{tripListComponents.active}
+				</List.Section>
+			)}
+			{tripListComponents.recent.length === 0 ? null : (
+				<List.Section>
+					<List.Subheader>Recientes</List.Subheader>
+					{tripListComponents.recent}
+				</List.Section>
+			)}
 		</ScrollView>
 	);
 }
