@@ -3,8 +3,9 @@ import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
 import { isInRadius, isToday, latitudeToKm } from "../core/utils";
-import { collection, doc, query, where, orderBy } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import Loading from "../components/Loading";
@@ -24,11 +25,13 @@ function TripSelectorScreen({ navigation, route }) {
 
 	useEffect(() => {
 		if (user) {
+			const nowTime = firebase.firestore.Timestamp.now();
+			console.log(nowTime.seconds * 10 ** 3);
 			db.collection("trips")
 				.where("institutionName", "==", user.institution.name)
-				.where("passengerUids", "not-in", [[user.uid]])
-				.orderBy("passengerUids")
+				.where("departureTime", ">", nowTime.seconds * 10 ** 3)
 				.orderBy("departureTime")
+				.orderBy("passengerUids")
 				.get()
 
 				.then((querySnapshot) => {
@@ -39,9 +42,8 @@ function TripSelectorScreen({ navigation, route }) {
 						return (
 							isInRadius(d.polyline, mapData.markerCoordinates, user.radius) &&
 							d.driver.uid !== user.uid &&
-							d.passengerCount < d.capacity
-
-							/* TODO: Filter for departureTime > Date.now() */
+							d.passengerCount < d.capacity &&
+							!d.passengerUids.includes(user.uid)
 						);
 					});
 					let todayComponents = filteredData.filter((trip) =>
