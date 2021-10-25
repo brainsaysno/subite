@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
@@ -7,6 +7,7 @@ import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import moment from "moment-with-locales-es6";
 import Button from "../components/Button";
+
 function ConfirmTripDetailScreen({ navigation, route }) {
 	const { trip, userCoordinates } = route.params;
 	const { colors } = useTheme();
@@ -42,7 +43,14 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<ScrollView
+			contentContainerStyle={{
+				flexGrow: 1,
+				justifyContent: "center",
+				alignItems: "center",
+				padding: 20,
+			}}
+		>
 			<Text
 				style={{
 					fontWeight: "400",
@@ -83,15 +91,19 @@ function ConfirmTripDetailScreen({ navigation, route }) {
 			>
 				Capacidad: {trip.passengerCount}/{trip.capacity}
 			</Text>
+			<Button
+				style={{ marginVertical: 10, width: "80%" }}
+				onPress={confirmTrip}
+				mode="contained"
+			>
+				Unirse al viaje
+			</Button>
 			<WidgetMapView
 				polyline={trip.polyline}
 				navigation={navigation}
 				passengerCoordinates={userCoordinates}
 			/>
-			<Button onPress={confirmTrip} mode="contained">
-				Unirse al viaje
-			</Button>
-		</View>
+		</ScrollView>
 	);
 }
 

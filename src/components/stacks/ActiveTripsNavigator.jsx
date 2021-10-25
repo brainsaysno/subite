@@ -10,24 +10,24 @@ import ActiveTripDetailScreen from "../../screens/ActiveTripDetailScreen";
 const Stack = createNativeStackNavigator();
 
 function ActiveTripsNavigator(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Viajes Activos"
-      /* 			screenOptions={({ route }) => {
+	return (
+		<Stack.Navigator
+			initialRouteName="Viajes activos"
+			/* 			screenOptions={({ route }) => {
 				if (route.name === "Map") return { headerShown: false };
 			}} */
-    >
-      <Stack.Screen name="Viajes Activos" component={ActiveTripsScreen} />
-      <Stack.Screen
-        name="Detalle de viaje"
-        component={ActiveTripDetailScreen}
-      />
-      <Stack.Screen
-        name="Default Screen"
-        component={DefaultScreen}
-      ></Stack.Screen>
-    </Stack.Navigator>
-  );
+		>
+			<Stack.Screen name="Viajes activos" component={ActiveTripsScreen} />
+			<Stack.Screen
+				name="Detalle de viaje"
+				component={ActiveTripDetailScreen}
+			/>
+			<Stack.Screen
+				name="Default Screen"
+				component={DefaultScreen}
+			></Stack.Screen>
+		</Stack.Navigator>
+	);
 }
 
 export default ActiveTripsNavigator;

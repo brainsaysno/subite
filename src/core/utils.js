@@ -1,4 +1,5 @@
 import { decode } from "@googlemaps/polyline-codec";
+import firebase from "firebase";
 
 export const emailValidator = (email) => {
 	const re = /\S+@\S+\.\S+/;
@@ -86,7 +87,7 @@ export function isInRadius(polyline, coords, radius) {
 }
 
 export const isToday = (date) => {
-	const now = new Date(Date.now());
+	const now = new Date(firebase.firestore.Timestamp.now().seconds * 10 ** 3);
 	return (
 		date.getDate() === now.getDate() &&
 		date.getMonth() === now.getMonth() &&

@@ -19,7 +19,7 @@ function DriverNavigator() {
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 
-					if (route.name === "Viajes activos") {
+					if (route.name === "Viajes") {
 						iconName = focused
 							? "navigation-2-outline"
 							: "navigation-2-outline";
@@ -36,8 +36,7 @@ function DriverNavigator() {
 				},
 			})}
 		>
-			{/* Viajes activos */}
-			<Tab.Screen name="Viajes activos" component={ActiveTripsNavigator} />
+			<Tab.Screen name="Viajes" component={ActiveTripsNavigator} />
 			{/* Nuevo viaje */}
 			<Tab.Screen name="Crear viaje" component={CreateTripNavigator} />
 			{/* Ajustes */}

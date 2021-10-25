@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
 import { db } from "../../config/firebase";
+import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
@@ -23,11 +24,12 @@ function RecentTripsScreen({ navigation }) {
 				.collection("trips")
 				.where("passengerUids", "array-contains", user.uid)
 				.onSnapshot((querySnapshot) => {
+					const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
 					const data = querySnapshot.docs.map((doc) => doc.data());
 					console.log(data);
 
 					let activeComponents = data.filter(
-						(trip) => trip.departureTime > Date.parse(new Date(Date.now()))
+						(trip) => trip.departureTime > nowTime
 					);
 
 					activeComponents.sort((a, b) => a.departureTime - b.departureTime);
@@ -48,10 +50,10 @@ function RecentTripsScreen({ navigation }) {
 					});
 
 					let recentComponents = data.filter(
-						(trip) => trip.departureTime < Date.parse(new Date(Date.now()))
+						(trip) => trip.departureTime < nowTime
 					);
 
-					recentComponents.sort((a, b) => a.departureTime - b.departureTime);
+					recentComponents.sort((a, b) => b.departureTime - a.departureTime);
 
 					recentComponents = recentComponents.map((trip, i) => {
 						return (
