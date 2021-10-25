@@ -54,7 +54,7 @@ export function DTComponent({ onChange, date }) {
 						marginBottom: 10,
 					}}
 				>
-					{moment(date).locale("es").format("L")}
+					{moment(date).locale("es").format("DD/MM/YYYY")}
 				</Button>
 				<Button onPress={() => showTimePicker()} mode="outlined">
 					{moment(date).locale("es").format("HH:mm")}

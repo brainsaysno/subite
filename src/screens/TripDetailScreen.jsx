@@ -1,5 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { Text, View, TouchableOpacity, Linking } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import {
+	Text,
+	View,
+	TouchableOpacity,
+	Linking,
+	ScrollView,
+} from "react-native";
 import styles from "../styles";
 import { Button, useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
@@ -7,121 +13,176 @@ import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import { Icon } from "react-native-eva-icons";
 import moment from "moment-with-locales-es6";
+import firebase from "firebase";
 
 function TripDetailScreen({ navigation, route }) {
-  const { trip, userCoordinates } = route.params;
-  const { colors } = useTheme();
-  const { user } = useContext(AppContext);
+	const { trip, userCoordinates } = route.params;
+	const { colors } = useTheme();
+	const { user } = useContext(AppContext);
 
-  const message = user ? `Hola, soy ${user.fullName}` : null;
+	const [tripCancelled, setTripCancelled] = useState();
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        paddingTop: 20,
-      }}
-    >
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-end",
-          justifyContent: "space-around",
-          width: "100%",
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              color: colors.text,
-              textAlign: "center",
-              fontSize: 20,
-            }}
-          >
-            {trip.driver.fullName}
-          </Text>
-        </View>
-        <View>
-          <Text
-            style={{
-              fontStyle: "italic",
-              fontWeight: "400",
-              fontSize: 20,
-              color: colors.text,
-              textAlign: "center",
-            }}
-          >
-            {moment(trip.departureTime).locale("es").format("l")}
-          </Text>
-          <Text
-            style={{
-              fontStyle: "italic",
-              fontWeight: "300",
-              fontSize: 20,
-              color: colors.text,
-              textAlign: "center",
-            }}
-          >
-            <Text style={{ fontWeight: "400" }}>Salida: </Text>
-            {moment(trip.departureTime).locale("es").format("HH:mm")}
-          </Text>
-        </View>
-      </View>
-      {/* <Text
+	const message = user ? `Hola, soy ${user.fullName}` : null;
+	const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
+	return (
+		<ScrollView
+			contentContainerStyle={{
+				flex: 1,
+				alignItems: "center",
+				justifyContent: "center",
+				paddingTop: 20,
+			}}
+		>
+			<View
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "flex-end",
+					justifyContent: "space-around",
+					width: "100%",
+				}}
+			>
+				<View>
+					<Text
+						style={{
+							color: colors.text,
+							textAlign: "center",
+							fontSize: 20,
+						}}
+					>
+						{trip.driver.fullName}
+					</Text>
+				</View>
+				<View>
+					<Text
+						style={{
+							fontStyle: "italic",
+							fontWeight: "400",
+							fontSize: 20,
+							color: colors.text,
+							textAlign: "center",
+						}}
+					>
+						{moment(trip.departureTime).locale("es").format("l")}
+					</Text>
+					<Text
+						style={{
+							fontStyle: "italic",
+							fontWeight: "300",
+							fontSize: 20,
+							color: colors.text,
+							textAlign: "center",
+						}}
+					>
+						<Text style={{ fontWeight: "400" }}>Salida: </Text>
+						{moment(trip.departureTime).locale("es").format("HH:mm")}
+					</Text>
+				</View>
+			</View>
+			{/* <Text
 				style={{ fontStyle: "italic", fontWeight: "200", color: colors.text }}
 			>
 				Capacity: {trip.passengerCount}/{trip.capacity}
 			</Text> */}
-      <WidgetMapView
-        polyline={trip.polyline}
-        navigation={navigation}
-        passengerCoordinates={
-          userCoordinates
-            ? userCoordinates
-            : trip.passengerData.length === 0
-            ? null
-            : trip.passengerData.map((pData) => [pData.location].flat(10)[0])
-        }
-      />
-      <TouchableOpacity
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          backgroundColor: colors.error,
-          padding: 15,
-          marginTop: "auto",
-          marginBottom: "auto",
-        }}
-        onPress={() =>
-          Linking.openURL(
-            `https://wa.me/598${trip.driver.phone}?text=${encodeURIComponent(
-              message
-            )}`
-          )
-        }
-      >
-        <Icon
-          name="message-circle-outline"
-          width={20}
-          height={20}
-          fill={colors.background}
-          style={{ marginRight: 7 }}
-        />
-        <Text
-          style={{
-            color: colors.background,
-            fontSize: 17,
-            fontWeight: "500",
-          }}
-        >
-          ¡Coordina el punto de encuentro!
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+			<WidgetMapView
+				polyline={trip.polyline}
+				navigation={navigation}
+				passengerCoordinates={
+					userCoordinates
+						? userCoordinates
+						: trip.passengerData.length === 0
+						? null
+						: trip.passengerData.map((pData) => [pData.location].flat(10)[0])
+				}
+			/>
+			<TouchableOpacity
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					backgroundColor: colors.error,
+					padding: 15,
+				}}
+				onPress={() =>
+					Linking.openURL(
+						`https://wa.me/598${trip.driver.phone}?text=${encodeURIComponent(
+							message
+						)}`
+					)
+				}
+			>
+				<Icon
+					name="message-circle-outline"
+					width={20}
+					height={20}
+					fill={colors.background}
+					style={{ marginRight: 7 }}
+				/>
+				<Text
+					style={{
+						color: colors.background,
+						fontSize: 17,
+						fontWeight: "500",
+					}}
+				>
+					¡Coordina el punto de encuentro!
+				</Text>
+			</TouchableOpacity>
+			{trip.departureTime > nowTime ? (
+				<TouchableOpacity
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						backgroundColor: colors.primary,
+						padding: 15,
+						marginVertical: 20,
+					}}
+					onPress={() =>
+						db
+							.collection("trips")
+							.where("polyline", "==", trip.polyline)
+							.where("departureTime", "==", trip.departureTime)
+							.get()
+							.then((r) => {
+								r.docs[0].ref.update({
+									passengerUids: trip.passengerUids.filter(
+										(uid) => uid !== user.uid
+									),
+									passengerData: trip.passengerData.filter(
+										(p) => p.uid !== user.uid
+									),
+								});
+								setTripCancelled(true);
+								setTimeout(() => navigation.navigate("Viajes recientes"), 1000);
+
+								console.log(r.docs[0].ref.id);
+							})
+					}
+				>
+					<Icon
+						name="close-outline"
+						width={20}
+						height={20}
+						fill={colors.background}
+						style={{ marginRight: 7 }}
+					/>
+					<Text
+						style={{
+							color: colors.background,
+							fontSize: 17,
+							fontWeight: "500",
+						}}
+					>
+						Cancelar el viaje
+					</Text>
+				</TouchableOpacity>
+			) : null}
+			{tripCancelled ? (
+				<Text style={{ color: colors.primary }}>
+					El viaje ha sido cancelado!
+				</Text>
+			) : null}
+		</ScrollView>
+	);
 }
 
 export default TripDetailScreen;

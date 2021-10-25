@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
-import { isInRadius, isToday, latitudeToKm } from "../core/utils";
-import { Timestamp } from "firebase/firestore";
+import { isInRadius, isToday } from "../core/utils";
 import { db } from "../../config/firebase";
+("");
 import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
@@ -25,11 +25,10 @@ function TripSelectorScreen({ navigation, route }) {
 
 	useEffect(() => {
 		if (user) {
-			const nowTime = firebase.firestore.Timestamp.now();
-			console.log(nowTime.seconds * 10 ** 3);
+			const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
 			db.collection("trips")
 				.where("institutionName", "==", user.institution.name)
-				.where("departureTime", ">", nowTime.seconds * 10 ** 3)
+				.where("departureTime", ">", nowTime)
 				.orderBy("departureTime")
 				.orderBy("passengerUids")
 				.get()
@@ -94,7 +93,7 @@ function TripSelectorScreen({ navigation, route }) {
 		return (
 			<View style={styles.container}>
 				<Text style={{ textAlign: "center", color: colors.text }}>
-					No se encontraron viajes activos en tu zona, intenta incrementando el
+					No se encontraron Viajes activos en tu zona, intenta incrementando el
 					radio de búsqueda!
 				</Text>
 				{/* Button to nav out back to map, to profile and to radius screen */}

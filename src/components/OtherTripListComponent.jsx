@@ -42,7 +42,7 @@ function OtherTripListComponent({
 						}}
 					>
 						<Text style={{ color: colors.text, fontSize: 24 }}>
-							{moment(trip.departureTime).format("D/M")}
+							{moment(trip.departureTime).format("DD/MM")}
 						</Text>
 						<Text style={{ color: colors.text, fontSize: 16 }}>
 							{moment(trip.departureTime).format("HH:mm")}

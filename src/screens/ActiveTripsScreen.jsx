@@ -10,6 +10,8 @@ import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 import OtherTripListComponent from "../components/OtherTripListComponent";
 
+import firebase from "firebase";
+
 function ActiveTripsScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState({
 		today: [],
@@ -19,10 +21,12 @@ function ActiveTripsScreen({ navigation, route }) {
 
 	//const tripsRef = collection(db, "trips");
 	useEffect(() => {
+		const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
 		if (user) {
 			const unsub = db
 				.collection("trips")
 				.where("driver.uid", "==", user.uid)
+				.where("departureTime", ">", nowTime)
 				.orderBy("departureTime")
 				.onSnapshot((querySnapshot) => {
 					const data = querySnapshot.docs.map((doc) => doc.data());
@@ -31,7 +35,7 @@ function ActiveTripsScreen({ navigation, route }) {
 						isToday(new Date(trip.departureTime))
 					);
 
-					todayComponents.sort((a, b) => a.departureTime - b.departureTime);
+					todayComponents.sort((a, b) => b.departureTime - a.departureTime);
 
 					todayComponents = todayComponents.map((trip, i) => (
 						<TodayTripListComponent
