@@ -4,16 +4,19 @@ import styles from "../styles";
 
 function AboutUs() {
 	return (
-		<ScrollView>
-			<Text>
-				Proyecto desarrollado bajo el marco de la Olimpiada de Programación de
-				Ceibal del año 2021 por el equipo Sobrinos de Voronoi integrado por los
-				alumnos Candelaria Paulo, Nicolás Russo y el tutor Mathías Tejera
+		<ScrollView contentContainerStyle={{ padding: 20 }}>
+			<Text style={{ fontSize: 24, fontWeight: "500" }}>Subite</Text>
+
+			<Text style={{ textAlign: "justify" }}>
+				Subite es un proyecto desarrollado bajo el marco de la Olimpiada de
+				Programación de Ceibal del año 2021 por el equipo Sobrinos de Voronoi
+				integrado por los alumnos Candelaria Paulo, Nicolás Russo y el tutor
+				Mathías Tejera
 			</Text>
 			<Text style={{ fontSize: 24, fontWeight: "500" }}>
 				Descripción del problema
 			</Text>
-			<Text>
+			<Text style={{ textAlign: "justify" }}>
 				Después de una análisis de las problemáticas más comunes relacionadas al
 				transporte y la comunicación en nuestro entorno detectamos que existe
 				una gran dificultad relacionada al translado hacia las instituciones
@@ -29,7 +32,7 @@ function AboutUs() {
 			<Text style={{ fontSize: 24, fontWeight: "500" }}>
 				Descripción de la solución
 			</Text>
-			<Text>
+			<Text style={{ textAlign: "justify" }}>
 				Nuestro proyecto consiste en una aplicación movil "Subite" que conecta a
 				las personas que viajan con lugares libres en sus vehículos hacia cada
 				institución educativa con aquellas que no tienen transporte o no pueden
