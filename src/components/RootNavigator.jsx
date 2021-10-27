@@ -9,25 +9,24 @@ import { auth, db } from "../../config/firebase";
 import { useFonts } from "expo-font";
 
 import {
-	DefaultTheme as PaperDefaultTheme,
-	DarkTheme as PaperDarkTheme,
-	Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme,
+  Provider as PaperProvider,
 } from "react-native-paper";
 import {
-	NavigationContainer,
-	DefaultTheme as NavigationDefaultTheme,
-	DarkTheme as NavigationDarkTheme,
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
 import AppLoading from "../screens/AppLoading";
-import Loading from "../screens/Loading";
 
 const CombinedDefaultTheme = {
-	...PaperDefaultTheme,
-	...NavigationDefaultTheme,
-	fonts: {
-		...PaperDefaultTheme.fonts,
-		...NavigationDefaultTheme.fonts,
-		/* regular: {
+  ...PaperDefaultTheme,
+  ...NavigationDefaultTheme,
+  fonts: {
+    ...PaperDefaultTheme.fonts,
+    ...NavigationDefaultTheme.fonts,
+    /* regular: {
 			fontFamily: "Gill Sans",
 			fontWeight: "300",
 		},
@@ -39,97 +38,97 @@ const CombinedDefaultTheme = {
 			fontFamily: "Gill Sans",
 			fontWeight: "400",
 		}, */
-	},
+  },
 
-	/* https://coolors.co/e6594c-689bf3-ffc247-81c596-95a8b1 */
+  /* https://coolors.co/e6594c-689bf3-ffc247-81c596-95a8b1 */
 
-	colors: {
-		...PaperDefaultTheme.colors,
-		...NavigationDefaultTheme.colors,
-		primary: "#e6594c",
-		blue: "#689bf3",
-		yellow: "#FFC247",
-		surface: "#e4e4e4",
-		green: "#81C596",
-		/* error: "red", */
-	},
+  colors: {
+    ...PaperDefaultTheme.colors,
+    ...NavigationDefaultTheme.colors,
+    primary: "#e6594c",
+    blue: "#689bf3",
+    yellow: "#FFC247",
+    surface: "#e4e4e4",
+    green: "#81C596",
+    /* error: "red", */
+  },
 };
 const CombinedDarkTheme = {
-	...PaperDarkTheme,
-	...NavigationDarkTheme,
-	colors: {
-		...PaperDarkTheme.colors,
-		...NavigationDarkTheme.colors,
-	},
+  ...PaperDarkTheme,
+  ...NavigationDarkTheme,
+  colors: {
+    ...PaperDarkTheme.colors,
+    ...NavigationDarkTheme.colors,
+  },
 };
 function RootNavigator() {
-	const [isLoading, setIsLoading] = useState(true);
-	const [isAuthed, setIsAuthed] = useState(false);
-	const { isDriver, setUser, usingDarkMode } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthed, setIsAuthed] = useState(false);
+  const { isDriver, setUser, usingDarkMode } = useContext(AppContext);
 
-	function onAuthStateChanged(authenticatedUser) {
-		if (authenticatedUser) {
-			db.collection("users")
-				.doc(authenticatedUser.uid)
-				.get()
-				.then((doc) => {
-					if (doc.exists) {
-						setIsAuthed(true);
-						setUser({
-							...doc.data(),
-							uid: doc.id,
-						});
-						setIsLoading(false);
-					} else {
-						// Sign out for security reasons... this should never happen for legitimate users
-						auth.signOut();
-					}
-				});
-		} else {
-			setUser(undefined);
-			setIsAuthed(false);
-			setIsLoading(false);
-		}
-	}
+  function onAuthStateChanged(authenticatedUser) {
+    if (authenticatedUser) {
+      db.collection("users")
+        .doc(authenticatedUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setIsAuthed(true);
+            setUser({
+              ...doc.data(),
+              uid: doc.id,
+            });
+            setIsLoading(false);
+          } else {
+            // Sign out for security reasons... this should never happen for legitimate users
+            auth.signOut();
+          }
+        });
+    } else {
+      setUser(undefined);
+      setIsAuthed(false);
+      setIsLoading(false);
+    }
+  }
 
-	useEffect(() => {
-		const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
-		return unsubscribeAuth;
-	}, []);
-	/* 	if (!loaded) {
+  useEffect(() => {
+    const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
+    return unsubscribeAuth;
+  }, []);
+  /* 	if (!loaded) {
 		return null;
 	} */
 
-	if (isLoading) {
-		return (
-			<PaperProvider
-				theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
-			>
-				<AppLoading />
-			</PaperProvider>
-		);
-	}
+  if (isLoading) {
+    return (
+      <PaperProvider
+        theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+      >
+        <AppLoading />
+      </PaperProvider>
+    );
+  }
 
-	return (
-		<PaperProvider
-			theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
-		>
-			<NavigationContainer
-				theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
-			>
-				{isAuthed ? (
-					isDriver ? (
-						<DriverNavigator />
-					) : (
-						<PassengerNavigator />
-					)
-				) : (
-					<LoginStack />
-				)}
-				<StatBar style={usingDarkMode ? "light" : "dark"} />
-			</NavigationContainer>
-		</PaperProvider>
-	);
+  return (
+    <PaperProvider
+      theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+    >
+      <NavigationContainer
+        theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
+      >
+        {isAuthed ? (
+          isDriver ? (
+            <DriverNavigator />
+          ) : (
+            <PassengerNavigator />
+          )
+        ) : (
+          <LoginStack />
+        )}
+        <StatBar style={usingDarkMode ? "light" : "dark"} />
+      </NavigationContainer>
+    </PaperProvider>
+  );
 }
 
 export default RootNavigator;

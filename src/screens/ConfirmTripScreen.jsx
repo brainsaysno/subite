@@ -98,20 +98,6 @@ function ConfirmTripScreen({ navigation, route }) {
           Crear viaje
         </Button>
       </ScrollView>
-      <Icon
-        name="arrow-down-outline"
-        width={40}
-        height={40}
-        fill={colors.primary}
-        style={{
-          position: "absolute",
-          bottom: 20,
-          right: 20,
-          borderColor: colors.primary,
-          borderWidth: 2,
-          borderRadius: 50,
-        }}
-      />
     </>
   );
 }

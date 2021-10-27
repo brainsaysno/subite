@@ -10,110 +10,110 @@ import styles from "../styles";
 import Button from "../components/Button";
 import OtherTripListComponent from "../components/OtherTripListComponent";
 import AppLoading from "./AppLoading";
-import Loading from "./Loading";
+import { LoadingPassenger } from "./Loading";
 
 function RecentTripsScreen({ navigation }) {
-	const [tripListComponents, setTripListComponents] = useState({
-		active: [],
-		recent: [],
-	});
-	const { user } = useContext(AppContext);
-	const { colors } = useTheme();
-	const [isLoading, setIsLoading] = useState(true);
+  const [tripListComponents, setTripListComponents] = useState({
+    active: [],
+    recent: [],
+  });
+  const { user } = useContext(AppContext);
+  const { colors } = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		if (user) {
-			const unsub = db
-				.collection("trips")
-				.where("passengerUids", "array-contains", user.uid)
-				.onSnapshot((querySnapshot) => {
-					const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
-					const data = querySnapshot.docs.map((doc) => doc.data());
-					console.log(data);
+  useEffect(() => {
+    if (user) {
+      const unsub = db
+        .collection("trips")
+        .where("passengerUids", "array-contains", user.uid)
+        .onSnapshot((querySnapshot) => {
+          const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
+          const data = querySnapshot.docs.map((doc) => doc.data());
+          console.log(data);
 
-					let activeComponents = data.filter(
-						(trip) => trip.departureTime > nowTime
-					);
+          let activeComponents = data.filter(
+            (trip) => trip.departureTime > nowTime
+          );
 
-					activeComponents.sort((a, b) => a.departureTime - b.departureTime);
+          activeComponents.sort((a, b) => a.departureTime - b.departureTime);
 
-					activeComponents = activeComponents.map((trip, i) => {
-						return (
-							<OtherTripListComponent
-								trip={trip}
-								key={i}
-								navigation={navigation}
-								passengerCoordinates={[
-									trip.passengerData.filter(
-										(pData) => pData.uid === user.uid
-									)[0].location,
-								].flat(10)}
-							/>
-						);
-					});
+          activeComponents = activeComponents.map((trip, i) => {
+            return (
+              <OtherTripListComponent
+                trip={trip}
+                key={i}
+                navigation={navigation}
+                passengerCoordinates={[
+                  trip.passengerData.filter(
+                    (pData) => pData.uid === user.uid
+                  )[0].location,
+                ].flat(10)}
+              />
+            );
+          });
 
-					let recentComponents = data.filter(
-						(trip) => trip.departureTime < nowTime
-					);
+          let recentComponents = data.filter(
+            (trip) => trip.departureTime < nowTime
+          );
 
-					recentComponents.sort((a, b) => b.departureTime - a.departureTime);
+          recentComponents.sort((a, b) => b.departureTime - a.departureTime);
 
-					recentComponents = recentComponents.map((trip, i) => {
-						return (
-							<OtherTripListComponent
-								trip={trip}
-								key={i}
-								navigation={navigation}
-								passengerCoordinates={[
-									trip.passengerData.filter(
-										(pData) => pData.uid === user.uid
-									)[0].location,
-								].flat(10)}
-							/>
-						);
-					});
+          recentComponents = recentComponents.map((trip, i) => {
+            return (
+              <OtherTripListComponent
+                trip={trip}
+                key={i}
+                navigation={navigation}
+                passengerCoordinates={[
+                  trip.passengerData.filter(
+                    (pData) => pData.uid === user.uid
+                  )[0].location,
+                ].flat(10)}
+              />
+            );
+          });
 
-					setTripListComponents({
-						active: activeComponents,
-						recent: recentComponents,
-					});
-					setIsLoading(false);
-				});
-			return unsub;
-		}
-	}, []);
+          setTripListComponents({
+            active: activeComponents,
+            recent: recentComponents,
+          });
+          setIsLoading(false);
+        });
+      return unsub;
+    }
+  }, []);
 
-	if (isLoading) return <Loading />;
+  if (isLoading) return <LoadingPassenger />;
 
-	if (
-		tripListComponents.active.length === 0 &&
-		tripListComponents.recent.length === 0
-	)
-		return (
-			<View style={styles.container}>
-				<Text color={colors.text}>No hiciste ningun viaje todavía.</Text>
-				<Button onPress={() => navigation.navigate("Nuevo viaje")}>
-					Unete a un nuevo viaje ahora
-				</Button>
-			</View>
-		);
+  if (
+    tripListComponents.active.length === 0 &&
+    tripListComponents.recent.length === 0
+  )
+    return (
+      <View style={styles.container}>
+        <Text color={colors.text}>No hiciste ningun viaje todavía.</Text>
+        <Button onPress={() => navigation.navigate("Nuevo viaje")}>
+          Unete a un nuevo viaje ahora
+        </Button>
+      </View>
+    );
 
-	return (
-		<ScrollView>
-			{tripListComponents.active.length === 0 ? null : (
-				<List.Section>
-					<List.Subheader>Activos</List.Subheader>
-					{tripListComponents.active}
-				</List.Section>
-			)}
-			{tripListComponents.recent.length === 0 ? null : (
-				<List.Section>
-					<List.Subheader>Recientes</List.Subheader>
-					{tripListComponents.recent}
-				</List.Section>
-			)}
-		</ScrollView>
-	);
+  return (
+    <ScrollView>
+      {tripListComponents.active.length === 0 ? null : (
+        <List.Section>
+          <List.Subheader>Activos</List.Subheader>
+          {tripListComponents.active}
+        </List.Section>
+      )}
+      {tripListComponents.recent.length === 0 ? null : (
+        <List.Section>
+          <List.Subheader>Recientes</List.Subheader>
+          {tripListComponents.recent}
+        </List.Section>
+      )}
+    </ScrollView>
+  );
 }
 
 export default RecentTripsScreen;

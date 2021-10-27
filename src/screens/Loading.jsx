@@ -1,14 +1,22 @@
 import React from "react";
 import { View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, useTheme } from "react-native-paper";
 import styles from "../styles";
 
-const Loading = () => {
-	return (
-		<View style={styles.container}>
-			<ActivityIndicator size="large" />
-		</View>
-	);
+export const LoadingDriver = () => {
+  const { colors } = useTheme();
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color={colors.primary} />
+    </View>
+  );
 };
 
-export default Loading;
+export const LoadingPassenger = () => {
+  const { colors } = useTheme();
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color={colors.blue} />
+    </View>
+  );
+};
