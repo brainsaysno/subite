@@ -9,6 +9,7 @@ import { AppContext } from "../../navigation/AppProvider";
 import MapConfirmButton from "../components/MapConfirmButton";
 import Button from "../components/Button";
 import { View } from "react-native";
+import { Icon } from "react-native-eva-icons";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();
@@ -30,6 +31,7 @@ function CreateTripScreen({ navigation, ...props }) {
 				setMapData(dataToSend);
 			});
 	};
+	if (!user.institution.coordinates) return null;
 
 	return (
 		<>
@@ -45,12 +47,24 @@ function CreateTripScreen({ navigation, ...props }) {
 					longitudeDelta: 0.0421,
 				}}
 			>
+				<Marker
+					/* coordinate={{
+								latitude: mapData.routes[0].legs[0].end_location.lat,
+								longitude: mapData.routes[0].legs[0].end_location.lng,
+							}} */
+					coordinate={{
+						latitude: user.institution.coordinates.latitude,
+						longitude: user.institution.coordinates.longitude,
+					}}
+				>
+					<Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+				</Marker>
 				{mapData.markerOn ? (
 					<>
 						<Marker
 							coordinate={mapData.markerCoordinates}
 							pinColor={colors.primary}
-						></Marker>
+						/>
 						<Polyline
 							coordinates={decode(
 								mapData.routes[0].overview_polyline.points,

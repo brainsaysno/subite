@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { View, Text, Settings, StyleSheet, StatusBar } from "react-native";
+import {
+	View,
+	Text,
+	Settings,
+	StyleSheet,
+	StatusBar,
+	ScrollView,
+} from "react-native";
 import { List, useTheme } from "react-native-paper";
 import ChevronSettingItem from "../components/ChevronSettingItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -31,7 +38,7 @@ function PreferencesScreen({ navigation }) {
 	);
 
 	return (
-		<View>
+		<ScrollView>
 			<List.Section>
 				<List.Subheader
 					style={{
@@ -86,7 +93,7 @@ function PreferencesScreen({ navigation }) {
 					onPress={() => auth.signOut()}
 				/>
 			</List.Section>
-		</View>
+		</ScrollView>
 	);
 }
 

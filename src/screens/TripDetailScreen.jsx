@@ -27,14 +27,14 @@ function TripDetailScreen({ navigation, route }) {
 	return (
 		<ScrollView
 			contentContainerStyle={{
-				flex: 1,
+				flexGrow: 1,
 				alignItems: "center",
 				justifyContent: "center",
-				paddingTop: 20,
 			}}
 		>
 			<View
 				style={{
+					marginTop: 20,
 					display: "flex",
 					flexDirection: "row",
 					alignItems: "flex-end",

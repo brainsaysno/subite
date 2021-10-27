@@ -7,6 +7,7 @@ import MapConfirmButton from "../components/MapConfirmButton";
 import { AppContext } from "../../navigation/AppProvider";
 import Button from "../components/Button";
 import { View } from "react-native";
+import { Icon } from "react-native-eva-icons";
 
 function JoinTripScreen({ navigation }) {
 	const { dark, colors } = useTheme();
@@ -37,6 +38,14 @@ function JoinTripScreen({ navigation }) {
 					longitudeDelta: 0.0421,
 				}}
 			>
+				<Marker
+					coordinate={{
+						latitude: user.institution.coordinates.latitude,
+						longitude: user.institution.coordinates.longitude,
+					}}
+				>
+					<Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+				</Marker>
 				{mapData.markerOn && user ? (
 					<>
 						<Marker
