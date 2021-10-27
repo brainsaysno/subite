@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Text, View, Dimensions, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import styles from "../styles";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
@@ -8,89 +14,106 @@ import { useTheme } from "react-native-paper";
 import Button from "../components/Button";
 import { DTComponent } from "../components/DTComponent";
 import WidgetMapView from "../components/WidgetMapView";
+import { Icon } from "react-native-eva-icons";
 
 function ConfirmTripScreen({ navigation, route }) {
-	const { mapData } = route.params;
-	const { user } = useContext(AppContext);
-	const { colors } = useTheme();
-	const [date, setDate] = useState(new Date(Date.now()));
-	const [loading, setLoading] = useState(false);
+  const { mapData } = route.params;
+  const { user } = useContext(AppContext);
+  const { colors } = useTheme();
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [loading, setLoading] = useState(false);
 
-	const [capacity, setCapacity] = useState(1);
+  const [capacity, setCapacity] = useState(1);
 
-	const polyline = mapData.routes[0].overview_polyline.points;
+  const polyline = mapData.routes[0].overview_polyline.points;
 
-	const handlePress = () => {
-		setLoading(true);
-		const tripData = {
-			polyline: polyline,
-			departureTime: Date.parse(date),
-			capacity: capacity,
-			driver: {
-				uid: user.uid,
-				fullName: user.fullName,
-				phone: user.phone,
-				plate: "***" + user.plate.slice(3),
-				childName: user.childName,
-			},
-			passengerData: [],
-			passengerUids: [],
-			institutionName: user.institution.name,
-			passengerCount: 0,
-		};
-		db.collection("trips")
-			.add(tripData)
-			.then(() => {
-				navigation.navigate("Mapa");
-				navigation.navigate("Detalle de viaje", { trip: tripData });
-			})
-			.catch((error) => {
-				console.error("Error adding document: ", error);
-			});
-	};
-	const onDateChange = (event, selectedDate) => {
-		const currentDate = selectedDate || date;
-		setDate(currentDate);
-	};
+  const handlePress = () => {
+    setLoading(true);
+    const tripData = {
+      polyline: polyline,
+      departureTime: Date.parse(date),
+      capacity: capacity,
+      driver: {
+        uid: user.uid,
+        fullName: user.fullName,
+        phone: user.phone,
+        plate: "***" + user.plate.slice(3),
+        childName: user.childName,
+      },
+      passengerData: [],
+      passengerUids: [],
+      institutionName: user.institution.name,
+      passengerCount: 0,
+    };
+    db.collection("trips")
+      .add(tripData)
+      .then(() => {
+        navigation.navigate("Mapa");
+        navigation.navigate("Detalle de viaje", { trip: tripData });
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  };
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+  };
 
-	return (
-		<ScrollView
-			contentContainerStyle={{
-				flexGrow: 1,
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<WidgetMapView
-				polyline={polyline}
-				navigation={navigation}
-				passengerCoordinates={[]}
-			/>
-			<View
-				style={{
-					marginVertical: 20,
-					width: "100%",
-				}}
-			>
-				<DTComponent onChange={onDateChange} date={date} />
-			</View>
-			<HorizontalNumberPicker
-				value={capacity}
-				onChange={setCapacity}
-				min={1}
-				max={4}
-				title={"Capacidad"}
-			/>
-			<Button
-				disabled={loading}
-				onPress={handlePress}
-				mode="contained"
-				style={{ width: "80%" }}
-			>
-				Crear viaje
-			</Button>
-		</ScrollView>
-	);
+  return (
+    <>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <WidgetMapView
+          polyline={polyline}
+          navigation={navigation}
+          passengerCoordinates={[]}
+        />
+        <View
+          style={{
+            marginVertical: 20,
+            width: "100%",
+          }}
+        >
+          <DTComponent onChange={onDateChange} date={date} />
+        </View>
+        <HorizontalNumberPicker
+          value={capacity}
+          onChange={setCapacity}
+          min={1}
+          max={4}
+          title={"Capacidad"}
+        />
+        <Button
+          disabled={loading}
+          onPress={handlePress}
+          mode="contained"
+          style={{ width: "80%" }}
+        >
+          Crear viaje
+        </Button>
+      </ScrollView>
+      <Icon
+        name="arrow-down-outline"
+        width={40}
+        height={40}
+        fill={colors.primary}
+        style={{
+          position: "absolute",
+          bottom: 20,
+          right: 20,
+          borderColor: colors.primary,
+          borderWidth: 2,
+          borderRadius: 50,
+        }}
+      />
+    </>
+  );
 }
 
 export default ConfirmTripScreen;
