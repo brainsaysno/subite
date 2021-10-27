@@ -7,9 +7,10 @@ import { db } from "../../config/firebase";
 import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
-import AppLoading from "./AppLoading";
 import styles from "../styles";
 import OtherTripListComponent from "../components/OtherTripListComponent";
+import Button from "../components/Button";
+import Loading from "./Loading";
 
 function TripSelectorScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState({
@@ -92,9 +93,17 @@ function TripSelectorScreen({ navigation, route }) {
 		return (
 			<View style={styles.container}>
 				<Text style={{ textAlign: "center", color: colors.text }}>
-					No hay ningun viaje activos en tu zona, intenta incrementando el radio
-					de búsqueda!
+					No hay ningun viaje activo en tu zona
 				</Text>
+				<Button
+					onPress={() => {
+						navigation.goBack();
+						navigation.navigate("Ajustes");
+						navigation.navigate("Ajustar radio");
+					}}
+				>
+					Aumenta tu radio de búsqueda
+				</Button>
 				{/* Button to nav out back to map, to profile and to radius screen */}
 			</View>
 		);
