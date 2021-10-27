@@ -152,7 +152,7 @@ function TripDetailScreen({ navigation, route }) {
 									),
 								});
 								setTripCancelled(true);
-								setTimeout(() => navigation.navigate("Viajes recientes"), 1000);
+								setTimeout(() => navigation.navigate("Viajes"), 1000);
 
 								console.log(r.docs[0].ref.id);
 							})

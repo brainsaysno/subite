@@ -30,18 +30,18 @@ function PreferencesScreen({ navigation }) {
 		/>
 	);
 
-	const DriverToggleItem = () => (
-		<ToggleSettingItem
-			title="Conductor"
-			value={isDriver}
-			onToggle={toggleIsDriver}
-			icon="steering"
-		/>
-	);
 	return (
 		<View>
 			<List.Section>
-				<List.Subheader>Cuenta</List.Subheader>
+				<List.Subheader
+					style={{
+						borderBottomColor: "grey",
+						borderBottomWidth: 0.5,
+						borderStyle: "solid",
+					}}
+				>
+					Cuenta
+				</List.Subheader>
 				{/* 	<DarkModeToggleItem /> */}
 				<ChevronSettingItem
 					title="Mi cuenta"
@@ -51,7 +51,15 @@ function PreferencesScreen({ navigation }) {
 				/>
 			</List.Section>
 			<List.Section>
-				<List.Subheader>Otros ajustes</List.Subheader>
+				<List.Subheader
+					style={{
+						borderBottomColor: "grey",
+						borderBottomWidth: 0.5,
+						borderStyle: "solid",
+					}}
+				>
+					Otros ajustes
+				</List.Subheader>
 				{isDriver ? null : (
 					<ChevronSettingItem
 						title="Ajustar radio"
@@ -59,7 +67,13 @@ function PreferencesScreen({ navigation }) {
 						onPress={() => navigation.navigate("Ajustar radio")}
 					/>
 				)}
-				<DriverToggleItem />
+				<ToggleSettingItem
+					title="Conductor"
+					value={isDriver}
+					onToggle={toggleIsDriver}
+					icon="steering"
+					iconColor={isDriver ? colors.primary : colors.blue}
+				/>
 				<ChevronSettingItem
 					title="Sobre nosotros"
 					icon="information-outline"

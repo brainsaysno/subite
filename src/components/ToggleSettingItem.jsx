@@ -33,7 +33,7 @@ function ToggleSettingItem({
 				)}
 				style={{
 					borderBottomColor: "grey",
-					borderBottomWidth: 1,
+					borderBottomWidth: 0.5,
 					borderStyle: "solid",
 				}}
 			/>
@@ -47,9 +47,8 @@ const itemStyles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		alignItems: "flex-end",
 		justifyContent: "center",
-		padding: 7.5,
+		paddingRight: 7.5,
 	},
 });
 

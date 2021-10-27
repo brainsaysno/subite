@@ -12,7 +12,6 @@ function HomeScreen({ navigation }) {
 	return (
 		<KeyboardAvoidingCustom>
 			<Logo />
-			<Header>Subite</Header>
 			<Button
 				mode="contained"
 				onPress={() => {

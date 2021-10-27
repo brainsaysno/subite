@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Platform } from "react-native";
-import { Button } from "react-native-paper";
+import Button from "../components/Button";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment-with-locales-es6";
 

@@ -18,7 +18,8 @@ import {
 	DefaultTheme as NavigationDefaultTheme,
 	DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
-import Loading from "./Loading";
+import AppLoading from "../screens/AppLoading";
+import Loading from "../screens/Loading";
 
 const CombinedDefaultTheme = {
 	...PaperDefaultTheme,
@@ -98,12 +99,13 @@ function RootNavigator() {
 	/* 	if (!loaded) {
 		return null;
 	} */
+
 	if (isLoading) {
 		return (
 			<PaperProvider
 				theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
 			>
-				<Loading />
+				<AppLoading />
 			</PaperProvider>
 		);
 	}

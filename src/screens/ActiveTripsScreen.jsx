@@ -11,6 +11,8 @@ import styles from "../styles";
 import OtherTripListComponent from "../components/OtherTripListComponent";
 
 import firebase from "firebase";
+import Button from "../components/Button";
+import Loading from "./Loading";
 
 function ActiveTripsScreen({ navigation, route }) {
 	const [tripListComponents, setTripListComponents] = useState({
@@ -18,6 +20,7 @@ function ActiveTripsScreen({ navigation, route }) {
 		others: [],
 	});
 	const { user } = useContext(AppContext);
+	const [isLoading, setIsLoading] = useState(true);
 
 	//const tripsRef = collection(db, "trips");
 	useEffect(() => {
@@ -57,15 +60,17 @@ function ActiveTripsScreen({ navigation, route }) {
 							navigation={navigation}
 						/>
 					));
-
 					setTripListComponents({
 						today: todayComponents,
 						others: otherComponents,
 					});
+					setIsLoading(false);
 				});
 			return unsub;
 		}
 	}, []);
+
+	if (isLoading) return <Loading />;
 
 	if (
 		tripListComponents.today.length === 0 &&

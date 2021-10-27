@@ -1,14 +1,19 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 
-const Logo = () => (
-	<Image source={require("../../assets/favicon.png")} style={styles.image} />
-);
+function Logo({ style }) {
+	return (
+		<Image
+			source={require("../../assets/icon.png")}
+			style={{ ...styles.image, ...style }}
+		/>
+	);
+}
 
 const styles = StyleSheet.create({
 	image: {
-		width: 128,
-		height: 128,
+		width: 256,
+		height: 256,
 		marginBottom: 12,
 	},
 });

@@ -26,7 +26,7 @@ function ChevronSettingItem({
 				right={() => <List.Icon icon="chevron-right" />}
 				style={{
 					borderBottomColor: "grey",
-					borderBottomWidth: 1,
+					borderBottomWidth: 0.5,
 					borderStyle: "solid",
 				}}
 			/>

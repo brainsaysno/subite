@@ -9,6 +9,8 @@ import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 import Button from "../components/Button";
 import OtherTripListComponent from "../components/OtherTripListComponent";
+import AppLoading from "./AppLoading";
+import Loading from "./Loading";
 
 function RecentTripsScreen({ navigation }) {
 	const [tripListComponents, setTripListComponents] = useState({
@@ -17,6 +19,7 @@ function RecentTripsScreen({ navigation }) {
 	});
 	const { user } = useContext(AppContext);
 	const { colors } = useTheme();
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		if (user) {
@@ -74,10 +77,13 @@ function RecentTripsScreen({ navigation }) {
 						active: activeComponents,
 						recent: recentComponents,
 					});
+					setIsLoading(false);
 				});
 			return unsub;
 		}
 	}, []);
+
+	if (isLoading) return <Loading />;
 
 	if (
 		tripListComponents.active.length === 0 &&

@@ -35,9 +35,7 @@ function DriverNavigator() {
 			})}
 		>
 			<Tab.Screen name="Viajes" component={ActiveTripsNavigator} />
-			{/* Nuevo viaje */}
 			<Tab.Screen name="Crear viaje" component={CreateTripNavigator} />
-			{/* Ajustes */}
 			<Tab.Screen name="Ajustes" component={PreferencesNavigator} />
 		</Tab.Navigator>
 	);

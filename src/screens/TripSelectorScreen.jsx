@@ -4,11 +4,10 @@ import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
 import { isInRadius, isToday } from "../core/utils";
 import { db } from "../../config/firebase";
-("");
 import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
-import Loading from "../components/Loading";
+import AppLoading from "./AppLoading";
 import styles from "../styles";
 import OtherTripListComponent from "../components/OtherTripListComponent";
 
@@ -75,11 +74,11 @@ function TripSelectorScreen({ navigation, route }) {
 						/>
 					));
 
-					setIsLoading(false);
 					setTripListComponents({
 						today: todayComponents,
 						others: otherComponents,
 					});
+					setIsLoading(false);
 				});
 		}
 	}, []);
@@ -93,8 +92,8 @@ function TripSelectorScreen({ navigation, route }) {
 		return (
 			<View style={styles.container}>
 				<Text style={{ textAlign: "center", color: colors.text }}>
-					No se encontraron Viajes activos en tu zona, intenta incrementando el
-					radio de búsqueda!
+					No hay ningun viaje activos en tu zona, intenta incrementando el radio
+					de búsqueda!
 				</Text>
 				{/* Button to nav out back to map, to profile and to radius screen */}
 			</View>

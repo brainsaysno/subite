@@ -21,7 +21,7 @@ function PassengerNavigator() {
 				tabBarIcon: ({ color, size }) => {
 					let iconName;
 
-					if (route.name === "Viajes recientes") {
+					if (route.name === "Viajes") {
 						iconName = "clock-outline";
 					} else if (route.name === "Nuevo viaje") {
 						iconName = "map";
@@ -36,11 +36,8 @@ function PassengerNavigator() {
 				},
 			})}
 		>
-			{/* Viajes recientes */}
-			<Tab.Screen name="Viajes recientes" component={RecentTripsNavigator} />
-			{/* Nuevo viaje */}
+			<Tab.Screen name="Viajes" component={RecentTripsNavigator} />
 			<Tab.Screen name="Nuevo viaje" component={JoinTripNavigator} />
-			{/* Ajustes */}
 			<Tab.Screen name="Ajustes" component={PreferencesNavigator} />
 		</Tab.Navigator>
 	);

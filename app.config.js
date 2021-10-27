@@ -25,12 +25,12 @@ export default {
 			package: "com.sdv.subite",
 			versionCode: 1,
 			adaptiveIcon: {
-				foregroundImage: "./assets/adaptive-icon.png",
+				foregroundImage: "./assets/icon.png",
 				backgroundColor: "#FFFFFF",
 			},
 		},
 		web: {
-			favicon: "./assets/favicon.png",
+			favicon: "./assets/icon.png",
 		},
 		extra: {
 			apiKey: process.env.API_KEY,
