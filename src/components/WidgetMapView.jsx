@@ -6,6 +6,7 @@ import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
 import { AppContext } from "../../navigation/AppProvider";
+import { Icon } from "react-native-eva-icons";
 
 function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
 	const decodedTrip = decode(polyline, 5).map((arr) => ({
@@ -63,7 +64,9 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
 			<Marker
 				coordinate={decodedTrip[decodedTrip.length - 1]}
 				pinColor={colors.primary}
-			></Marker>
+			>
+				<Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+			</Marker>
 			{/* Passenger coordinates marker */}
 			{passengerCoordinates
 				? passengerCoordinates.map((pCoord, i) => (
