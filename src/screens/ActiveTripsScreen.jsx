@@ -74,7 +74,9 @@ function ActiveTripsScreen({ navigation, route }) {
 		return (
 			<View style={styles.container}>
 				<Text>No tienes ningun viaje activo</Text>
-				{/* Add button to nav to create trip */}
+				<Button onPress={() => navigation.navigate("Crear viaje")}>
+					Crea un viaje ahora!
+				</Button>
 			</View>
 		);
 	}

@@ -48,7 +48,7 @@ function SetRadiusScreen({ navigation }) {
 						radius: radius,
 					});
 					navigation.goBack();
-					navigation.navigate("Nuevo Viaje");
+					navigation.navigate("Nuevo viaje");
 				}}
 			>
 				Ok!

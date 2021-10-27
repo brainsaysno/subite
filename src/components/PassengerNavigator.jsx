@@ -15,18 +15,18 @@ const Tab = createBottomTabNavigator();
 function PassengerNavigator() {
 	return (
 		<Tab.Navigator
-			initialRouteName="Nuevo Viaje"
+			initialRouteName="Nuevo viaje"
 			screenOptions={({ route }) => ({
 				headerShown: false,
-				tabBarIcon: ({ focused, color, size }) => {
+				tabBarIcon: ({ color, size }) => {
 					let iconName;
 
-					if (route.name === "Viajes Recientes") {
-						iconName = focused ? "clock-outline" : "clock-outline";
-					} else if (route.name === "Nuevo Viaje") {
-						iconName = focused ? "map" : "map";
+					if (route.name === "Viajes recientes") {
+						iconName = "clock-outline";
+					} else if (route.name === "Nuevo viaje") {
+						iconName = "map";
 					} else if (route.name === "Ajustes") {
-						iconName = focused ? "settings-2-outline" : "settings-2-outline";
+						iconName = "settings-2-outline";
 					}
 
 					return (
@@ -37,9 +37,9 @@ function PassengerNavigator() {
 			})}
 		>
 			{/* Viajes recientes */}
-			<Tab.Screen name="Viajes Recientes" component={RecentTripsNavigator} />
+			<Tab.Screen name="Viajes recientes" component={RecentTripsNavigator} />
 			{/* Nuevo viaje */}
-			<Tab.Screen name="Nuevo Viaje" component={JoinTripNavigator} />
+			<Tab.Screen name="Nuevo viaje" component={JoinTripNavigator} />
 			{/* Ajustes */}
 			<Tab.Screen name="Ajustes" component={PreferencesNavigator} />
 		</Tab.Navigator>

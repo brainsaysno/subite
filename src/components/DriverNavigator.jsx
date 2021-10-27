@@ -13,20 +13,18 @@ const Tab = createBottomTabNavigator();
 function DriverNavigator() {
 	return (
 		<Tab.Navigator
-			initialRouteName="Nuevo Viaje"
+			initialRouteName="Nuevo viaje"
 			screenOptions={({ route }) => ({
 				headerShown: false,
-				tabBarIcon: ({ focused, color, size }) => {
+				tabBarIcon: ({ color, size }) => {
 					let iconName;
 
 					if (route.name === "Viajes") {
-						iconName = focused
-							? "navigation-2-outline"
-							: "navigation-2-outline";
+						iconName = "navigation-2-outline";
 					} else if (route.name === "Crear viaje") {
-						iconName = focused ? "map" : "map";
+						iconName = "map";
 					} else if (route.name === "Ajustes") {
-						iconName = focused ? "settings-2-outline" : "settings-2-outline";
+						iconName = "settings-2-outline";
 					}
 
 					return (
