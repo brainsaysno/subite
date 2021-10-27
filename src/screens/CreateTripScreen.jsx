@@ -8,6 +8,7 @@ import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 import { AppContext } from "../../navigation/AppProvider";
 import MapConfirmButton from "../components/MapConfirmButton";
 import Button from "../components/Button";
+import { View } from "react-native";
 
 function CreateTripScreen({ navigation, ...props }) {
 	const { dark, colors } = useTheme();
@@ -46,7 +47,10 @@ function CreateTripScreen({ navigation, ...props }) {
 			>
 				{mapData.markerOn ? (
 					<>
-						<Marker coordinate={mapData.markerCoordinates}></Marker>
+						<Marker
+							coordinate={mapData.markerCoordinates}
+							pinColor={colors.primary}
+						></Marker>
 						<Polyline
 							coordinates={decode(
 								mapData.routes[0].overview_polyline.points,
@@ -59,26 +63,27 @@ function CreateTripScreen({ navigation, ...props }) {
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<Button
-					onPress={() =>
-						navigation.navigate("Confirmar viaje", {
-							mapData: mapData,
-						})
-					}
-					mode="contained"
-					// Horizontal centering may not work on all device sizes
+				<View
 					style={{
 						position: "absolute",
 						bottom: 10,
-						left: "25%",
-						flex: 1,
-						justifyContent: "center",
+						width: "100%",
+						display: "flex",
 						alignItems: "center",
-						width: 200,
 					}}
 				>
-					Continuar
-				</Button>
+					<Button
+						onPress={() =>
+							navigation.navigate("Confirmar viaje", {
+								mapData: mapData,
+							})
+						}
+						mode="contained"
+						style={{ width: 200 }}
+					>
+						Continuar
+					</Button>
+				</View>
 			) : null}
 		</>
 	);

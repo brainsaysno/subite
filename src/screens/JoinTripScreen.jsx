@@ -6,6 +6,7 @@ import { useTheme } from "react-native-paper";
 import MapConfirmButton from "../components/MapConfirmButton";
 import { AppContext } from "../../navigation/AppProvider";
 import Button from "../components/Button";
+import { View } from "react-native";
 
 function JoinTripScreen({ navigation }) {
 	const { dark, colors } = useTheme();
@@ -39,14 +40,14 @@ function JoinTripScreen({ navigation }) {
 				{mapData.markerOn && user ? (
 					<>
 						<Marker
-							pinColor={"#ff6347"}
+							pinColor={colors.primary}
 							coordinate={mapData.markerCoordinates}
 						/>
 						<Circle
 							center={mapData.markerCoordinates}
 							radius={user.radius * 1000}
 							strokeColor={colors.text}
-							fillColor={"#ff000040"}
+							fillColor={colors.primary + "90"}
 							onPress={(e) => handleMapPress(e.nativeEvent)}
 							/* #rgba */
 						/>
@@ -54,21 +55,23 @@ function JoinTripScreen({ navigation }) {
 				) : null}
 			</MapView>
 			{mapData.markerOn ? (
-				<Button
-					onPress={handleConfirm}
-					mode="contained"
+				<View
 					style={{
 						position: "absolute",
 						bottom: 10,
-						left: "25%",
-						flex: 1,
-						justifyContent: "center",
+						width: "100%",
+						display: "flex",
 						alignItems: "center",
-						width: 200,
 					}}
 				>
-					Buscar viajes
-				</Button>
+					<Button
+						onPress={handleConfirm}
+						mode="contained"
+						style={{ width: 200 }}
+					>
+						Buscar viajes
+					</Button>
+				</View>
 			) : null}
 		</>
 	);
