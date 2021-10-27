@@ -67,7 +67,7 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
 			{/* Passenger coordinates marker */}
 			{passengerCoordinates
 				? passengerCoordinates.map((pCoord, i) => (
-						<Marker key={i} coordinate={pCoord} pinColor={colors.accent} />
+						<Marker key={i} coordinate={pCoord} pinColor={colors.blue} />
 				  ))
 				: null}
 			<Polyline

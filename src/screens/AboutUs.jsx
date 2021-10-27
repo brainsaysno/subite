@@ -5,7 +5,7 @@ import styles from "../styles";
 function AboutUs() {
 	return (
 		<ScrollView contentContainerStyle={{ padding: 20 }}>
-			<Text style={{ fontSize: 24, fontWeight: "500" }}>Subite</Text>
+			<Text style={{ fontSize: 32, fontWeight: "500" }}>Subite</Text>
 
 			<Text style={{ textAlign: "justify" }}>
 				Subite es un proyecto desarrollado bajo el marco de la Olimpiada de

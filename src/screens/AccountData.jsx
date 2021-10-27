@@ -12,19 +12,57 @@ function AccountData() {
 	console.log(user);
 	const message = `Hola, soy ${user.fullName}, mi id de usuario es ${user.uid}. Me gustaría cambiar los datos de mi cuenta.`;
 	return (
-		<View style={{ ...styles.container, alignItems: "flex-start" }}>
-			<Text style={{ fontSize: 20 }}>Nombre: {user.fullName}</Text>
-			<Text style={{ fontSize: 20 }}>Email: {user.email}</Text>
-			<Text style={{ fontSize: 20 }}>Institución: {user.institution.name}</Text>
-			<Text style={{ fontSize: 20 }}>Teléfono: {user.phone}</Text>
-			<Text style={{ fontSize: 20 }}>Matricula: {user.plate}</Text>
-			<TouchableOpacity
+		<View
+			style={{
+				flex: 1,
+				padding: 20,
+				alignItems: "flex-start",
+				justifyContent: "flex-start",
+			}}
+		>
+			<Text
+				style={{
+					fontSize: 18,
+					fontWeight: "700",
+				}}
+			>
+				Nombre:
+				<Text style={{ fontWeight: "200" }}> {user.fullName}</Text>
+			</Text>
+			<Text style={{ fontSize: 18, fontWeight: "700" }}>
+				Email: <Text style={{ fontWeight: "200" }}>{user.email}</Text>
+			</Text>
+			<Text style={{ fontSize: 18, fontWeight: "700" }}>
+				Institución:{" "}
+				<Text style={{ fontWeight: "200" }}>{user.institution.name}</Text>
+			</Text>
+			<Text style={{ fontSize: 18, fontWeight: "700" }}>
+				Teléfono: <Text style={{ fontWeight: "200" }}>{user.phone}</Text>
+			</Text>
+			<Text style={{ fontSize: 18, fontWeight: "700" }}>
+				Matricula: <Text style={{ fontWeight: "200" }}>{user.plate}</Text>
+			</Text>
+			<Text style={{ color: colors.text, alignSelf: "center", marginTop: 10 }}>
+				Para cambiar tu información haz{" "}
+				<Text
+					style={{ color: colors.blue }}
+					onPress={() =>
+						Linking.openURL(
+							`https://wa.me/59895078292?text=${encodeURIComponent(message)}`
+						)
+					}
+				>
+					click aquí
+				</Text>
+			</Text>
+			{/* <TouchableOpacity
 				style={{
 					display: "flex",
 					flexDirection: "row",
-					backgroundColor: colors.error,
+					backgroundColor: colors.green,
 					padding: 15,
-					marginTop: 20,
+					marginTop: "auto",
+					marginBottom: "auto",
 					width: "100%",
 				}}
 				onPress={() =>
@@ -49,7 +87,7 @@ function AccountData() {
 				>
 					Contacta con el desarrollador para cambiar tu información (Beta)
 				</Text>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 		</View>
 	);
 }

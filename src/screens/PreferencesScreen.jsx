@@ -46,7 +46,7 @@ function PreferencesScreen({ navigation }) {
 				<ChevronSettingItem
 					title="Mi cuenta"
 					icon="account"
-					iconColor={colors.onSurface}
+					iconColor={colors.yellow}
 					onPress={() => navigation.navigate("Mi cuenta")}
 				/>
 			</List.Section>
@@ -63,7 +63,7 @@ function PreferencesScreen({ navigation }) {
 				<ChevronSettingItem
 					title="Sobre nosotros"
 					icon="information-outline"
-					iconColor={colors.error}
+					iconColor={colors.green}
 					onPress={() => navigation.navigate("Sobre nosotros")}
 				/>
 				<ChevronSettingItem

@@ -57,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
 		},
 		link: {
 			fontWeight: "bold",
-			color: colors.accent,
+			color: colors.blue,
 		},
 	});
 

@@ -99,7 +99,7 @@ function TripDetailScreen({ navigation, route }) {
 				style={{
 					display: "flex",
 					flexDirection: "row",
-					backgroundColor: colors.error,
+					backgroundColor: colors.green,
 					padding: 15,
 				}}
 				onPress={() =>
