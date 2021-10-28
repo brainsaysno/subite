@@ -4,7 +4,7 @@ import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
-import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
+import Constants from "expo-constants";
 import { AppContext } from "../../navigation/AppProvider";
 import Button from "../components/Button";
 import { View } from "react-native";
@@ -18,7 +18,7 @@ function CreateTripScreen({ navigation, ...props }) {
 
   const handleMapPress = ({ coordinate }) => {
     fetch(
-      `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinate.latitude},${coordinate.longitude}&destination=${user.institution.coordinates.latitude}, ${user.institution.coordinates.longitude}&key=${GOOGLE_MAPS_API_KEY}`
+      `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinate.latitude},${coordinate.longitude}&destination=${user.institution.coordinates.latitude}, ${user.institution.coordinates.longitude}&key=${Constants.manifest.extra.googleDirections.apiKey}`
     )
       .then((response) => response.json())
       .then((data) => {
