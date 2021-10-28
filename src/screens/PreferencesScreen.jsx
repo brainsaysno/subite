@@ -3,7 +3,6 @@ import { ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import ChevronSettingItem from "../components/ChevronSettingItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DefaultScreen from "./DefaultScreen";
 import SetRadiusScreen from "./SetRadiusScreen";
 import { AppContext } from "../../navigation/AppProvider";
 import ToggleSettingItem from "../components/ToggleSettingItem";
@@ -110,7 +109,6 @@ function PreferencesNavigator() {
       <Stack.Screen name="Ajustar radio" component={SetRadiusScreen} />
       <Stack.Screen name="Mi cuenta" component={AccountData} />
       <Stack.Screen name="Sobre nosotros" component={AboutUs} />
-      <Stack.Screen name="Default Screen" component={DefaultScreen} />
     </Stack.Navigator>
   );
 }

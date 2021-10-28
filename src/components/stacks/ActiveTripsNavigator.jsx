@@ -1,7 +1,6 @@
 import React from "react";
 import { useTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DefaultScreen from "../../screens/DefaultScreen";
 import ActiveTripsScreen from "../../screens/ActiveTripsScreen";
 import ActiveTripDetailScreen from "../../screens/ActiveTripDetailScreen";
 
@@ -22,10 +21,6 @@ function ActiveTripsNavigator() {
         name="Detalle de viaje"
         component={ActiveTripDetailScreen}
       />
-      <Stack.Screen
-        name="Default Screen"
-        component={DefaultScreen}
-      ></Stack.Screen>
     </Stack.Navigator>
   );
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import JoinTripScreen from "../../screens/JoinTripScreen";
-import DefaultScreen from "../../screens/DefaultScreen";
 import ConfirmTripDetailScreen from "../../screens/ConfirmTripDetailScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
@@ -23,7 +22,6 @@ function JoinTripNavigator() {
         component={ConfirmTripDetailScreen}
       />
       <Stack.Screen name="Detalle de viaje" component={TripDetailScreen} />
-      <Stack.Screen name="Default Screen" component={DefaultScreen} />
     </Stack.Navigator>
   );
 }
