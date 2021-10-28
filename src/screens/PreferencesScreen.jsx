@@ -101,8 +101,16 @@ function PreferencesScreen({ navigation }) {
 }
 
 function PreferencesNavigator() {
+  const { colors } = useTheme();
+
   return (
-    <Stack.Navigator initialRouteName="Preferencias">
+    <Stack.Navigator
+      initialRouteName="Preferencias"
+      screenOptions={{
+        headerTintColor: "white",
+        headerStyle: { backgroundColor: colors.dbackground },
+      }}
+    >
       {/* Preferencias */}
       <Stack.Screen name="Preferencias" component={PreferencesScreen} />
       {/* Ajustar radio */}

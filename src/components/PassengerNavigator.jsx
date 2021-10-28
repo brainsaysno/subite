@@ -19,10 +19,20 @@ function PassengerNavigator() {
       initialRouteName="Nuevo viaje"
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: colors.blue,
+        tabBarInactiveTintColor: "white",
         headerShown: false,
+        tabBarBackground: () => (
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: colors.dbackground,
+            }}
+          />
+        ),
         tabBarIcon: ({ size, focused }) => {
           let iconName;
-          const color = focused ? colors.blue : "#8E8E8F";
+          const color = focused ? colors.blue : "white";
 
           if (route.name === "Viajes") {
             iconName = "clock-outline";

@@ -34,6 +34,7 @@ export default {
         },
       },
     },
+    androidStatusBar: { style: "light" },
     web: {
       favicon: "./assets/icon.png",
     },

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
-import { StatusBar as StatBar } from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 import PassengerNavigator from "./PassengerNavigator";
 import DriverNavigator from "./DriverNavigator";
 import LoginStack from "./stacks/LoginStack";
@@ -97,16 +97,6 @@ function RootNavigator() {
     return unsubscribeAuth;
   }, []);
 
-  if (isLoading) {
-    return (
-      <PaperProvider
-        theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
-      >
-        <AppLoading />
-      </PaperProvider>
-    );
-  }
-
   return (
     <PaperProvider
       theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
@@ -114,7 +104,9 @@ function RootNavigator() {
       <NavigationContainer
         theme={usingDarkMode ? CombinedDarkTheme : CombinedDefaultTheme}
       >
-        {isAuthed ? (
+        {isLoading ? (
+          <AppLoading />
+        ) : isAuthed ? (
           isDriver ? (
             <DriverNavigator />
           ) : (
@@ -123,7 +115,7 @@ function RootNavigator() {
         ) : (
           <LoginStack />
         )}
-        <StatBar style={usingDarkMode ? "light" : "dark"} />
+        <StatusBar style={"light"} />
       </NavigationContainer>
     </PaperProvider>
   );

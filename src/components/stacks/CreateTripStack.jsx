@@ -1,5 +1,5 @@
 import React from "react";
-import { View, List } from "react-native-paper";
+import { View, List, useTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import JoinTripScreen from "../../screens/JoinTripScreen";
 import DefaultScreen from "../../screens/DefaultScreen";
@@ -10,21 +10,27 @@ import CreateTripScreen from "../../screens/CreateTripScreen";
 const Stack = createNativeStackNavigator();
 
 function CreateTripNavigator() {
-	return (
-		<Stack.Navigator
-			initialRouteName="Mapa"
-			screenOptions={({ route }) => {
-				if (route.name === "Mapa") return { headerShown: false };
-			}}
-		>
-			<Stack.Screen name="Mapa" component={CreateTripScreen} />
-			<Stack.Screen name="Confirmar viaje" component={ConfirmTripScreen} />
-			<Stack.Screen
-				name="Default Screen"
-				component={DefaultScreen}
-			></Stack.Screen>
-		</Stack.Navigator>
-	);
+  const { colors } = useTheme();
+  return (
+    <Stack.Navigator
+      initialRouteName="Mapa"
+      screenOptions={({ route }) => {
+        const def = {
+          headerTintColor: "white",
+          headerStyle: { backgroundColor: colors.dbackground },
+        };
+        if (route.name === "Mapa") return { ...def, headerShown: false };
+        return def;
+      }}
+    >
+      <Stack.Screen name="Mapa" component={CreateTripScreen} />
+      <Stack.Screen name="Confirmar viaje" component={ConfirmTripScreen} />
+      <Stack.Screen
+        name="Default Screen"
+        component={DefaultScreen}
+      ></Stack.Screen>
+    </Stack.Navigator>
+  );
 }
 
 export default CreateTripNavigator;
