@@ -53,6 +53,15 @@ function TripDetailScreen({ navigation, route }) {
           >
             {trip.driver.fullName}
           </Text>
+          <Text
+            style={{
+              color: colors.text,
+              textAlign: "center",
+              fontSize: 20,
+            }}
+          >
+            {trip.driver.plate}
+          </Text>
         </View>
         <View>
           <Text

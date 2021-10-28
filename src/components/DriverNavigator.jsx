@@ -19,15 +19,10 @@ function DriverNavigator() {
       initialRouteName="Crear viaje"
       screenOptions={({ route }) => ({
         tabBarInactiveTintColor: "white",
-        tabBarBackground: () => (
-          <View
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: colors.dbackground,
-            }}
-          />
-        ),
+        tabBarStyle: {
+          backgroundColor: colors.dbackground,
+          borderTopWidth: 0,
+        },
         headerShown: false,
         tabBarIcon: ({ focused, size }) => {
           let iconName;

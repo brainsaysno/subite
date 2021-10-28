@@ -7,52 +7,52 @@ import styles from "../styles";
 import { Icon } from "react-native-eva-icons";
 
 function AccountData() {
-	const { user } = useContext(AppContext);
-	const { colors } = useTheme();
-	console.log(user);
-	const message = `Hola, soy ${user.fullName}, mi id de usuario es ${user.uid}. Me gustaría cambiar los datos de mi cuenta.`;
-	return (
-		<View
-			style={{
-				flex: 1,
-				padding: 20,
-				alignItems: "flex-start",
-				justifyContent: "flex-start",
-			}}
-		>
-			<Text
-				style={{
-					fontSize: 18,
-					fontWeight: "700",
-				}}
-			>
-				Nombre:
-				<Text style={{ fontWeight: "200" }}> {user.fullName}</Text>
-			</Text>
-			<Text style={{ fontSize: 18, fontWeight: "700" }}>
-				Email: <Text style={{ fontWeight: "200" }}>{user.email}</Text>
-			</Text>
-			<Text style={{ fontSize: 18, fontWeight: "700" }}>
-				Institución:{" "}
-				<Text style={{ fontWeight: "200" }}>{user.institution.name}</Text>
-			</Text>
-			<Text style={{ fontSize: 18, fontWeight: "700" }}>
-				Teléfono: <Text style={{ fontWeight: "200" }}>{user.phone}</Text>
-			</Text>
-			<Text style={{ fontSize: 18, fontWeight: "700" }}>
-				Matricula: <Text style={{ fontWeight: "200" }}>{user.plate}</Text>
-			</Text>
-			<Text
-				style={{ color: colors.primaryt, alignSelf: "center", marginTop: 10 }}
-				onPress={() =>
-					Linking.openURL(
-						`https://wa.me/59895078292?text=${encodeURIComponent(message)}`
-					)
-				}
-			>
-				Para cambiar tu información haz click aquí.
-			</Text>
-			{/* <TouchableOpacity
+  const { user } = useContext(AppContext);
+  const { colors } = useTheme();
+  console.log(user);
+  const message = `Hola, soy ${user.fullName}, mi id de usuario es ${user.uid}. Me gustaría cambiar los datos de mi cuenta.`;
+  return (
+    <View
+      style={{
+        flex: 1,
+        padding: 20,
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "700",
+        }}
+      >
+        Nombre:
+        <Text style={{ fontWeight: "200" }}> {user.fullName}</Text>
+      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "700" }}>
+        Email: <Text style={{ fontWeight: "200" }}>{user.email}</Text>
+      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "700" }}>
+        Institución:{" "}
+        <Text style={{ fontWeight: "200" }}>{user.institution.name}</Text>
+      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "700" }}>
+        Teléfono: <Text style={{ fontWeight: "200" }}>{user.phone}</Text>
+      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "700" }}>
+        Matricula: <Text style={{ fontWeight: "200" }}>{user.plate}</Text>
+      </Text>
+      <Text
+        style={{ color: colors.primary, alignSelf: "center", marginTop: 10 }}
+        onPress={() =>
+          Linking.openURL(
+            `https://wa.me/59895078292?text=${encodeURIComponent(message)}`
+          )
+        }
+      >
+        Para cambiar tu información haz click aquí.
+      </Text>
+      {/* <TouchableOpacity
 				style={{
 					display: "flex",
 					flexDirection: "row",
@@ -85,8 +85,8 @@ function AccountData() {
 					Contacta con el desarrollador para cambiar tu información (Beta)
 				</Text>
 			</TouchableOpacity> */}
-		</View>
-	);
+    </View>
+  );
 }
 
 export default AccountData;
