@@ -1,13 +1,9 @@
-import * as React from "react";
-import { Text, useTheme } from "react-native-paper";
-import { View, StyleSheet, Image } from "react-native";
-import styles from "../styles.js";
-import JoinTripScreen from "../screens/JoinTripScreen";
+import React from "react";
+import { useTheme } from "react-native-paper";
 import PreferencesNavigator from "../screens/PreferencesScreen";
 import JoinTripNavigator from "./stacks/JoinTripStack.jsx";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
-import DefaultScreen from "../screens/DefaultScreen.jsx";
 import RecentTripsNavigator from "./stacks/RecentTripsNavigator.jsx";
 
 const Tab = createBottomTabNavigator();

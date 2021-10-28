@@ -1,10 +1,8 @@
 import React from "react";
 import { useContext } from "react";
-import { View, Text, TouchableOpacity, Linking } from "react-native";
+import { View, Text, Linking } from "react-native";
 import { useTheme } from "react-native-paper";
 import { AppContext } from "../../navigation/AppProvider";
-import styles from "../styles";
-import { Icon } from "react-native-eva-icons";
 
 function AccountData() {
   const { user } = useContext(AppContext);

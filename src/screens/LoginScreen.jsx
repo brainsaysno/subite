@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import KeyboardAvoidingCustom from "../components/KeyboardAvoidingCustom";
 import Logo from "../components/Logo";
-import Header from "../components/Header";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";

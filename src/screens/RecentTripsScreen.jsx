@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
-import TodayTripListComponent from "../components/TodayTripListComponent";
 import { db } from "../../config/firebase";
-import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";
 import Button from "../components/Button";
 import OtherTripListComponent from "../components/OtherTripListComponent";
-import AppLoading from "./AppLoading";
 import { LoadingPassenger } from "./Loading";
 import { getEpochNow } from "../core/utils";
 

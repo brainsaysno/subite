@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE, Circle } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
 import styles from "../styles";
 import { useTheme } from "react-native-paper";
-import MapConfirmButton from "../components/MapConfirmButton";
 import { AppContext } from "../../navigation/AppProvider";
 import Button from "../components/Button";
 import { View } from "react-native";

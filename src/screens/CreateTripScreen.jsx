@@ -6,7 +6,6 @@ import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
 import { GOOGLE_MAPS_API_KEY } from "../../keys.js";
 import { AppContext } from "../../navigation/AppProvider";
-import MapConfirmButton from "../components/MapConfirmButton";
 import Button from "../components/Button";
 import { View } from "react-native";
 import { Icon } from "react-native-eva-icons";

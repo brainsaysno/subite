@@ -1,9 +1,7 @@
 import React from "react";
-import { View, List, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import JoinTripScreen from "../../screens/JoinTripScreen";
 import DefaultScreen from "../../screens/DefaultScreen";
-import TripSelectorScreen from "../../screens/TripSelectorScreen";
 import ConfirmTripScreen from "../../screens/ConfirmTripScreen";
 import CreateTripScreen from "../../screens/CreateTripScreen";
 

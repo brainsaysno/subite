@@ -1,10 +1,8 @@
 import React from "react";
 import { useContext } from "react";
 import { View, Image } from "react-native";
-import { ActivityIndicator, Text, useTheme } from "react-native-paper";
-import { AppContext } from "../../navigation/AppProvider";
+import { ActivityIndicator, useTheme } from "react-native-paper";
 import Logo from "../components/Logo";
-import styles from "../styles";
 
 function AppLoading() {
   const { colors } = useTheme();

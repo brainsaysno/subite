@@ -4,7 +4,6 @@ import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
 import { getEpochNow, isInRadius, isToday } from "../core/utils";
 import { db } from "../../config/firebase";
-import firebase from "firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
 import styles from "../styles";

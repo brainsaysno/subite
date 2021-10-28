@@ -1,11 +1,8 @@
-import React, { memo, useContext } from "react";
+import React, { useContext } from "react";
 import KeyboardAvoidingCustom from "../components/KeyboardAvoidingCustom";
 import Logo from "../components/Logo";
-import Header from "../components/Header";
-import Paragraph from "../components/Paragraph";
 import { AppContext } from "../../navigation/AppProvider";
 import Button from "../components/Button";
-import { Dimensions, View } from "react-native";
 import { useTheme } from "react-native-paper";
 function HomeScreen({ navigation }) {
   const { setIsDriver } = useContext(AppContext);

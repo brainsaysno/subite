@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
-import { getEpochNow, isToday, latitudeToKm } from "../core/utils";
-import { collection, doc, query, where, orderBy } from "firebase/firestore";
+import { getEpochNow, isToday } from "../core/utils";
 import { db } from "../../config/firebase";
 
 import { AppContext } from "../../navigation/AppProvider";

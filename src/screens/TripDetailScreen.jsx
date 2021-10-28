@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   View,
@@ -6,14 +6,12 @@ import {
   Linking,
   ScrollView,
 } from "react-native";
-import styles from "../styles";
-import { Button, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import { Icon } from "react-native-eva-icons";
 import moment from "moment-with-locales-es6";
-import firebase from "firebase";
 import { getEpochNow } from "../core/utils";
 
 function TripDetailScreen({ navigation, route }) {

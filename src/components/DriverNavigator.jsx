@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PreferencesNavigator from "../screens/PreferencesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-eva-icons";
-import DefaultScreen from "../screens/DefaultScreen.jsx";
-import CreateTripScreen from "../screens/CreateTripScreen";
 import CreateTripNavigator from "./stacks/CreateTripStack";
-import ActiveTripsScreen from "../screens/ActiveTripsScreen";
 import ActiveTripsNavigator from "./stacks/ActiveTripsNavigator";
 import { useTheme } from "react-native-paper";
-import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 

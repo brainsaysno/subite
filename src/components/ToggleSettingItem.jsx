@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import { DefaultTheme, List, Switch, useTheme } from "react-native-paper";
+import React from "react";
+import { List, Switch, useTheme } from "react-native-paper";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import styles from "../styles";
-import { AppContext } from "../../navigation/AppProvider";
 
 function ToggleSettingItem({
   title = "Toggle Setting",

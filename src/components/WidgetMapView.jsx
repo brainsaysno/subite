@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { darkStyle as darkMapStyle } from "../../mapStyles";
-import styles from "../styles";
 import { useTheme } from "react-native-paper";
 import { decode } from "@googlemaps/polyline-codec";
-import { AppContext } from "../../navigation/AppProvider";
 import { Icon } from "react-native-eva-icons";
 
 function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {

@@ -5,7 +5,6 @@ import { emailValidator } from "../core/utils";
 import KeyboardAvoidingCustom from "../components/KeyboardAvoidingCustom";
 import BackButton from "../components/BackButton";
 import Logo from "../components/Logo";
-import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import { AppContext } from "../../navigation/AppProvider";

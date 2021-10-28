@@ -1,12 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  Text,
-  View,
-  Dimensions,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import styles from "../styles";
+import { View, ScrollView } from "react-native";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import HorizontalNumberPicker from "../components/HorizontalNumberPicker";

@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
-import {
-  View,
-  Text,
-  Settings,
-  StyleSheet,
-  StatusBar,
-  ScrollView,
-} from "react-native";
+import { ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import ChevronSettingItem from "../components/ChevronSettingItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

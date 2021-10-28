@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import PassengerNavigator from "./PassengerNavigator";
 import DriverNavigator from "./DriverNavigator";
 import LoginStack from "./stacks/LoginStack";
 import { AppContext } from "../../navigation/AppProvider";
 import { auth, db } from "../../config/firebase";
-import { useFonts } from "expo-font";
 
 import {
   DefaultTheme as PaperDefaultTheme,
