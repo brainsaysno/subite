@@ -10,7 +10,7 @@ export default {
     splash: {
       image: "./assets/splash.png",
       resizeMode: "contain",
-      backgroundColor: "#ffffff",
+      backgroundColor: "#173b66",
     },
     updates: {
       fallbackToCacheTimeout: 0,
@@ -19,14 +19,14 @@ export default {
     ios: {
       bundleIdentifier: "com.sdv.subite",
       buildNumber: "1.0.0",
-      supportsTablet: true,
+      supportsTablet: false,
     },
     android: {
       package: "com.sdv.subite",
       versionCode: 1,
       adaptiveIcon: {
-        foregroundImage: "./assets/icon.png",
-        backgroundColor: "#FFFFFF",
+        foregroundImage: "./assets/foreground-adaptive-icon.png",
+        backgroundColor: "#173b66",
       },
       config: {
         googleMaps: {

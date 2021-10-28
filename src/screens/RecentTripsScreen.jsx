@@ -11,6 +11,7 @@ import Button from "../components/Button";
 import OtherTripListComponent from "../components/OtherTripListComponent";
 import AppLoading from "./AppLoading";
 import { LoadingPassenger } from "./Loading";
+import { getEpochNow } from "../core/utils";
 
 function RecentTripsScreen({ navigation }) {
   const [tripListComponents, setTripListComponents] = useState({
@@ -27,12 +28,12 @@ function RecentTripsScreen({ navigation }) {
         .collection("trips")
         .where("passengerUids", "array-contains", user.uid)
         .onSnapshot((querySnapshot) => {
-          const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
+          const epochNow = getEpochNow();
           const data = querySnapshot.docs.map((doc) => doc.data());
           console.log(data);
 
           let activeComponents = data.filter(
-            (trip) => trip.departureTime > nowTime
+            (trip) => trip.departureTime > epochNow
           );
 
           activeComponents.sort((a, b) => a.departureTime - b.departureTime);
@@ -53,7 +54,7 @@ function RecentTripsScreen({ navigation }) {
           });
 
           let recentComponents = data.filter(
-            (trip) => trip.departureTime < nowTime
+            (trip) => trip.departureTime < epochNow
           );
 
           recentComponents.sort((a, b) => b.departureTime - a.departureTime);

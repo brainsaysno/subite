@@ -50,6 +50,7 @@ const CombinedDefaultTheme = {
     yellow: "#FFC247",
     surface: "#e4e4e4",
     green: "#81C596",
+    dbackground: "#173b66",
     /* error: "red", */
   },
 };
@@ -95,9 +96,6 @@ function RootNavigator() {
     const unsubscribeAuth = auth.onAuthStateChanged(onAuthStateChanged);
     return unsubscribeAuth;
   }, []);
-  /* 	if (!loaded) {
-		return null;
-	} */
 
   if (isLoading) {
     return (

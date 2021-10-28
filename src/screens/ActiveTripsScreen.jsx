@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
-import { isToday, latitudeToKm } from "../core/utils";
+import { getEpochNow, isToday, latitudeToKm } from "../core/utils";
 import { collection, doc, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
@@ -24,12 +24,11 @@ function ActiveTripsScreen({ navigation, route }) {
 
   //const tripsRef = collection(db, "trips");
   useEffect(() => {
-    const nowTime = firebase.firestore.Timestamp.now().seconds * 10 ** 3;
     if (user) {
       const unsub = db
         .collection("trips")
         .where("driver.uid", "==", user.uid)
-        .where("departureTime", ">", nowTime)
+        .where("departureTime", ">", getEpochNow())
         .orderBy("departureTime")
         .onSnapshot((querySnapshot) => {
           const data = querySnapshot.docs.map((doc) => doc.data());
