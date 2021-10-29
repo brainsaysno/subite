@@ -7,7 +7,6 @@ import { AppContext } from "../../navigation/AppProvider";
 function AccountData() {
   const { user } = useContext(AppContext);
   const { colors } = useTheme();
-  console.log(user);
   const message = `Hola, soy ${user.fullName}, mi id de usuario es ${user.uid}. Me gustaría cambiar los datos de mi cuenta.`;
   return (
     <View
