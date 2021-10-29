@@ -65,7 +65,6 @@ function JoinTripScreen({ navigation }) {
               strokeColor={colors.text}
               fillColor={colors.blue + "90"}
               onPress={(e) => handleMapPress(e.nativeEvent)}
-              /* #rgba */
             />
           </>
         ) : null}

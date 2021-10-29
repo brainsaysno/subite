@@ -30,6 +30,10 @@ function AccountData() {
         Email: <Text style={{ fontWeight: "200" }}>{user.email}</Text>
       </Text>
       <Text style={{ fontSize: 18, fontWeight: "700" }}>
+        Nombre del hijo/a:{" "}
+        <Text style={{ fontWeight: "200" }}>{user.childName}</Text>
+      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "700" }}>
         Institución:{" "}
         <Text style={{ fontWeight: "200" }}>{user.institution.name}</Text>
       </Text>
@@ -49,39 +53,6 @@ function AccountData() {
       >
         Para cambiar tu información haz click aquí.
       </Text>
-      {/* <TouchableOpacity
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					backgroundColor: colors.green,
-					padding: 15,
-					marginTop: "auto",
-					marginBottom: "auto",
-					width: "100%",
-				}}
-				onPress={() =>
-					Linking.openURL(
-						`https://wa.me/59895078292?text=${encodeURIComponent(message)}`
-					)
-				}
-			>
-				<Icon
-					name="message-circle-outline"
-					width={40}
-					height={40}
-					fill={colors.background}
-					style={{ marginRight: 10 }}
-				/>
-				<Text
-					style={{
-						color: colors.background,
-						fontSize: 16,
-						fontWeight: "500",
-					}}
-				>
-					Contacta con el desarrollador para cambiar tu información (Beta)
-				</Text>
-			</TouchableOpacity> */}
     </View>
   );
 }

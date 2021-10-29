@@ -22,7 +22,9 @@ function TripDetailScreen({ navigation, route }) {
   const [tripCancelled, setTripCancelled] = useState();
   const [tripCancelling, setTripCancelling] = useState(false);
 
-  const message = user ? `Hola, soy ${user.fullName}` : null;
+  const message = user
+    ? `¡Hola! ¿Cómo estas? Soy ${user.fullName} padre/madre de ${user.childName}\nMe sumé a tu viaje agendado en Subite y te escribo para coordinar el punto de encuentro 😁🚗`
+    : null;
   const unixNow = getUnixNow();
   return (
     <ScrollView
