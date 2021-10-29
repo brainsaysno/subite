@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { List, useTheme } from "react-native-paper";
 import TodayTripListComponent from "../components/TodayTripListComponent";
-import { getEpochNow, isInRadius, isToday } from "../core/utils";
+import { getUnixNow, isInRadius, isToday } from "../core/utils";
 import { db } from "../../config/firebase";
 
 import { AppContext } from "../../navigation/AppProvider";
@@ -26,7 +26,7 @@ function TripSelectorScreen({ navigation, route }) {
     if (user) {
       db.collection("trips")
         .where("institutionName", "==", user.institution.name)
-        .where("departureTime", ">", getEpochNow())
+        .where("departureTime", ">", getUnixNow())
         .orderBy("departureTime")
         .orderBy("passengerUids")
         .get()

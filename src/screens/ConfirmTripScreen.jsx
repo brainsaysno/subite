@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import HorizontalNumberPicker from "../components/HorizontalNumberPicker";
@@ -7,22 +7,24 @@ import { useTheme } from "react-native-paper";
 import Button from "../components/Button";
 import { DTComponent } from "../components/DTComponent";
 import WidgetMapView from "../components/WidgetMapView";
-import { getEpochNow } from "../core/utils";
+import { getUnixNow } from "../core/utils";
 
 function ConfirmTripScreen({ navigation, route }) {
   const { mapData } = route.params;
   const { user } = useContext(AppContext);
-  const [date, setDate] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date(getUnixNow()));
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [capacity, setCapacity] = useState(1);
 
   const polyline = mapData.routes[0].overview_polyline.points;
 
   const handlePress = () => {
-    const epochDate = Date.parse(date);
-    if (epochDate < getEpochNow()) {
-      console.log("Time cannot be");
+    const unixDate = Date.parse(date);
+    if (unixDate < getUnixNow()) {
+      setError("Esta fecha ya pasó, intenta de nuevo!");
+      return;
     }
     setLoading(true);
     const tripData = {
@@ -48,7 +50,7 @@ function ConfirmTripScreen({ navigation, route }) {
         navigation.navigate("Detalle de viaje", { trip: tripData });
       })
       .catch((error) => {
-        console.error("Error adding document: ", error);
+        console.error("Error añadiendo el documento: ", error);
       });
   };
   const onDateChange = (event, selectedDate) => {
@@ -72,18 +74,22 @@ function ConfirmTripScreen({ navigation, route }) {
         />
         <View
           style={{
-            marginVertical: 20,
+            marginTop: 20,
             width: "100%",
           }}
         >
           <DTComponent onChange={onDateChange} date={date} />
         </View>
+        {error !== "" ? (
+          <Text style={{ color: "red", marginTop: 10 }}>{error}</Text>
+        ) : null}
         <HorizontalNumberPicker
           value={capacity}
           onChange={setCapacity}
           min={1}
           max={4}
           title={"Capacidad"}
+          style={{ marginTop: 20 }}
         />
         <Button
           disabled={loading}

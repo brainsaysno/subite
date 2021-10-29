@@ -12,7 +12,7 @@ import { db } from "../../config/firebase";
 import { AppContext } from "../../navigation/AppProvider";
 import { Icon } from "react-native-eva-icons";
 import moment from "moment-with-locales-es6";
-import { getEpochNow } from "../core/utils";
+import { getUnixNow } from "../core/utils";
 
 function TripDetailScreen({ navigation, route }) {
   const { trip, userCoordinates } = route.params;
@@ -23,7 +23,7 @@ function TripDetailScreen({ navigation, route }) {
   const [tripCancelling, setTripCancelling] = useState(false);
 
   const message = user ? `Hola, soy ${user.fullName}` : null;
-  const epochNow = getEpochNow();
+  const unixNow = getUnixNow();
   return (
     <ScrollView
       contentContainerStyle={{
@@ -133,12 +133,12 @@ function TripDetailScreen({ navigation, route }) {
             fontWeight: "500",
           }}
         >
-          {trip.departureTime > epochNow
+          {trip.departureTime > unixNow
             ? "¡Coordina el punto de encuentro!"
             : "¡Enviale un mensaje al conductor!"}
         </Text>
       </TouchableOpacity>
-      {trip.departureTime > epochNow ? (
+      {trip.departureTime > unixNow ? (
         <TouchableOpacity
           style={{
             display: "flex",

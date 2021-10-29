@@ -95,5 +95,5 @@ export const isToday = (date) => {
   );
 };
 
-export const getEpochNow = () =>
+export const getUnixNow = () =>
   firebase.firestore.Timestamp.now().seconds * 10 ** 3;
