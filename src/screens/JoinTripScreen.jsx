@@ -45,7 +45,12 @@ function JoinTripScreen({ navigation }) {
             longitude: user.institution.coordinates.longitude,
           }}
         >
-          <Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+          <Icon
+            name={"home"}
+            width={20}
+            height={20}
+            fill={colors.dbackground}
+          />
         </Marker>
         {mapData.markerOn && user ? (
           <>

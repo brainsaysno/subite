@@ -52,7 +52,12 @@ function CreateTripScreen({ navigation, ...props }) {
             longitude: user.institution.coordinates.longitude,
           }}
         >
-          <Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+          <Icon
+            name={"home"}
+            width={20}
+            height={20}
+            fill={colors.dbackground}
+          />
         </Marker>
         {mapData.markerOn ? (
           <>
@@ -67,8 +72,8 @@ function CreateTripScreen({ navigation, ...props }) {
                 mapData.routes[0].overview_polyline.points,
                 5
               ).map((arr) => ({ latitude: arr[0], longitude: arr[1] }))}
-              lineDashPattern={[10, 1]}
-              strokeWidth={5}
+              lineDashPattern={[0]}
+              strokeWidth={2.5}
             ></Polyline>
           </>
         ) : null}

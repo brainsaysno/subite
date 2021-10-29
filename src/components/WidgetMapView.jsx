@@ -64,7 +64,7 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
       <Marker coordinate={decodedTrip[0]} pinColor={colors.primary}></Marker>
       {/* Arrival coordinates marker */}
       <Marker coordinate={decodedTrip[decodedTrip.length - 1]}>
-        <Icon name={"home"} width={20} height={20} fill={colors.yellow} />
+        <Icon name={"home"} width={20} height={20} fill={colors.dbackground} />
       </Marker>
       {/* Passenger coordinates marker */}
       {passengerCoordinates
@@ -75,7 +75,7 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
       <Polyline
         coordinates={decodedTrip}
         lineDashPattern={[0]}
-        strokeWidth={5}
+        strokeWidth={2.5}
         strokeColor={dark ? "#fff" : "#000"}
       ></Polyline>
     </MapView>
