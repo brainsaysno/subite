@@ -15,8 +15,6 @@
 <h1 align="center">Subite</h1>
 
   <p align="center">
-    Descripción del proyecto
-    <br />
     <a href="https://github.com/brainsaysno/subite"><strong>Explorar la documentación »</strong></a>
     <br />
     <br />
