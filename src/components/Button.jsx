@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Button as PaperButton } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 
-function Button({ style, children, ...props }) {
+function Button({ style, children, color, ...props }) {
   const { colors } = useTheme();
   return (
     <PaperButton
@@ -11,7 +11,7 @@ function Button({ style, children, ...props }) {
         ...styles.button,
         ...style,
       }}
-      labelStyle={styles.text}
+      labelStyle={{ ...styles.text, color: color ? color : colors.primary }}
       {...props}
     >
       {children}

@@ -90,8 +90,11 @@ function RecentTripsScreen({ navigation }) {
     return (
       <View style={styles.container}>
         <Text color={colors.text}>No hiciste ningun viaje todavía.</Text>
-        <Button onPress={() => navigation.navigate("Nuevo viaje")}>
-          Unete a un nuevo viaje ahora
+        <Button
+          color={colors.blue}
+          onPress={() => navigation.navigate("Nuevo viaje")}
+        >
+          Unete a un viaje ahora
         </Button>
       </View>
     );
