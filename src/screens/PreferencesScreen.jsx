@@ -61,10 +61,10 @@ function PreferencesScreen({ navigation }) {
           Otros ajustes
         </List.Subheader>
         <ToggleSettingItem
-          title="Conductor"
+          title={isDriver ? "Conductor" : "Pasajero"}
           value={isDriver}
           onToggle={toggleIsDriver}
-          icon="steering"
+          icon={isDriver ? "steering" : "seat-passenger"}
           iconColor={isDriver ? colors.primary : colors.blue}
         />
         {isDriver ? null : (

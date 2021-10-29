@@ -90,7 +90,7 @@ function RecentTripsScreen({ navigation }) {
       <View style={styles.container}>
         <Text color={colors.text}>No hiciste ningun viaje todavía.</Text>
         <Button
-          color={colors.blue}
+          labelColor={colors.blue}
           onPress={() => navigation.navigate("Nuevo viaje")}
         >
           Unete a un viaje ahora
