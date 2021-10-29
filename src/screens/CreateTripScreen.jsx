@@ -12,7 +12,9 @@ import { Icon } from "react-native-eva-icons";
 
 function CreateTripScreen({ navigation, ...props }) {
   const { dark, colors } = useTheme();
+
   const [mapData, setMapData] = useState({ markerOn: false });
+  const [confirming, setConfirming] = useState(false);
 
   const { user } = useContext(AppContext);
 
@@ -82,13 +84,16 @@ function CreateTripScreen({ navigation, ...props }) {
           }}
         >
           <Button
-            onPress={() =>
+            onPress={() => {
+              setConfirming(true);
               navigation.navigate("Confirmar viaje", {
                 mapData: mapData,
-              })
-            }
+              });
+              setConfirming(false);
+            }}
             mode="contained"
             style={{ width: 200 }}
+            disabled={confirming}
           >
             Continuar
           </Button>
