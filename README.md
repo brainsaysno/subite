@@ -62,6 +62,8 @@
 
 ## Sobre el proyecto
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C1Ov9Djh6Bw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### El problema
 
 Después de una análisis de las problemáticas más comunes relacionadas al transporte y la comunicación en nuestro entorno detectamos que existe una gran dificultad relacionada al translado hacia las instituciones educativas. Debido a las horas comunes de ingreso entre generaciones se crean horarios pico, en los que los alrededores de las instituciones educativas presentan un problema de embotellamiento grave que genera grandes retrasos para los estudiantes y sus familias. Hay padres y madres que llevan a sus hijos en sus autos a veces hasta con tres espacios libres mientras que otros no pueden llevarlos y tienen que recurrir a contratar transporte. Reducir la cantidad de autos significaría que todos llegaran a destino de forma más eficiente.
