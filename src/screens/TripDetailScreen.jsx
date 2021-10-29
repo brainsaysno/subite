@@ -20,6 +20,7 @@ function TripDetailScreen({ navigation, route }) {
   const { user } = useContext(AppContext);
 
   const [tripCancelled, setTripCancelled] = useState();
+  const [tripCancelling, setTripCancelling] = useState(false);
 
   const message = user ? `Hola, soy ${user.fullName}` : null;
   const epochNow = getEpochNow();
@@ -146,9 +147,9 @@ function TripDetailScreen({ navigation, route }) {
             padding: 15,
             marginVertical: 20,
           }}
-          onPress={() =>
-            db
-              .collection("trips")
+          onPress={() => {
+            setTripCancelling(true);
+            db.collection("trips")
               .where("polyline", "==", trip.polyline)
               .where("departureTime", "==", trip.departureTime)
               .get()
@@ -163,10 +164,9 @@ function TripDetailScreen({ navigation, route }) {
                 });
                 setTripCancelled(true);
                 setTimeout(() => navigation.navigate("Viajes"), 1000);
-
-                console.log(r.docs[0].ref.id);
-              })
-          }
+              });
+          }}
+          disabled={tripCancelling}
         >
           <Icon
             name="close-outline"

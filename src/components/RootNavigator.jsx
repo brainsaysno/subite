@@ -72,11 +72,11 @@ function RootNavigator() {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            setIsAuthed(true);
             setUser({
               ...doc.data(),
               uid: doc.id,
             });
+            setIsAuthed(true);
             setIsLoading(false);
           } else {
             // Sign out for security reasons... this should never happen for legitimate users
@@ -84,8 +84,8 @@ function RootNavigator() {
           }
         });
     } else {
-      setUser(undefined);
       setIsAuthed(false);
+      setUser(null);
       setIsLoading(false);
     }
   }

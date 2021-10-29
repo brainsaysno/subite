@@ -12,6 +12,7 @@ function ActiveTripDetailScreen({ navigation, route }) {
   const { colors } = useTheme();
 
   const [tripCancelled, setTripCancelled] = useState(false);
+  const [tripCancelling, setTripCancelling] = useState(false);
 
   return (
     <ScrollView
@@ -96,9 +97,9 @@ function ActiveTripDetailScreen({ navigation, route }) {
           padding: 15,
           marginVertical: 20,
         }}
-        onPress={() =>
-          db
-            .collection("trips")
+        onPress={() => {
+          setTripCancelling(true);
+          db.collection("trips")
             .where("polyline", "==", trip.polyline)
             .where("departureTime", "==", trip.departureTime)
             .get()
@@ -106,8 +107,9 @@ function ActiveTripDetailScreen({ navigation, route }) {
               r.docs[0].ref.delete();
               setTripCancelled(true);
               setTimeout(() => navigation.navigate("Viajes activos"), 1000);
-            })
-        }
+            });
+        }}
+        disabled={tripCancelling}
       >
         <Icon
           name="close-outline"

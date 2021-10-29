@@ -4,15 +4,22 @@ import JoinTripScreen from "../../screens/JoinTripScreen";
 import ConfirmTripDetailScreen from "../../screens/ConfirmTripDetailScreen";
 import TripDetailScreen from "../../screens/TripDetailScreen";
 import TripSelectorScreen from "../../screens/TripSelectorScreen";
+import { useTheme } from "react-native-paper";
 
 const Stack = createNativeStackNavigator();
 
 function JoinTripNavigator() {
+  const { colors } = useTheme();
   return (
     <Stack.Navigator
       initialRouteName="Mapa"
       screenOptions={({ route }) => {
-        if (route.name === "Mapa") return { headerShown: false };
+        const def = {
+          headerTintColor: "white",
+          headerStyle: { backgroundColor: colors.dbackground },
+        };
+        if (route.name === "Mapa") return { ...def, headerShown: false };
+        return def;
       }}
     >
       <Stack.Screen name="Mapa" component={JoinTripScreen} />

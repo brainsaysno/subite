@@ -30,8 +30,6 @@ function CreateTripScreen({ navigation, ...props }) {
         setMapData(dataToSend);
       });
   };
-  if (!user.institution.coordinates) return null;
-
   return (
     <>
       <MapView
@@ -61,6 +59,7 @@ function CreateTripScreen({ navigation, ...props }) {
               key={-1}
               pinColor={colors.primary}
             />
+
             <Polyline
               coordinates={decode(
                 mapData.routes[0].overview_polyline.points,

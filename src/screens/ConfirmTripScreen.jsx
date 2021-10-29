@@ -7,16 +7,13 @@ import { useTheme } from "react-native-paper";
 import Button from "../components/Button";
 import { DTComponent } from "../components/DTComponent";
 import WidgetMapView from "../components/WidgetMapView";
-import { Icon } from "react-native-eva-icons";
 import { getEpochNow } from "../core/utils";
 
 function ConfirmTripScreen({ navigation, route }) {
   const { mapData } = route.params;
   const { user } = useContext(AppContext);
-  const { colors } = useTheme();
   const [date, setDate] = useState(new Date(Date.now()));
   const [loading, setLoading] = useState(false);
-  const [showDownArrow, setShowDownArrow] = useState(true);
 
   const [capacity, setCapacity] = useState(1);
 
@@ -79,11 +76,6 @@ function ConfirmTripScreen({ navigation, route }) {
           justifyContent: "center",
           alignItems: "center",
         }}
-        onScroll={({ nativeEvent }) => {
-          if (isCloseToBottom(nativeEvent)) setShowDownArrow(false);
-          /* if (showDownArrow === false) */ else setShowDownArrow(true);
-        }}
-        scrollEventThrottle={100}
       >
         <WidgetMapView
           polyline={polyline}
@@ -114,22 +106,6 @@ function ConfirmTripScreen({ navigation, route }) {
           Crear viaje
         </Button>
       </ScrollView>
-      {showDownArrow ? (
-        <Icon
-          name="arrow-ios-downward-outline"
-          width={50}
-          height={50}
-          fill={colors.primary}
-          style={{
-            position: "absolute",
-            right: 10,
-            bottom: 10,
-            borderColor: "grey",
-            borderWidth: 0.5,
-            borderRadius: 50,
-          }}
-        />
-      ) : null}
     </>
   );
 }
