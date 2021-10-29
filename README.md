@@ -22,9 +22,12 @@
     <br />
     <a href="https://github.com/brainsaysno/subite">Descargar Demo</a>
     ·
+    <a href="https://expo.dev/@vendedordewards/subite">Pagina de expo</a>
+    ·
     <a href="https://github.com/brainsaysno/subite/issues">Reportar un bug</a>
     ·
     <a href="https://github.com/brainsaysno/subite/issues">Solicitar función</a>
+    
   </p>
 </div>
 
