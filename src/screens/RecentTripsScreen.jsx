@@ -27,7 +27,6 @@ function RecentTripsScreen({ navigation }) {
         .onSnapshot((querySnapshot) => {
           const unixNow = getUnixNow();
           const data = querySnapshot.docs.map((doc) => doc.data());
-          console.log(data);
 
           let activeComponents = data.filter(
             (trip) => trip.departureTime > unixNow
