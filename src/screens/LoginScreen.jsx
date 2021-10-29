@@ -26,20 +26,17 @@ const LoginScreen = ({ navigation }) => {
       setPassword({ ...password, error: passwordError });
     }
 
-    auth
-      .signInWithEmailAndPassword(email.value, password.value)
-      .then((authenticatedUser) => {})
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          //TODO: Add login backend errors
-        }
+    auth.signInWithEmailAndPassword(email.value, password.value).catch((e) => {
+      let errorMessage;
+      if (e.code === "auth/user-not-found") {
+        errorMessage =
+          "No hay ningun usuario registrado con este email. Contacta con tu institución para registrarte.";
+      } else {
+        errorMessage = e.toString();
+      }
 
-        if (error.code === "auth/invalid-email") {
-          //TODO: Add login backend errors
-        }
-
-        console.error(error);
-      });
+      setEmail({ ...email, error: errorMessage });
+    });
     return;
   };
 

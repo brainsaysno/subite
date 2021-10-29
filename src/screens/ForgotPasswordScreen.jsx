@@ -8,6 +8,7 @@ import Logo from "../components/Logo";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import { AppContext } from "../../navigation/AppProvider";
+import { auth } from "../../config/firebase";
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -23,9 +24,22 @@ const ForgotPasswordScreen = ({ navigation }) => {
       return;
     }
 
-    //TODO: add forgot password firebase method
-
-    navigation.navigate("Login");
+    auth
+      .sendPasswordResetEmail(email.value)
+      .then(() => navigation.navigate("Login"))
+      .catch((e) => {
+        let errorMessage;
+        if (e.code === "auth/user-not-found") {
+          errorMessage =
+            "No hay ningun usuario registrado con este email. Contacta con tu institución para registrarte.";
+        } else {
+          errorMessage = e.toString();
+        }
+        setEmail({
+          ...email,
+          error: errorMessage,
+        });
+      });
   };
 
   const styles = StyleSheet.create({
