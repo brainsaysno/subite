@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Text, ScrollView } from "react-native";
 import { useTheme } from "react-native-paper";
 import WidgetMapView from "../components/WidgetMapView";
@@ -11,8 +11,10 @@ function ConfirmTripDetailScreen({ navigation, route }) {
   const { trip, userCoordinates } = route.params;
   const { colors } = useTheme();
   const { user } = useContext(AppContext);
+  const [joining, setJoining] = useState(false);
 
   const confirmTrip = () => {
+    setJoining(true);
     db.collection("trips")
       .doc(trip.tripId)
       .update({
@@ -35,10 +37,12 @@ function ConfirmTripDetailScreen({ navigation, route }) {
           trip: trip,
           userCoordinates: userCoordinates,
         });
+        setJoining(false);
       })
-      .catch((e) =>
-        console.error(`There was an error while joining trip: ${e}`)
-      );
+      .catch((e) => {
+        console.error(`There was an error while joining trip: ${e}`);
+        setJoining(false);
+      });
   };
 
   return (
@@ -94,6 +98,7 @@ function ConfirmTripDetailScreen({ navigation, route }) {
         style={{ marginVertical: 10, width: "80%" }}
         onPress={confirmTrip}
         mode="contained"
+        disabled={joining}
       >
         Unirse al viaje
       </Button>

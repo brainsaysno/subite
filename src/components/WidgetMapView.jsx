@@ -16,12 +16,16 @@ function WidgetMapView({ polyline, navigation, passengerCoordinates, style }) {
 
   useEffect(() => {
     if (Platform.OS === "ios") {
-      navigation.addListener("transitionEnd", (e) => {
+      const unsub1 = navigation.addListener("transitionEnd", (e) => {
         setShow(true);
       });
-      navigation.addListener("transitionStart", (e) => {
+      const unsub2 = navigation.addListener("transitionStart", (e) => {
         setShow(false);
       });
+      return () => {
+        unsub1();
+        unsub2();
+      };
     }
   }, []);
 
