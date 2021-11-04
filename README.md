@@ -35,6 +35,7 @@
     <li>
       <a href="#sobre-el-proyecto">Sobre el proyecto</a>
       <ul>
+        <li><a href="#video-explicativo">Video explicativo</a></li>
         <li><a href="#el-problema">El problema</a></li>
         <li><a href="#subite">Subite</a></li>
         <li><a href="#tecnologías">Tecnologías</a></li>
@@ -63,9 +64,13 @@
 
 ## Sobre el proyecto
 
+### Video explicativo
+
+Puedes acceder al video introductorio de subite haciendo [click aquí](https://youtu.be/C1Ov9Djh6Bw)
+
 ### El problema
 
-Después de una análisis de las problemáticas más comunes relacionadas al transporte y la comunicación en nuestro entorno detectamos que existe una gran dificultad relacionada al translado hacia las instituciones educativas. Debido a las horas comunes de ingreso entre generaciones se crean horarios pico, en los que los alrededores de las instituciones educativas presentan un problema de embotellamiento grave que genera grandes retrasos para los estudiantes y sus familias. Hay padres y madres que llevan a sus hijos en sus autos a veces hasta con tres espacios libres mientras que otros no pueden llevarlos y tienen que recurrir a contratar transporte. Reducir la cantidad de autos significaría que todos llegaran a destino de forma más eficiente.
+Después de una análisis de las problemáticas más comunes relacionadas al transporte y la comunicación en nuestro entorno detectamos que existe una gran dificultad relacionada al traslado hacia las instituciones educativas. Debido a las horas comunes de ingreso entre generaciones se crean horarios pico, en los que los alrededores de las instituciones educativas presentan un problema de embotellamiento grave que genera grandes retrasos para los estudiantes y sus familias. Hay padres y madres que llevan a sus hijos en sus autos a veces hasta con tres espacios libres mientras que otros no pueden llevarlos y tienen que recurrir a contratar transporte. Reducir la cantidad de autos significaría que todos llegaran a destino de forma más eficiente.
 
 ### Subite
 
