@@ -66,7 +66,7 @@
 
 ### Video explicativo
 
-Puedes acceder al video introductorio de subite haciendo [click aquí](https://youtu.be/C1Ov9Djh6Bw)
+Puedes acceder al video introductorio de subite haciendo [click aquí](https://youtu.be/C1Ov9Djh6Bw).
 
 ### El problema
 
