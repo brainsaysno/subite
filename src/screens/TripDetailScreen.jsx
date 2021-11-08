@@ -156,16 +156,17 @@ function TripDetailScreen({ navigation, route }) {
               .where("departureTime", "==", trip.departureTime)
               .get()
               .then((r) => {
-                r.docs[0].ref.update({
-                  passengerUids: trip.passengerUids.filter(
-                    (uid) => uid !== user.uid
-                  ),
-                  passengerData: trip.passengerData.filter(
-                    (p) => p.uid !== user.uid
-                  ),
-                });
                 setTripCancelled(true);
-                setTimeout(() => navigation.navigate("Viajes"), 1000);
+                r.docs[0].ref
+                  .update({
+                    passengerUids: trip.passengerUids.filter(
+                      (uid) => uid !== user.uid
+                    ),
+                    passengerData: trip.passengerData.filter(
+                      (p) => p.uid !== user.uid
+                    ),
+                  })
+                  .then(() => navigation.navigate("Viajes"));
               });
           }}
           disabled={tripCancelling}

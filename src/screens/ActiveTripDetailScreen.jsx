@@ -104,9 +104,10 @@ function ActiveTripDetailScreen({ navigation, route }) {
             .where("departureTime", "==", trip.departureTime)
             .get()
             .then((r) => {
-              r.docs[0].ref.delete();
               setTripCancelled(true);
-              setTimeout(() => navigation.navigate("Viajes activos"), 1000);
+              r.docs[0].ref
+                .delete()
+                .then(() => navigation.navigate("Viajes activos"));
             });
         }}
         disabled={tripCancelling}
