@@ -18,7 +18,7 @@
     <a href="https://github.com/brainsaysno/subite"><strong>Explorar la documentación »</strong></a>
     <br />
     <br />
-    <a href="https://expo.dev/artifacts/97a5021c-ddc7-44cb-89da-c4aebb350705">Descargar APK</a>
+    <a href="https://expo.dev/artifacts/9f650b42-4072-46c7-80eb-2ad7e7213279">Descargar APK</a>
     ·
     <a href="https://expo.dev/@vendedordewards/subite">Pagina de expo</a>
     ·
