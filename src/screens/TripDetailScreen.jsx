@@ -166,7 +166,10 @@ function TripDetailScreen({ navigation, route }) {
                       (p) => p.uid !== user.uid
                     ),
                   })
-                  .then(() => navigation.navigate("Viajes"));
+                  .then(() => {
+                    navigation.navigate("Mapa");
+                    navigation.navigate("Viajes");
+                  });
               });
           }}
           disabled={tripCancelling}

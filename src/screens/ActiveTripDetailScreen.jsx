@@ -105,9 +105,10 @@ function ActiveTripDetailScreen({ navigation, route }) {
             .get()
             .then((r) => {
               setTripCancelled(true);
-              r.docs[0].ref
-                .delete()
-                .then(() => navigation.navigate("Viajes activos"));
+              r.docs[0].ref.delete().then(() => {
+                navigation.navigate("Map");
+                navigation.navigate("Viajes activos");
+              });
             });
         }}
         disabled={tripCancelling}
