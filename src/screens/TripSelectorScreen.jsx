@@ -94,7 +94,7 @@ function TripSelectorScreen({ navigation, route }) {
           No hay ningun viaje activo en tu zona
         </Text>
         <Button
-          color={colors.blue}
+          labelColor={colors.blue}
           onPress={() => {
             navigation.goBack();
             navigation.navigate("Ajustes");
