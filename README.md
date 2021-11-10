@@ -84,6 +84,7 @@ Además de solucionar los problemas planteados anteriormente, nuestro proyecto t
 - [Node.js](https://nodejs.org/)
 - [React Native](https://reactjs.org/)
 - [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [React Navigation](https://reactnavigation.org/)
 - [Expo](https://expo.dev)
 - [Firebase](https://firebase.google.com)
 - [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview?_gl=1*9dtta9*_ga*MTAyNDM4NzMyNS4xNjM1NTI3Nzg1*_ga_NRWSTWS78N*MTYzNTUyNzc4NC4xLjAuMTYzNTUyNzc4Ny4w)
